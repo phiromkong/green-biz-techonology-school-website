@@ -1,0 +1,43 @@
+.news_update_title{
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    text-align: justify;
+    font-weight: bold;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    padding-top: 3rem;
+    font-size: 2.5rem;
+    margin-bottom: 1vh;
+    color: white;
+}
+.program_container {
+    text-align: center;
+    background-color:#45a049;
+  }
+.program_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px;
+    justify-content: center;
+    margin-left: 17vh;
+    max-width: 900px; 
+    width: 100%;
+    padding: 150px;
+  }
+
+  .all_news {
+    background-color: #F0C52D;
+    color: black;
+    font-size: 20px;
+    padding: 10px 60px;
+    border-radius: 5px;
+    margin: 10px 2rem 10px auto; /* Adjust the right margin as needed */
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+
+
+  

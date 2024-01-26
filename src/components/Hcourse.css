@@ -1,0 +1,51 @@
+.container {
+  text-align: center;
+  background-color: white;
+}
+
+.courseTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  text-align: justify;
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  color: black;
+  padding-left: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 120px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.column {
+  flex: 1 1 300px; /* Adjust width as needed */
+}
+
+.courseTitle {
+  margin-bottom: 20px; 
+}
+
+.container > div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+}
+.all_courses {
+  background-color: #006C44;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 2rem 10px auto; 
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+  font-style: italic;
+}

@@ -1,0 +1,30 @@
+.bg_gray {
+    background-color: grey; /* Set the desired background color */
+  }
+  
+  .container {
+    margin: 20px;
+     /* Adjust the margin as needed */
+  }
+  
+  .home_title {
+    color: #333; /* Set the desired text color */
+  }
+  
+  .owl-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    margin: 0 -10px; /* Adjust margin to remove default spacing between items */
+  }
+  
+  .owl-carousel .item {
+    flex: 0 0 auto;
+    padding: 0 10px; /* Adjust padding to create spacing between items */
+  }
+  
+  .owl-carousel img {
+    width: 100%;
+    height: auto;
+  }
+  
