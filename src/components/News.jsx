@@ -1,6 +1,6 @@
 // Program.jsx
 import React from 'react';
-import "./Program.css";
+import "./News.css";
 
 function Program({ title, imgUrl, description, link, imageStyle, gridColumn }) {
     const gridStyles = {
