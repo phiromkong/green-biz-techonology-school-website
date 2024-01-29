@@ -32,13 +32,16 @@ nav .title {
 }
 .login-button {
     background-color: #F0C52D;
-    color: white;
+    color: black;
     padding: 8px 16px;
     border: none;
     cursor: pointer;
     width: 100px;
     border-radius: 15px;
     transition: background-color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .login-button:hover {
@@ -72,7 +75,7 @@ nav ul li {
 nav ul li a {
     display: block;
     text-decoration: none;
-    color: #45a049;
+    color: #006C44;
     padding: 0.5rem;
     margin: 0 0.5rem;
     border-radius: 0.5rem;

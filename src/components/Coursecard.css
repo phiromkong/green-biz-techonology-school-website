@@ -10,6 +10,10 @@
   max-width: auto;
 }
 
+styles.courseDescription {
+  color: black;
+}
+
 .course-card {
   display: flex;
   flex-direction: column;
@@ -19,6 +23,6 @@
 }
 
 .bt_read_more{
-  background-color: black;
+  background-color: #f2c72d;
 }
 

@@ -1,29 +1,45 @@
-.bg_gray {
-    background-color: grey; /* Set the desired background color */
+
+  
+.partner-container {
+    background-color: #E1E1E1;
+    width: 100%;
+    margin-bottom: 20px;
   }
   
-  .container {
-    margin: 20px;
-     /* Adjust the margin as needed */
-  }
-  
-  .home_title {
-    color: #333; /* Set the desired text color */
+  .partner_title {
+    color: black    ;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    text-align: justify;
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    padding-left: 50px;
+    padding-top: 3rem;
   }
   
   .owl-carousel {
     display: flex;
     flex-wrap: nowrap;
     overflow: hidden;
-    margin: 0 -10px; /* Adjust margin to remove default spacing between items */
   }
   
   .owl-carousel .item {
     flex: 0 0 auto;
-    padding: 0 10px; /* Adjust padding to create spacing between items */
+    width: auto;
+    height: 300px;
+    padding: 0 10px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+    overflow: hidden;
+    color: #E1E1E1;
+
   }
   
-  .owl-carousel img {
+  .partner-card img {
     width: 100%;
     height: auto;
   }

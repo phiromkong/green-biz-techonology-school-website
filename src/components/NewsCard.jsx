@@ -1,8 +1,8 @@
 // Program.jsx
 import React from 'react';
-import "./News.css";
+import "./NewsCard.css";
 
-function Program({ title, imgUrl, description, link, imageStyle, gridColumn }) {
+function NewsCard({ title, imgUrl, description, link, imageStyle, gridColumn }) {
     const gridStyles = {
         gridColumn: gridColumn,
       };
@@ -30,4 +30,4 @@ function Program({ title, imgUrl, description, link, imageStyle, gridColumn }) {
   );
 }
 
-export default Program;
+export default NewsCard;

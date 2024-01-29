@@ -3,11 +3,26 @@ import Navbar from '../components/Navbar';
 import Slider from '../components/Slider';
 import Slogan from '../components/Slogan';
 import Hnews from '../components/Hnews';
-import Program from '../components/News';
+import NewsCard from '../components/NewsCard';
 import Hcourse from '../components/Hcourse';
 import Partners from '../components/Partners';
+import Footer from '../components/Footer';
 
 const Home = () => {
+  const partnerLogos = [
+    {icon: "./IFLS-Logo.png"},
+    {icon: "./Vattanac-Logo.png"},
+    {icon: "./IFLS-Logo.png"},
+    {icon: "./IFLS-Logo.png"},
+    {icon: "./Vattanac-Logo.png"},
+    {icon: "./IFLS-Logo.png"},
+    {icon: "./IFLS-Logo.png"},
+    {icon: "./Vattanac-Logo.png"},
+    {icon: "./IFLS-Logo.png"},
+    {icon: "./IFLS-Logo.png"},
+    {icon: "./Vattanac-Logo.png"},
+    {icon: "./IFLS-Logo.png"},
+  ];
   const cardData = [
     { title: "Course 1", image: "./Img1.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", link: "/course-details1" },
     { title: "Course 2", image: "./Img2.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", link: "/course-details2" },
@@ -33,12 +48,14 @@ const Home = () => {
             </div>
             <Slogan/>
             <Hnews title="News and Update">
-              <Program title="News 1" imgUrl="./Img1.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link1"/>
-              <Program title="News 2" imgUrl="./Img2.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link2"/>
-              <Program title="News 3" imgUrl="./Img3.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link3"/>
-              <Program title="News 4" imgUrl="./Img2.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link4"/>
+              <NewsCard title="News 1" imgUrl="./Img1.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link1"/>
+              <NewsCard title="News 2" imgUrl="./Img2.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link2"/>
+              <NewsCard title="News 3" imgUrl="./Img3.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link3"/>
+              <NewsCard title="News 4" imgUrl="./Img2.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" link="/link4"/>
             </Hnews>
             <Hcourse courses={cardData} />
+            <Partners images={partnerLogos} />
+            <Footer></Footer>
         </div>
       );
 };

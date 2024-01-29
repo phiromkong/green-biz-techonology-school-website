@@ -3,7 +3,7 @@
     font-style: italic;
     text-align: justify;
     font-weight: bold;
-    margin-left: 2rem;
+    margin-left: 50px;
     margin-top: 2rem;
     padding-top: 3rem;
     font-size: 2.5rem;
@@ -12,7 +12,8 @@
 }
 .program_container {
     text-align: center;
-    background-color:#45a049;
+    background-color:#006C44;
+    margin-top: 0;
   }
 .program_grid {
     display: grid;
