@@ -1,0 +1,34 @@
+.courses-box-title {
+    font-family: "Inter";
+    font-size: 40px;
+    font-weight: bold;
+    font-weight: 800;
+    font-style: italic;
+    padding-top: 40px;
+    margin-left: 80px;
+
+}
+
+.header-image {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .header-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+.courses-container {
+    margin-left: 80px;
+    text-align: center;
+    background-color: white;
+    padding-top: 30px;
+    margin-left: 80px;
+    margin-right: 80px;
+    padding-bottom: 80px;
+  }
+  
+  
+
+  

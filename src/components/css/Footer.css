@@ -3,6 +3,7 @@ body,
 h1,
 h2,
 h3,
+
 p {
   margin: 0;
   padding: 0;
@@ -34,15 +35,13 @@ footer {
 .footer-left {
   max-width: 400px;
   flex: 1 0 100%;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
 }
 
 .footer-left h4 {
   font-size: 20px;
   font-weight: bold;
   font-weight: 600;
-  margin-bottom: 10px;
-  padding-top: 25px;
 }
 
 .footer-left p {
@@ -73,8 +72,7 @@ footer {
   min-height: 460px;
   height: auto;
   padding-top: 70px;
-  padding-left: 20px;
-  margin-left: 20px;
+
 }
 
 /* "View on the Map" button styles */

@@ -38,15 +38,29 @@ p {
   line-height: 45px;
 }
 
-.divider-container {
-  display: flex;
-  align-items: center;
-}
-
 /* Divider Style */
 .divider {
   width: 2px;
   align-self: stretch;
   flex: 0 0 auto;
   background-color: black;
+}
+
+@media (max-width: 767px) {
+  .missionVisionContainer {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    align-items: center;
+  }
+
+  .mission, .vision {
+    flex: 1 0 100%; /* Full width on smaller screens */
+    margin-bottom: 20px; /* Add some space between mission and vision */
+    font-size: 20px;
+    line-height: 30px;
+    text-align: left;
+  }
+
+  .divider {
+    display: none; /* Hide the divider on smaller screens */
+  }
 }

@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="footer-left">
           <h4>ADDRESS</h4>
           <p>Kampong Svay Village, Sangkat Kampong Svay, Serei 
-Saophoan Municipality, Banteay Meanchey Province</p>
+              Saophoan Municipality, Banteay Meanchey Province</p>
 
           <h4>CONTACT US</h4>
           <p>Contact Number: 011 686 681 / 096 996 67 82</p>
