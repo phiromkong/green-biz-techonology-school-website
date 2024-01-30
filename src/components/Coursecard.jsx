@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import './Coursecard.css';
+import './css/Coursecard.css';
 
 const CourseCard = ({ image, title, description }) => (
   <Card className='course-card'>

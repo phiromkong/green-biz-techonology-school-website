@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Hnews.css";
+import "./css/Hnews.css";
 
 function Hnews({ children }) {
   return (

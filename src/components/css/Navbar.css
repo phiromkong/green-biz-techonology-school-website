@@ -100,12 +100,12 @@ nav .menu {
 nav .menu span {
     height: 0.4rem;
     width: 100%;
-    background-color: #006C44;
+    background-color: grey;
     border-radius: 0.2rem;
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 864px) {
     nav .menu {
         display: flex;
     }

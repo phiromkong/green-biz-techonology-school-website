@@ -1,0 +1,52 @@
+h2 {
+  font-family: "Inter";
+  font-size: 40px;
+  font-style: italic;
+  font-weight: bold;
+  font-weight: 800px;
+  color: #006C44;
+  text-transform: uppercase;
+
+}
+
+p {
+  padding-top: 40px;
+}
+
+/* Mission and Vision Container */
+.missionVisionContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #F0C52D;
+}
+
+/* Mission and Vision Sections */
+.mission,
+.vision {
+  margin-top: 100px;
+  margin-bottom: 100px; /* Adjusted margin-bottom value */
+  flex: 1;
+  padding: 0 50px;
+  font-size: 25px;
+  font-family: 'Roboto Slab';
+  font-style: bold;
+  text-align: center;
+  line-height: 45px;
+}
+
+.divider-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Divider Style */
+.divider {
+  width: 2px;
+  align-self: stretch;
+  flex: 0 0 auto;
+  background-color: black;
+}

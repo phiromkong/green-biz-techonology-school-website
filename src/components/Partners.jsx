@@ -2,27 +2,27 @@ import React from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import './Partners.css';
+import './css/Partners.css';
 
 const Partners = ({ images }) => {
     const owlOptions = {
-        loop: false,
+        loop: images.length > 1,
         margin: 10,
         responsive: {
             0: {
-            items: 1,
+                items: 1,
             },
             600: {
-            items: 3,
+                items: 3,
             },
             1000: {
-            items: 5,
+                items: 5,
             },
         },
     };
   
     return (
-      <section className="bg_gray text-center">
+      <div className="bg_gray text-center">
         <div className="partner-container">
           <h2 className="font_bold text-uppercase partner_title">Our Partners</h2>
           <OwlCarousel className="owl-theme" {...owlOptions}>
@@ -33,7 +33,7 @@ const Partners = ({ images }) => {
             ))}
           </OwlCarousel>
         </div>
-      </section>
+      </div>
     );
   };
   

@@ -1,0 +1,133 @@
+/* Reset some default styles */
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic styling for the container */
+.containerWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0px;
+  height: auto;
+  width: 100%;
+  background-color: #006C44;
+  padding-bottom: 150px;
+}
+
+/* Container for the flex layout */
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px;
+}
+
+/* Left column styles */
+.contentSection {
+  flex: 1;
+  max-width: 600px;
+}
+
+.heading {
+  font-size: 16px;
+  font-weight: bold;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-left: 50px;
+  color: white;
+  font-family: "Inter";
+  font-style: italic;
+}
+
+.features {
+  margin-top: 8px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  margin-top: 90px;
+  padding-left: 50px;
+  color: white;
+  font-family: "Roboto Slab";
+  font-weight: bold;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+/* Right column styles */
+.imageSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0.55;
+  position: relative;
+}
+
+/* Hero image styles */
+.heroImage {
+  max-width: 50%;
+  height: auto;
+  border-radius: 5px;
+}
+.socialIcons {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -70px;
+  }
+  
+  .socialIcons .react-social-icons svg {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px; /* Adjusted margin for smaller screens */
+  }
+
+@media (max-width: 767px) {
+    .flexContainer {
+        flex-direction: column-reverse;
+      }
+    
+      .imageSection {
+        margin-top: 20px; /* Add some space between content and image on smaller screens */
+        align-items: center; /* Align image to center on smaller screens */
+      }
+    
+      .heroImage {
+        width: 80%; /* Adjust the width of the image on smaller screens */
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 20px; /* Add margin at the bottom of the image on smaller screens */
+      }
+    
+      .socialIcons {
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px; /* Adjust the margin-top for the icons on smaller screens */
+      }
+    
+      .heading {
+        margin-top: 90px;
+        text-align: center; /* Center align the heading on smaller screens */
+      }
+    
+      .feature {
+        text-align: center; /* Center align the features on smaller screens */
+        margin-top: 20px; /* Adjust the margin-top for the features on smaller screens */
+      }
+
+      .socialIcons {
+        margin-top: 20px; /* Adjusted margin-top for smaller screens */
+      }    
+}
+  

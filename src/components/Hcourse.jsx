@@ -1,7 +1,6 @@
-// Assuming you have MUI Grid imported
 import Grid from '@mui/material/Grid';
 import CourseCard from './Coursecard'; 
-import './Hcourse.css';
+import './css/Hcourse.css';
 
 const Hcourse = ({ courses }) => (
   <div className="container">

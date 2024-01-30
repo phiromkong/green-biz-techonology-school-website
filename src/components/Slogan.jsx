@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Slogan.module.css';
+import styles from './css/Slogan.module.css';
 
 const Slogan = () => {
  return (

@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from '../components/Navbar'; 
 import Footer from '../components/Footer';
 import Partners from '../components/Partners';
+import Hero from '../components/Hero';
+import MVission from '../components/MVission';
 
 const About = () => {
     const partnerLogos = [
@@ -21,8 +23,8 @@ const About = () => {
     return (
         <div>
             <Navbar />
-            <h1>About Page</h1>
-            <p>Welcome to the About page of our website!</p>
+            <Hero />
+            <MVission />
             <Partners images={partnerLogos} />
             <Footer />
         </div>

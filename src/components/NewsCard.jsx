@@ -1,6 +1,6 @@
 // Program.jsx
 import React from 'react';
-import "./NewsCard.css";
+import "./css/NewsCard.css";
 
 function NewsCard({ title, imgUrl, description, link, imageStyle, gridColumn }) {
     const gridStyles = {
