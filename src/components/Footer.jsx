@@ -1,6 +1,8 @@
 import React from 'react';
 import "./css/Footer.css";
 import { SocialIcon } from 'react-social-icons'
+import { Link } from 'react-router-dom';
+
 
 const Footer = () => {
   return (
@@ -38,7 +40,9 @@ const Footer = () => {
                 />
             </div>
                 {/* "View on the Map" Button */}
-                <button className="view-map-button">VIEW ON MAP</button>
+                <button>
+                  <Link className="view-map-button" to={"https://www.google.com/maps?ll=13.593064,102.973053&z=14&t=m&hl=en&gl=US&mapclient=embed&cid=10804990733860351961"}> VIEW ON MAP</Link>
+                </button>
             </div>
         </div>
       </div>
