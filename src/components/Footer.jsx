@@ -40,8 +40,8 @@ const Footer = () => {
                 />
             </div>
                 {/* "View on the Map" Button */}
-                <button>
-                  <Link className="view-map-button" to={"https://www.google.com/maps?ll=13.593064,102.973053&z=14&t=m&hl=en&gl=US&mapclient=embed&cid=10804990733860351961"}> VIEW ON MAP</Link>
+                <button className='view-map-button'>
+                  <Link style={{color: 'white'}} to={"https://www.google.com/maps?ll=13.593064,102.973053&z=14&t=m&hl=en&gl=US&mapclient=embed&cid=10804990733860351961"}> VIEW ON MAP</Link>
                 </button>
             </div>
         </div>

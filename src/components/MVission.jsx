@@ -11,10 +11,7 @@ const MVission = () => {
             and internships. 
             </p>
           </div>
-          <div className="divider-container">
-            <div className="divider"></div>
-          </div>
-
+          <div className="divider"></div>
           <div className="vision">
             <h2>Vision</h2>
             <p>

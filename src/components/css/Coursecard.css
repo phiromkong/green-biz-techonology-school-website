@@ -3,16 +3,13 @@
 /* Adjust the width as needed */
 .card-media-img {
   max-width: 100%;
-  max-height: auto;
+  max-height: fit-content;
 }
 
 .card-action-area {
   max-width: auto;
 }
 
-styles.courseDescription {
-  color: black;
-}
 
 .course-card {
   display: flex;
@@ -22,7 +19,5 @@ styles.courseDescription {
 
 }
 
-.bt_read_more{
-  background-color: #f2c72d;
-}
+
 

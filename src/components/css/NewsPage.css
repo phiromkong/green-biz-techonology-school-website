@@ -1,0 +1,20 @@
+/* Add this to your CSS file, for example, NewsPage.css */
+.post-container {
+    border: 1px solid #ddd;
+  }
+  
+  .post-item.block {
+    flex-basis: calc(33.33% - 15px); /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+  }
+  
+  .home_title {
+    font-family: "Inter";
+    font-size: 50px;
+    font-style: italic;
+    font-weight: bold;
+    padding-top: 40px;
+    padding-left: 10px;
+    display: flex;
+    align-items: left;
+  }

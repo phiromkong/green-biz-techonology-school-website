@@ -1,0 +1,57 @@
+/* NewsPost.css */
+.post-item {
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s;
+    margin-left: 15px; /* Adjust as needed */
+    margin-right: 15px; /* Adjust as needed */
+    width: 80vw;
+  }
+  
+  .post-image {
+    max-width: 30%; /* Make the image responsive */
+    display: block; /* Remove extra space below the image */
+    justify-items: center;
+  }
+  
+  /* Align the title and content to the right of the image */
+  .post-item-wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Optional: Add hover effect on the thumbnail image */
+  .post-image img:hover {
+    transform: scale(1.01); /* Increase size on hover */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .post-item:hover {
+    transform: scale(1.003);
+  }
+  
+  .post-item-description {
+    flex: 1; /* Allow the description to take remaining width */
+  }
+  
+  .post-item-description h4 {
+    margin-bottom: 0px;
+    text-align: left;
+    font-family: "Roboto Slab";
+    font-size: 20px;
+    padding-left: 20px;
+    font-weight: bold;
+  }
+  
+  .post-item-description p {
+    margin-top: 0px;
+    text-align: left; /* Align text to the left */
+    font-family: "Roboto Slab";
+    padding-left: 20px;
+    font-size: 15px;
+
+  }
+  
