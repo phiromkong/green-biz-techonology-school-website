@@ -1,17 +1,16 @@
 /* Pagination.css */
 .pagin {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: baseline;
-    border-radius: 5px;
     color: black;
     font-weight: bold;
     margin-top: 20px;
   }
   
   .btn_paginat {
-    padding: 10px 0;
-    width: 50%;
+    padding: 10px 0px;
+    width: 100%;
     text-align: center;
     color: #fff !important ;
     background-color: #206c44 !important;
@@ -23,9 +22,17 @@
     background-color: #035429 !important;
     border-color: #035429 !important;
   }
+
+  .btn_disable:hover {
+    background-color: #E8E8E8 !important;
+    border-color: #E8E8E8 !important;
+    cursor: pointer;
+}
   
   .btn_next {
     border-left: 1px solid black;
+    text-transform: uppercase;
+
   }
   
   .page_show {
@@ -40,10 +47,18 @@
   
   .btn_disable {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    text-transform: uppercase;
+    padding: 10px 0px;
   }
   
   .btn_disable:active {
     border-color: #e6e8eb !important;
     background-color: #f4f5f8 !important;
   }
-  
+
+  .page-info {
+    order: -1;
+  }
+  .right-align {
+    margin-left: auto;
+  }

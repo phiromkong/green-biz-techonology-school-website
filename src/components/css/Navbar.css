@@ -11,6 +11,7 @@ nav {
     background-color: White;
     position: sticky;
     top: 0;
+    border: 2px solid #ddd;
 }
 
 nav .title {
@@ -21,6 +22,7 @@ nav .title {
     color: black;
     display: flex;
     align-items: center;
+    padding-left: 50px;
 }
 .login-rectangle {
     display: flex;

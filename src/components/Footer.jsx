@@ -12,12 +12,13 @@ const Footer = () => {
         <div className="footer-left">
           <h4>ADDRESS</h4>
           <p>Kampong Svay Village, Sangkat Kampong Svay, Serei 
-              Saophoan Municipality, Banteay Meanchey Province</p>
-
-          <h4>CONTACT US</h4>
-          <p>Contact Number: 011 686 681 / 096 996 67 82</p>
-          <p>E-mail: kimle.keo@gmail.com</p>
-
+              Saophoan Municipality, Banteay Meanchey Province
+            </p>
+          <div className="footer-left__content">
+            <h4>CONTACT US</h4>
+            <p>Contact Number: 011 686 681 / 096 996 67 82</p>
+            <p>E-mail: kimle.keo@gmail.com</p>
+          </div>
           {/* Social Icons */}
           <div className="social-icons">
             <SocialIcon style={{ height: 40, width: 40 }} url="https://facebook.com/gbt.school.bmc" />

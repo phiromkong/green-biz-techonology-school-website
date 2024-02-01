@@ -36,16 +36,18 @@ footer {
   max-width: 400px;
   flex: 1 0 100%;
   margin-bottom: 80px;
+  display: flex;
+  flex-wrap: wrap; 
 }
 
 .footer-left h4 {
   font-size: 20px;
   font-weight: bold;
-  font-weight: 600;
+  font-weight: 600
 }
 
 .footer-left p {
-  margin-bottom: 15px;
+  line-height: 25px;
 }
 
 /* Social Icons styles */
@@ -105,4 +107,33 @@ footer {
 
 .copyright-content div{
     background-color: #006C44;
+}
+.footer-left_content {
+  padding-bottom: 10px;
+  background-color: white;
+}
+
+@media (min-width: 768px) {
+  /* Adjust styles for larger screens */
+
+  .footer-container {
+    padding: 40px;
+  }
+
+  .footer-left {
+    margin-bottom: 0;
+    line-height: 30px;
+  }
+
+  .social-icons {
+    margin-bottom: 30px;
+  }
+
+  .google-map {
+    padding-top: 50px;
+  }
+
+  .view-map-button {
+    transform: translateX(-30%) translateY(-200%); /* Adjust as needed */
+  }
 }

@@ -21,7 +21,6 @@ export const Navbar = () => {
                             <img src="logo192.png" alt="School Logo" className="logo" />
                         </div>
                         <div className="title-container">
-                            <div className="khmer">សាលាបច្ចេកវិទ្យា ហ្រ្គីនប៊ីស</div>
                             <div className="english">Green Biz Technology School</div>
                         </div>
                     </Link>

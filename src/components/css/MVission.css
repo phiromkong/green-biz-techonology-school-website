@@ -9,7 +9,10 @@ h2 {
 
 }
 
-p {
+.vision p{
+  padding-top: 40px;
+}
+.mission p {
   padding-top: 40px;
 }
 
