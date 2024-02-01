@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from '@mui/material/Card';
 import { Link } from 'react-router-dom';
+import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -21,10 +21,8 @@ const CourseCard = ({ image, title, description, link }) => (
       </CardContent>
     </CardActionArea>
     <CardActions>
-    <Button variant="contained" style={{ backgroundColor: '#f2c72d', color: 'black', textTransform: 'none', fontWeight: 'bold' }}>
-        <Link to={link} style={{ textDecoration: 'none', color: 'inherit' }}>
-          Read More
-        </Link>
+      <Button component={Link} to={link} variant="contained" style={{ backgroundColor: '#f2c72d', color: 'black', textTransform: 'none', fontWeight: 'bold' }}>
+        Read More
       </Button>
     </CardActions>
   </Card>
