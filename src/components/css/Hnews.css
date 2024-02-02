@@ -17,12 +17,12 @@
 .program_grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 80px;
     justify-content: center;
     margin-left: 17vh;
     max-width: 900px; 
     width: 100%;
     padding: 150px;
+    grid-gap: 20px 30px;
   }
 
   .all_news {

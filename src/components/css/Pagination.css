@@ -21,6 +21,7 @@
   .btn_paginat:hover {
     background-color: #035429 !important;
     border-color: #035429 !important;
+    cursor: pointer;
   }
 
   .btn_disable:hover {

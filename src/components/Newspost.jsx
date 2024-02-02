@@ -1,12 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./css/Newspost.css"
-
-const Newspost = ({ title, content, date, thumbnailImage, newsImages }) => {
+const Newspost = ({ id, title, content, date, thumbnailImage, newsImages }) => {
   // Ensure newsImages is an array before mapping over it
   const imagesToShow = Array.isArray(newsImages) ? newsImages : [];
 
   return (
-    <div className="post-item block">
+      <Link style={{color: 'black'}} to={`/news/${id}`}>    <div className="post-item block">
       <div className="post-item-wrap">
         {/* Thumbnail Image */}
         <div className="post-image">
@@ -30,6 +30,7 @@ const Newspost = ({ title, content, date, thumbnailImage, newsImages }) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

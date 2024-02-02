@@ -80,14 +80,15 @@ const NewsPage = ({ newsData }) => {
               </div>
               <div className="post-container">
               {currentPosts.map((post) => (
-                <Newspost
-                    key={post.id}
-                    title={post.title}
-                    content={post.content}
-                    date={post.date}
-                    thumbnailImage={post.thumbnailImage} 
-                />
-              ))}
+              <Newspost
+                key={post.id}
+                id={post.id} 
+                title={post.title}
+                content={post.content}
+                date={post.date}
+                thumbnailImage={post.thumbnailImage} 
+              />
+            ))}
               </div>
               <Pagination
                 postsPerPage={postsPerPage}
