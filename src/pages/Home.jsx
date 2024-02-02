@@ -55,7 +55,7 @@ const Home = () => {
             </Hnews>
             <Hcourse courses={cardData} />
             <Partners images={partnerLogos} />
-            <Footer></Footer>
+            <Footer />
         </div>
       );
 };
