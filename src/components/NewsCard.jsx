@@ -1,29 +1,30 @@
-// Program.jsx
 import React from 'react';
-import "./css/NewsCard.css";
+import { Link } from 'react-router-dom';
+import './css/NewsCard.css';
 
-function NewsCard({ title, imgUrl, description, link, imageStyle, gridColumn }) {
-    const gridStyles = {
-        gridColumn: gridColumn,
-      };
+function NewsCard({ title, imgUrl, description, content, id, imageStyle, gridColumn }) {
+  const gridStyles = {
+    gridColumn: gridColumn,
+  };
+
   return (
     <div className="text-center" style={gridStyles}>
       <div className="program_box">
-        <a href={link}>
+        <Link to={`/news/${id}`}>
           <img className={`c_program_image ${imageStyle}`} src={imgUrl} alt={title} />
-        </a>
+        </Link>
         <div className="pt-5">
-          <a href={link}>
+          <Link to={`/news/${id}`}>
             <h4 className="c_white ctitle_program">{title}</h4>
-          </a>
+          </Link>
           <div className="c_white font12rem text__content four_line program__content ac_text">
             <p>{description}</p>
           </div>
-          <a href={link}>
+          <Link to={`/news/${id}`}>
             <div className="d-flex ohver_read pt-2">
               <button className="read_more">Read More</button>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -3,23 +3,30 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import "./css/Hnews.css";
 
-function Hnews({ children }) {
+function Hnews({ children, limit = 4 }) {
+  const limitedChildren = React.Children.toArray(children).slice(0, limit);
+
   return (
     <div className="program_container text-center">
       <h2 className='news_update_title'>News</h2>
       <button className='all_news'>
-        <Link to="/news" style={{color: 'black'}}>Explore all News</Link>
+        <Link to="/news" style={{ color: 'black' }}>Explore all News</Link>
       </button>
       <Grid container spacing={2}>
-        {React.Children.map(children, (child, index) => {
+        {limitedChildren.map((child, index) => {
           const isOdd = index % 2 !== 0;
           const isColumnOdd = Math.floor(index / 2) % 2 !== 0;
           const imageStyle = (isColumnOdd && isOdd) || (!isColumnOdd && !isOdd)
             ? 'c_program_image_y'
             : 'c_program_image_w';
 
+            const gridColumnStyle = {
+              paddingTop: isColumnOdd ? '0px' : '80px', // Add your desired top padding value for the second column
+              paddingRight: '0', // No right padding for this example
+            };
+  
           return (
-            <Grid item key={index} xs={12} md={6}>
+            <Grid item key={index} xs={12} md={6} style={gridColumnStyle}>
               {React.cloneElement(child, { imageStyle })}
             </Grid>
           );
