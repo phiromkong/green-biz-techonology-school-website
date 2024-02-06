@@ -6,8 +6,8 @@
     overflow: hidden;
     background-color: #fff;
     transition: transform 0.3s;
-    margin-left: 15px; /* Adjust as needed */
-    margin-right: 15px; /* Adjust as needed */
+    margin-left: 15px;
+    margin-right: 15px; 
     width: 80vw;
   }
   

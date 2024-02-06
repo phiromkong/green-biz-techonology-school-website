@@ -1,8 +1,8 @@
-// CoursesBox.js
 import React from 'react';
-import CourseCard from './Coursecard'; // Replace with the actual path to your CourseCard component
-import './css/Coursesbox.css'; // Add your styling for CoursesBox
+import CourseCard from './Coursecard';
+import './css/Coursesbox.css';
 import Grid from '@mui/material/Grid';
+import { Link } from 'react-router-dom';
 
 const Coursesbox = ({ courses }) => {
   return (
@@ -13,9 +13,11 @@ const Coursesbox = ({ courses }) => {
       <div className='courses-box-title'>Our Program</div>
       <div className="courses-container">
         <Grid container spacing={10}>
-          {courses.map((course, index) => (
-            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-              <CourseCard {...course} />
+          {courses.map((course) => (
+            <Grid item key={course.id} xs={12} sm={6} md={4} lg={3}>
+              <Link to={`/courses/${course.id}`}>
+                <CourseCard {...course} />
+              </Link>
             </Grid>
           ))}
         </Grid>

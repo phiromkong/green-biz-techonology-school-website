@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import './css/Coursecard.css';
 
-const CourseCard = ({ image, title, description, link }) => (
+const CourseCard = ({ id, image, title, description, link }) => (
   <Card className='course-card'>
     <CardActionArea className="card-action-area">
       <CardMedia component="img" height="140" image={image} alt={title} className="card-media-img"/>
@@ -21,7 +21,7 @@ const CourseCard = ({ image, title, description, link }) => (
       </CardContent>
     </CardActionArea>
     <CardActions>
-      <Button component={Link} to={link} variant="contained" style={{ backgroundColor: '#f2c72d', color: 'black', textTransform: 'none', fontWeight: 'bold' }}>
+      <Button component={Link} to={`/courses/${id}`} variant="contained" style={{ backgroundColor: '#f2c72d', color: 'black', textTransform: 'none', fontWeight: 'bold' }}>
         Read More
       </Button>
     </CardActions>

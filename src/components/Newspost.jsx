@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "./css/Newspost.css"
-const Newspost = ({ id, title, content, date, thumbnailImage, newsImages }) => {
+const Newspost = ({ id, title, description, content, date, thumbnailImage, newsImages }) => {
   // Ensure newsImages is an array before mapping over it
   const imagesToShow = Array.isArray(newsImages) ? newsImages : [];
 
@@ -15,11 +15,11 @@ const Newspost = ({ id, title, content, date, thumbnailImage, newsImages }) => {
   
         {/* Render post content */}
         <div className="post-item-description">
-          <h4>{title}</h4>
+          <h4 style={{paddingTop: "-2px"}}>{title}</h4>
           <div className="five_line">
-            <p>{content}</p>
+            <p style={{paddingTop: "30px"}}>{description}</p>
           </div>
-          <p style={{paddingTop: "10px"}}>Posted on {date}</p>
+          <p style={{paddingTop: "40px"}}>Posted on {date}</p>
         </div>
   
         {/* Additional News Images */}

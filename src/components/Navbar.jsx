@@ -18,7 +18,7 @@ export const Navbar = () => {
                 <div>
                     <Link to="/" className="title">
                         <div className="logo-container">
-                            <img src="logo2.png" alt="School Logo" className="logo" />
+                            <img src="/logo2.png" alt="School Logo" className="logo" />
                         </div>
                         <div className="title-container">
                             <div className="english">Green Biz Technology School</div>
@@ -36,22 +36,22 @@ export const Navbar = () => {
                         <NavLink to="/">Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/About">About</NavLink>
+                        <NavLink to="/about">About</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/Courses">Course</NavLink>
+                        <NavLink to="/courses">Course</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/News">News</NavLink>
+                        <NavLink to="/news">News</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/Faculty">Faculty</NavLink>
+                        <NavLink to="/faculty">Faculty</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/Gallery">Gallery</NavLink>
+                        <NavLink to="/gallery">Gallery</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/Contact">Contact</NavLink>
+                        <NavLink to="/contact">Contact</NavLink>
                     </li>
                 </ul>
             </nav>

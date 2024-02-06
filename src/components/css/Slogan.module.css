@@ -18,18 +18,18 @@
     font-style: italic;
     font-variation-settings:"slnt" 0;
     text-align: center;
-    font-size: 3em;
+    font-size: 2.3em;
  }
  
  .Slogan .part1 {
     color: #006C44;
     padding-top: 2px;
-    padding-right: 3em;
+    padding-right: 4em;
  }
  
  .Slogan .part2 {
     color: white;
-    padding-left: 4em;
+    padding-left: 3em;
     padding-bottom: 30px;
  }
 
