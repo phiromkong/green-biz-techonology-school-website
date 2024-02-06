@@ -6,7 +6,8 @@ const Newspost = ({ id, title, description, content, date, thumbnailImage, newsI
   const imagesToShow = Array.isArray(newsImages) ? newsImages : [];
 
   return (
-      <Link style={{color: 'black'}} to={`/news/${id}`}>    <div className="post-item block">
+      <Link style={{color: 'black'}} to={`/news/${id}`}>    
+      <div className="post-item block">
       <div className="post-item-wrap">
         {/* Thumbnail Image */}
         <div className="post-image">

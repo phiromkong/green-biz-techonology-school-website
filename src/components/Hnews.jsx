@@ -20,13 +20,9 @@ function Hnews({ children, limit = 4 }) {
             ? 'c_program_image_y'
             : 'c_program_image_w';
 
-            const gridColumnStyle = {
-              paddingTop: isColumnOdd ? '0px' : '80px', // Add your desired top padding value for the second column
-              paddingRight: '0', // No right padding for this example
-            };
   
           return (
-            <Grid item key={index} xs={12} md={6} style={gridColumnStyle}>
+            <Grid item key={index} xs={12} md={6}>
               {React.cloneElement(child, { imageStyle })}
             </Grid>
           );

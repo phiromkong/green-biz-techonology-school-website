@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import "../components/css/NewsPage.css"
 
 const NewsPage = ({ newsData }) => {
-  // Static data for demonstration (replace it with your actual data)
   const staticPosts = [
     {
       id: 1,
@@ -62,7 +61,6 @@ const NewsPage = ({ newsData }) => {
       thumbnailImage: "./Img4.jpg",
       newsImages: ["./Img4.jpg", "./Img5.jpg"],
     },
-    // Add more static posts as needed
   ];
 
   const postsPerPage = 5; // Set the number of posts per page

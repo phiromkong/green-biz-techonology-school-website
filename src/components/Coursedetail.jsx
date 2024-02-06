@@ -5,7 +5,7 @@ import Footer from './Footer';
 
 const CoursesDetail = ({ courses }) => {
     const { id } = useParams();
-  const course = courses.find((course) => course.id === Number(id));
+    const course = courses.find((course) => course.id === Number(id));
   if (!course) {
     return <p>Course not found</p>;
   }
