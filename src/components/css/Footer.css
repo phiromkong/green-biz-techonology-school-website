@@ -132,7 +132,7 @@ footer {
   }
 
   .view-map-button {
-    transform: translateX(-50%) translateY(-200%); /* Adjust as needed */
+    transform: translateX(-50%) translateY(-115%); /* Adjust as needed */
   }
 }
 

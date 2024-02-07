@@ -8,7 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import './css/Coursecard.css';
 
 const CourseCard = ({ id, image, title, description, link }) => (
-  <Card className='course-card'>
+  <Card component={Link} to={`/courses/${id}`} className='course-card'>
     <CardActionArea className="card-action-area">
       <CardMedia component="img" height="140" image={image} alt={title} className="card-media-img"/>
       <CardContent>

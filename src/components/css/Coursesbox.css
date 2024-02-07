@@ -9,15 +9,17 @@
 }
 
 .header-image {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .header-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+  position: relative;
+  overflow: hidden;
+  max-height: 700px; /* Adjust the maximum height as needed */
+}
+
+.header-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .courses-container {
     margin-left: 80px;
     text-align: center;

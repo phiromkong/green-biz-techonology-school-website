@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
@@ -11,6 +12,10 @@ const NewsDetail = ({ newsData }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const post = newsData.find((post) => post.id === Number(id));
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!post) {
     return <p>Post not found</p>;

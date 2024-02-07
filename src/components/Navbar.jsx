@@ -10,9 +10,6 @@ export const Navbar = () => {
     return (
         <div>
             <div className="login-rectangle">
-                <Link to="/admin" className="login-button">
-                    <button className="login-button">Login</button>
-                </Link>
             </div>
             <nav>
                 <div>

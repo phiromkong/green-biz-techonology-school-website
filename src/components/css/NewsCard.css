@@ -8,7 +8,7 @@ a {
     border: none;
     cursor: pointer;
     width: auto;
-    border-radius: 15px;
+    border-radius: 10px;
     font-size: 1.2rem;
     font-family: 'Inter', sans-serif;
     font-style: italic;
@@ -20,12 +20,11 @@ a {
     color: #fff;
     font-size: 1.6rem;
     text-transform: uppercase;
+ 
   }
   
   .program_box {
-    text-align: center;
     padding-top: 20px;
-    text-align: center;
   }
   
   .c_program_image {
@@ -68,3 +67,8 @@ a {
     word-spacing: 0.5px;
     padding-left: 2rem;
   } 
+
+  .d-flex {
+    display: flex;
+    justify-content: center;
+}

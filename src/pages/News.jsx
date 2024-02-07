@@ -95,12 +95,15 @@ const NewsPage = ({ newsData }) => {
               />
             ))}
               </div>
+              <div style={{ textAlign: 'center', marginBottom: '40px', marginTop: '-1vw', marginLeft: '72vw' }}>
               <Pagination
                 postsPerPage={postsPerPage}
                 totalPosts={staticPosts.length}
                 paginate={paginate}
                 currentPage={currentPage}
               />
+              </div>
+
             </div>
           </div>
         </div>
