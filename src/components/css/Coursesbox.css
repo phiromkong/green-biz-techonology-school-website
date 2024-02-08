@@ -30,6 +30,11 @@
     padding-bottom: 80px;
   }
   
+  @media only screen and (max-width: 768px) {
+    .courses-box-title {
+      font-size: 20px;
+    }
+  }
   
 
   

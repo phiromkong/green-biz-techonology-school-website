@@ -54,4 +54,24 @@
     font-size: 15px;
 
   }
+
+  @media only screen and (max-width: 768px) {
+    .post-item-wrap {
+      flex-direction: column; /* Stack elements vertically */
+      align-items: center; /* Center align items */
+    }
+  
+    .post-image {
+      max-width: 100%; /* Full width for smaller screens */
+    }
+  
+    .post-item-description h4,
+    .post-item-description p {
+      text-align: center; /* Center align text */
+    }
+  
+    .additional-images {
+      margin-top: 10px; /* Adjust spacing */
+    }
+  }
   

@@ -20,7 +20,6 @@ a {
     color: #fff;
     font-size: 1.6rem;
     text-transform: uppercase;
- 
   }
   
   .program_box {
@@ -71,4 +70,26 @@ a {
   .d-flex {
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .text__content {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .c_program_image_y {
+    width: 80%;
+    box-shadow: 5rem 5rem 0px -4rem #f2c72d, -5rem -5rem 0px -4rem #f2c72d; 
+
+  }
+  .c_program_image_w {
+    width: 80%;
+  }
+  .ctitle_program {
+    font-size: 1.1rem;
+  }
+
+  .read_more {
+    font-size: 0.8rem;
+  }
 }

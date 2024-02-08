@@ -1,11 +1,68 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import "../components/css/Faculty.css";
+import Team from '../components/Team';
+import Footer from '../components/Footer';
 const Faculty = () => {
+    const teamMembers = [
+        {
+            name: 'KEO KIMLE',
+            role: 'Founder & Head of School',
+            image: '../HeadOfSchool.png',
+            description: 'As the founder and head of the school...'
+        },
+        {
+            name: 'KEO KIMLE',
+            role: 'Founder & Head of School',
+            image: '../HeadOfSchool.png',
+            description: 'As the founder and head of the school...'
+        },
+        {
+            name: 'KEO KIMLE',
+            role: 'Founder & Head of School',
+            image: '../HeadOfSchool.png',
+            description: 'As the founder and head of the school...'
+        },
+        {
+            name: 'KEO KIMLE',
+            role: 'Founder & Head of School',
+            image: '../HeadOfSchool.png',
+            description: 'As the founder and head of the school...'
+        },
+        {
+            name: 'KEO KIMLE',
+            role: 'Founder & Head of School',
+            image: '../HeadOfSchool.png',
+            description: 'As the founder and head of the school...'
+        },
+        {
+            name: 'KEO KIMLE',
+            role: 'Founder & Head of School',
+            image: '../HeadOfSchool.png',
+            description: 'As the founder and head of the school...'
+        },
+    ];
     return (
         <div>
             <Navbar />
-            <h1>Faculty Page</h1>
-            {/* Add your faculty content here */}
+            <section className="background-grey bg_green pt-50 pb-50">
+            <div className="container">
+                <div className="row c_white" style={{backgroundColor: '#006C44'}}>
+                <h4 className="team_title">Our Team</h4>
+                <p>Dynamic, hard-working, and education lover, everyone says it, but in our case it&rsquo;s true: our team is the secret to our success, hence we call them partners. Each of our partners is best in their own skill, and together they are what makes CISC, our acronym, such a fun and rewarding place to work. The CISC team is a tight-knit, talented group with a shared vision of delivering consistently great results for our beloved students, as well as ensuring the agency is a fun, inclusive, challenging working-place.</p>
+
+                <p>We&rsquo;re very proud of the team we&rsquo;ve built. CISC has always been an agency defined by bringing together talented people with a shared vision and passion for helping us to be the best we can be for our students and parents.</p>
+
+                <p>Be bold: proactive, decisive, take responsibility, and try new things.&nbsp;<br />
+                Be Curious: ask questions, do some research, learn new techniques, and study our clients and their industries.&nbsp;<br />
+                Be Together: play an active role in the team, support your colleagues, collaborate, and have fun.&nbsp;<br />
+                Be Connected: Meet people, make contacts, build relationships, and see the bigger picture.&nbsp;<br />
+                Be Better: look for ways to improve, challenge yourself, never stop learning, and strive to be the best. Building, developing, training, retaining, and engaging the CISC team is a daily commitment. We work hard every day to make sure that our students are supported and empowered to deliver exceptional results for our clients.</p>
+                </div>
+            </div>
+            <Team teamMembers={teamMembers} />
+        </section>
+        <Footer />
         </div>
     );
 };

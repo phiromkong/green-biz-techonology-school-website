@@ -1,23 +1,30 @@
 import React from 'react';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
+import LightGallery from 'lightgallery/react';
+import 'lightgallery/css/lightgallery.css'; // Import lightgallery CSS
+import 'lightgallery/css/lg-zoom.css'; // Import lightgallery zoom CSS
+import 'lightgallery/css/lg-thumbnail.css'; // Import lightgallery thumbnail CSS
+import lgThumbnail from 'lightgallery/plugins/thumbnail'; // Import lightgallery thumbnail plugin
+import lgZoom from 'lightgallery/plugins/zoom'; // Import lightgallery zoom plugin
 
-const Galleryimg = ({ itemData }) => {
+const Gallery = ({ itemData }) => {
+    const onInit = () => {
+        console.log('lightGallery has been initialized');
+    };
+
     return (
-      <ImageList sx={{ width: 1000, height: 500 }} cols={3} rowHeight={200}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.id}>
-            <img
-              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
+        <div className="App">
+            <LightGallery
+                onInit={onInit}
+                plugins={[lgThumbnail, lgZoom]} // Specify plugins
+            >
+                {itemData.map((item) => (
+                    <a href={item.img} key={item.id}>
+                        <img alt={item.title} src={item.img} />
+                    </a>
+                ))}
+            </LightGallery>
+        </div>
     );
-  };
-  
+};
 
-export default Galleryimg;
+export default Gallery;

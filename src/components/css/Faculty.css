@@ -1,0 +1,12 @@
+.row {
+
+    max-width: 100%;
+    color: white;
+    text-align: left;
+    font-size: 20px;
+    padding: 5rem 8rem;
+}
+
+.team_title {
+    font-size: 3rem;
+}
