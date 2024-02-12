@@ -1,5 +1,5 @@
 .news_update_title{
-    font-family: 'Inter', sans-serif;
+    font-family: "Kantumruy Pro", sans-serif;
     font-style: italic;
     text-align: justify;
     font-weight: bold;
@@ -14,6 +14,7 @@
     background-color:#006C44;
     margin-top: 0;
   }
+  
 .program_grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -27,6 +28,8 @@
 
   .all_news {
     background-color: #F0C52D;
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: bold;
     color: black;
     font-size: 20px;
     padding: 10px 60px;
@@ -34,15 +37,13 @@
     margin: 10px 2rem 10px auto; /* Adjust the right margin as needed */
     cursor: pointer;
     float: right;
-    font-weight: bold;
-    font-style: italic;
   }
 
   
   @media only screen and (max-width: 768px) {
 
     .news_update_title {
-      font-size: 1.25rem;
+      font-size: 1.78rem;
     }
     .all_news {
       padding: 5px 10px;

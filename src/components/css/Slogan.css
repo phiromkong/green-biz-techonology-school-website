@@ -1,0 +1,92 @@
+.Slogan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    height: 20vh;
+    background-color: #F0C52D;
+    margin-bottom: -4.3vh;
+    margin-top: -288px;
+    max-height: 100%;
+ }
+ 
+ .Slogan .part1,
+ .Slogan .part2 {
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: bold;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: italic;
+    font-variation-settings:"slnt" 0;
+    text-align: center;
+    font-size: 2.5em;
+ }
+ 
+ .Slogan .part1 {
+    color: #006C44;
+    padding-top: 2px;
+    padding-right: 4em;
+ }
+ 
+ .Slogan .part2 {
+    color: white;
+    padding-left: 3em;
+    padding-bottom: 30px;
+ }
+
+@media (max-width: 1024px) {
+   .Slogan {
+       height: 20vh;
+   }
+
+   .Slogan .part1,
+   .Slogan .part2 {
+       font-size: 1.75em;
+       padding: 10px;
+   }
+}
+
+@media (max-width: 768px) {
+   .Slogan {
+       height: 25vh;
+       flex-direction: column;
+   }
+
+   .Slogan .part1,
+   .Slogan .part2 {
+       font-size: 1.5em;
+       padding: 5px;
+   }
+
+   .Slogan .part1 {
+       padding-top: 1em;
+       padding-right: 2em;
+   }
+
+   .Slogan .part2 {
+       padding-left: 2em;
+       padding-bottom: 1em;
+   }
+}
+
+@media (max-width: 480px) {
+   .Slogan {
+       height: 30vh;
+   }
+
+   .Slogan .part1,
+   .Slogan .part2 {
+       font-size: 1.25em;
+       padding: 2px;
+   }
+
+   .Slogan .part1 {
+       padding-top: 0.5em;
+       padding-right: 1em;
+   }
+
+   .Slogan .part2 {
+       padding-left: 1em;
+       padding-bottom: 0.5em;
+   }
+}

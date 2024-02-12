@@ -13,14 +13,14 @@
   
   
   .news-title {
-    font-family: "Inter";
+    font-family: "Kantumruy Pro", sans-serif;
     font-weight: bold;
     font-size: 30px;
     padding-left: 1.5px;
 }
   
   .news-article > p:first-of-type {
-    font-family: "Roboto Slab";
+    font-family: "Kantumruy Pro", sans-serif;
     font-size: 20px;
     padding-left: 1.5px;
     padding-top: 15px;
@@ -35,7 +35,7 @@
   }
   
   .news-article > p:last-of-type {
-    font-family: "Roboto Slab";
+    font-family: "Kantumruy Pro", sans-serif;
     font-size: 20px;
     padding-left: 1.5px;
     padding-top: 30px;

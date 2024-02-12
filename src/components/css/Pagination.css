@@ -1,6 +1,7 @@
 /* Pagination.css */
 
 .pagin {
+  font-family: "Kantumruy Pro";
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -66,8 +67,8 @@
 }
 
 .page-info {
-  order: -1;
-  font-size: 15px;
+  font-family: "Kantumruy Pro";
+  font-size: 19px;
   padding-bottom: 5px;
 }
 
@@ -82,6 +83,6 @@
     font-size: 0.8rem; /* Adjust font size for smaller screens */
   }
   .page-info {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 }

@@ -29,11 +29,11 @@ const Team = ({ teamMembers }) => {
                                     </div>
                                     <div className="col-md-9 col-12 col-sm-12">
                                         <div className="col-md-12">
-                                            <h3 className="font_bold team_title" style={{ marginBottom: '0px !important', color: '#006C44'}}>{member.name}</h3>
-                                            <h5 className="font_bold team_sub_title" style={{color: '#006C44'}}>{member.role}</h5>
+                                            <h3 className="font_bold team_title" style={{ marginBottom: '0px !important', color: '#006C44', fontFamily: "Kantumruy Pro", fontWeight: 'bold'}}>{member.name}</h3>
+                                            <h5 className="font_bold team_sub_title" style={{color: '#006C44', fontFamily: "Kantumruy Pro"}}>{member.role}</h5>
                                         </div>
                                         <div className="blockquote blockquote-fancy quote_center_team">
-                                            <p style={{color: 'black'}}>{member.description}</p>
+                                            <p style={{color: 'black', fontFamily: "Kantumruy Pro"}}>{member.description}</p>
                                         </div>
                                     </div>
                                 </div>

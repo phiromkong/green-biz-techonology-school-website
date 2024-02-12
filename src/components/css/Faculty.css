@@ -1,12 +1,29 @@
 .row {
-
     max-width: 100%;
     color: white;
-    text-align: left;
+    text-align: justify;
     font-size: 20px;
-    padding: 5rem 8rem;
-}
+    padding: 5rem 10rem; /* Adjusted padding for smaller screens */
+  }
+  
+  .team_title {
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: bold;
+    font-size: 2rem; /* Adjusted font size for smaller screens */
+  }
 
-.team_title {
-    font-size: 3rem;
-}
+  p {
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: 450;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .row {
+      padding: 2rem 1rem; /* Adjusted padding for medium-sized screens */
+    }
+  
+    .team_title {
+      font-size: 1.5rem; /* Adjusted font size for medium-sized screens */
+    }
+  }
+  

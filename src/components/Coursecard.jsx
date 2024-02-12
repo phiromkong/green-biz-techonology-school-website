@@ -12,16 +12,16 @@ const CourseCard = ({ id, image, title, description, link }) => (
     <CardActionArea className="card-action-area">
       <CardMedia component="img" height="140" image={image} alt={title} className="card-media-img"/>
       <CardContent>
-        <Typography variant="h5" component="div" className={{fontFamily: 'Roboto Slab'}}>
+        <Typography variant="h5" component="div" style={{fontFamily: 'Kantumruy Pro', fontWeight: 'bold'}}>
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary" style={{color: 'black', fontFamily: 'Inter', overflow: 'hidden'}}>
+        <Typography variant="body2" color="text.secondary" style={{color: 'black', fontFamily: 'Kantumruy Pro', overflow: 'hidden', fontWeight: '450', paddingTop: '15px'}}>
           {description}
         </Typography>
       </CardContent>
     </CardActionArea>
     <CardActions>
-      <Button component={Link} to={`/courses/${id}`} variant="contained" style={{ backgroundColor: '#f2c72d', color: 'black', textTransform: 'none', fontWeight: 'bold' }}>
+      <Button component={Link} to={`/courses/${id}`} variant="contained" style={{ backgroundColor: '#f2c72d', color: 'black', textTransform: 'none', fontFamily: 'Kantumruy Pro', fontWeight: 'bold'}}>
         Read More
       </Button>
     </CardActions>

@@ -17,9 +17,6 @@ export const Navbar = () => {
                         <div className="logo-container">
                             <img src="/logo2.png" alt="School Logo" className="logo" />
                         </div>
-                        <div className="title-container">
-                            <div className="english">Green Biz Technology School</div>
-                        </div>
                     </Link>
                 </div>
 

@@ -1,4 +1,5 @@
 .course-details {
+    font-family: "Kantumruy Pro", sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -49,9 +50,5 @@ button {
     margin-bottom: 40px;
 }
 
-.back-btn {
-    padding-top: -20px;
-    color: black;
-}
 
 

@@ -13,36 +13,35 @@ p {
   display: flex;
   flex-direction: column;
   padding: 40px 0px;
-  height: 25vw;
   width: 100%;
   background-color: #006C44;
-  padding-bottom: 180px;
 }
 
 /* Container for the flex layout */
 .flexContainer {
   display: flex;
   justify-content: space-between;
-  padding: 40px 20px;
+  align-items: center; /* Align items vertically */
+  padding: 0 20px; /* Adjust padding */
+  margin-bottom: 30px;
 }
 
 /* Left column styles */
 .contentSection {
   flex: 1;
   max-width: 600px;
+  color: white; /* Moved color to this section */
 }
 
 .heading {
   font-size: 20px;
-  font-weight: bold;
   font-weight: 600;
   margin-bottom: 10px;
-  padding-left: 50px;
-  color: white;
-  font-family: "Inter";
+  font-family: "Kantumruy Pro", sans-serif;
+  font-weight: bold;
   font-style: italic;
   padding-top: 40px;
-  padding-right: 40px;
+  margin-left: 50px;
 }
 
 .features {
@@ -50,16 +49,11 @@ p {
 }
 
 .feature {
-  display: flex;
-  align-items: center;
-  margin-top: 90px;
-  padding-left: 50px;
-  color: white;
-  font-family: "Roboto Slab";
-  font-weight: bold;
+  margin-top: 30px; /* Adjusted margin */
+  font-family: "Kantumruy Pro", sans-serif;
   font-weight: 500;
-  font-size: 20px;
-  padding-right: 40px;
+  font-size: 16px; /* Adjusted font size */
+  margin-left: 50px;
 }
 
 /* Right column styles */
@@ -67,71 +61,66 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 0.55;
+  flex: 1;
   position: relative;
+  margin-top: 20px; /* Adjusted margin */
 }
 
 /* Hero image styles */
 .heroImage {
-  max-width: 50%;
+  width: 100%; /* Adjusted width */
+  max-width: 400px; /* Added max-width */
   height: auto;
   border-radius: 5px;
 }
+
 .socialIcons {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-60%);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: -50px;
-  }
-  
-  .socialIcons .react-social-icons svg {
-    width: 30px;
-    height: 30px;
-    margin: 0 5px; /* Adjusted margin for smaller screens */
-  }
+  position: absolute;
+  bottom: -50px; /* Adjusted bottom position */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.socialIcons .react-social-icons svg {
+  width: 30px;
+  height: 30px;
+  margin: 0 5px; /* Adjusted margin for smaller screens */
+}
 
 @media (max-width: 767px) {
-    .flexContainer {
-        flex-direction: column-reverse;
-      }
-    
-      .imageSection {
-        margin-top: 20px; /* Add some space between content and image on smaller screens */
-        align-items: center; /* Align image to center on smaller screens */
-      }
-    
-      .heroImage {
-        width: 80%; /* Adjust the width of the image on smaller screens */
-        max-width: 100%;
-        height: auto;
-        border-radius: 5px;
-        margin-bottom: 20px; /* Add margin at the bottom of the image on smaller screens */
-      }
-    
-      .socialIcons {
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px; /* Adjust the margin-top for the icons on smaller screens */
-      }
-    
-      .heading {
-        margin-top: 100px;
-        text-align: left; /* Center align the heading on smaller screens */
-      }
-    
-      .feature {
-        justify-content: center;
-        text-align: left; /* Center align the features on smaller screens */
-        margin-top: 20px; /* Adjust the margin-top for the features on smaller screens */
-      }
+  .flexContainer {
+    flex-direction: column-reverse; /* Adjusted flex direction for smaller screens */
+    align-items: flex-start; /* Align items to the start */
+  }
 
-      .socialIcons {
-        margin-top: 20px; /* Adjusted margin-top for smaller screens */
-      }    
+  .heading {
+    text-align: center; /* Center align the heading on smaller screens */
+    margin-top: 40px; /* Adjusted margin */
+    margin-left: 0;
+    font-size: 15px;
+  }
+
+  .feature {
+    text-align: center; /* Center align the features on smaller screens */
+    margin-top: 20px; /* Adjusted margin */
+    margin-left: 0;
+    font-size: 14px;
+  }
+
+  .imageSection {
+    margin-top: 40px; /* Adjusted margin */
+  }
+
+  .heroImage {
+    max-width: 100%;
+  }
+
+  .socialIcons {
+    bottom: -50px; /* Adjusted bottom position */
+    height: 20;
+    width: 20;
+  }
 }
-  

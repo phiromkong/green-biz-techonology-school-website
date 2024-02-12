@@ -15,7 +15,7 @@ footer {
   font-size: 18px;
   line-height: 32px;
   font-weight: 400;
-  font-family: 'Roboto Slab', serif;
+  font-family: "Kantumruy Pro", sans-serif;
   margin-top: -20px;
 }
 
@@ -43,7 +43,7 @@ footer {
 .footer-left h4 {
   font-size: 20px;
   font-weight: bold;
-  font-weight: 600;
+
 }
 
 .footer-left p {
@@ -73,7 +73,6 @@ footer {
   width: 100%;
   min-height: 460px;
   height: auto;
-  padding-top: 30px;
 }
 
 /* "View on the Map" button styles */
@@ -87,9 +86,9 @@ footer {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-family: Inter;
+  font-family: "Kantumruy Pro", sans-serif;
+  font-weight: bold;
   font-style: italic;
-  font-weight: 800;
   font-size: 20px;
 }
 
@@ -101,6 +100,8 @@ footer {
   text-align: center;
   color: white;
   margin-top: -50px;
+  font-family: "Kantumruy Pro", sans-serif;
+  font-weight: bold;
 }
 
 .copyright-content div{
@@ -132,7 +133,7 @@ footer {
   }
 
   .view-map-button {
-    transform: translateX(-50%) translateY(-115%); /* Adjust as needed */
+    transform: translateX(-50%) translateY(-75%); /* Adjust as needed */
   }
 }
 
@@ -140,20 +141,30 @@ footer {
 @media only screen and (max-width: 600px) {
   .footer-container {
     flex-direction: column;
+    padding-left: 0;
   }
   .footer-left, .footer-right {
     max-width: 100%;
   }
   .footer-left h4 {
     font-size: 15px;
+    padding-left: 1.5rem;
   }
 
   .footer-left p {
     font-size: 15px;
+    padding-left: 1.5rem;
   }
   .view-map-button {
-    padding: 5px 5px;
-    font-size: 10px;
+    padding: 10px 20px;
+    transform: translateX(-50%) translateY(-78%);
+    font-size: 13px;
+  }
+  .google-map {
+    margin-left: -5px;
+  }
+  .social-icons {
+    padding-left: 1.5rem;
   }
 }
 
@@ -175,6 +186,11 @@ footer {
   .footer-left, .footer-right {
     max-width: 50%;
   }
+  .view-map-button {
+    padding: 10px 20px;
+    transform: translateX(-55%) translateY(-78%);
+    font-size: 15px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -187,12 +203,3 @@ footer {
   }
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .footer-container {
-    flex-direction: row;
-  }
-  .footer-left, .footer-right {
-    max-width: 50%;
-  }
-}

@@ -74,42 +74,42 @@ const NewsPage = ({ newsData }) => {
 
   return (
     <div>
-      <Navbar />
-      <section id="page-content" className="sidebar-right">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="content col-lg-10 blog_header">
-              <div className="post-container">
+    <Navbar />
+    <section id="page-content" className="sidebar-right">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="content col-lg-10 blog_header">
+            <div className="post-container">
               <div className="page-title mb-5">
-                <h2 className="home_title" style={{color: 'black', paddingLeft: '10px'}}>Recent Post</h2>
+                <h2 className="home_title" style={{color: 'black'}}>Recent Post</h2>
               </div>
               {currentPosts.map((post) => (
-              <Newspost
-                key={post.id}
-                id={post.id} 
-                title={post.title}
-                content={post.content}
-                description={post.description}
-                date={post.date}
-                thumbnailImage={post.thumbnailImage} 
-              />
-            ))}
-              </div>
-              <div style={{ textAlign: 'center', marginBottom: '40px', marginTop: '-1vw', marginLeft: '72vw' }}>
+                <Newspost
+                  key={post.id}
+                  id={post.id} 
+                  title={post.title}
+                  content={post.content}
+                  description={post.description}
+                  date={post.date}
+                  thumbnailImage={post.thumbnailImage} 
+                />
+              ))}
+            </div>
+            <div className="text-center mt-4">
               <Pagination
                 postsPerPage={postsPerPage}
                 totalPosts={staticPosts.length}
                 paginate={paginate}
                 currentPage={currentPage}
               />
-              </div>
-
             </div>
           </div>
         </div>
-      </section>
-      <Footer />
-    </div>
+      </div>
+    </section>
+    <Footer />
+  </div>
+
   );
 };
 

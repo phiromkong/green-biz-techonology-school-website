@@ -4,7 +4,7 @@
 }
 
 .courseTitle {
-  font-family: 'Inter', sans-serif;
+  font-family: "Kantumruy Pro", sans-serif;
   font-weight: bold;
   font-style: italic;
   text-align: justify;
@@ -48,16 +48,15 @@
   cursor: pointer;
   float: right;
   font-weight: bold;
-  font-style: italic;
+  font-family: "Kantumruy Pro", sans-serif;
 }
 
 @media only screen and (max-width: 768px) {
   .courseTitle {
-    font-size: 1.25rem;
+    font-size: 1.78rem;
   }
   .all_courses {
     padding: 5px 10px;
     font-size: 10px;
-    margin-left: 20px;
   }
 }

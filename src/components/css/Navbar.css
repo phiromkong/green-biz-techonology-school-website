@@ -1,5 +1,5 @@
 .active{
-    color: #F0C52D;
+    color: #FF0000;
 }
 
 
@@ -34,40 +34,21 @@ nav .title {
     height: 52px;
     width: auto;
 }
-.login-button {
-    background-color: #F0C52D;
-    color: black;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    width: 100px;
-    border-radius: 15px;
-    transition: background-color 0.3s ease;
-    font-family: 'Inter', sans-serif;
-    font-style: italic;
-    font-weight: bold;
-}
 
 .login-button:hover {
     color: black; 
 }
 
 .logo {
-    width: 100px; 
+    width: 40%; 
     height: auto;
 }
 
-.logo-container, .title-container {
+.logo-container {
     margin-right: 10px; 
 }
 
-.khmer {
-    font-family: "Khmer OS SiemReap", Arial, sans-serif;
-}
 
-.english {
-    font-family: "Inter", Arial, sans-serif;
-}
 nav ul {
     display: flex;
 }
@@ -79,11 +60,12 @@ nav ul li {
 nav ul li a {
     display: block;
     text-decoration: none;
-    color: #006C44;
+    color: black;
     padding: 0.5rem;
     margin: 0 0.5rem;
     border-radius: 0.5rem;
-    font-family: 'Roboto Slab', serif;
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: bold;
 }
 
 nav ul li a:not(.active):hover {
@@ -98,21 +80,22 @@ nav .menu {
     right: 0.5rem;
     flex-direction: column;
     justify-content: space-between;
-    width: 2.25rem;
-    height: 2rem;
+    width: 2rem;
+    height: 1.5rem;
 }
 
 nav .menu span {
-    height: 0.4rem;
+    height: 0.2rem;
     width: 100%;
     background-color: black;
     border-radius: 0.2rem;
 }
 
 
-@media (max-width: 980px) {
+@media (max-width: 1200px) {
     .logo {
-        width: 50px; /* Adjust the width for larger screens */
+        width: 70%; /* Adjust the width for larger screens */
+        margin-left: -50px;
     }
     nav .menu {
         display: flex;
@@ -141,12 +124,5 @@ nav .menu span {
 
     nav ul li a {
         margin: 0.2rem 0.5rem;
-    }
-    .login-button {
-        margin-top: 0.25rem; 
-    }
-
-    nav .title{
-        font-size: 1rem;
     }
 }
