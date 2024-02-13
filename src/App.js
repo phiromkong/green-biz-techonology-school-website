@@ -12,6 +12,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import CoursesDetail from './components/Coursedetail'; 
 
+
 function App() {
   const newsData = [
     {
@@ -138,23 +139,26 @@ function App() {
       programOutcome: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
     },
   ];
- return (
-    <Router>
-      <Routes>
-        <Route path="/about" element={<About />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/courses/:id" element={<CoursesDetail courses={cardData} />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/news/:id" element={<NewsDetails newsData={newsData} />} />
-        <Route path="/faculty" element={<Faculty />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/dashboard" element={<AdminDashboard />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </Router>
- );
+  
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:id" element={<CoursesDetail courses={cardData} />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/news/:id" element={<NewsDetails newsData={newsData} />} />
+          <Route path="/faculty" element={<Faculty />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </>
+  );
 }
 
 export default App;

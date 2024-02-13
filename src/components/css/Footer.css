@@ -80,7 +80,7 @@ footer {
   position: absolute;
   left: 50%;
   transform: translateX(-30%) translateY(-200%);
-  background-color: #006C44;
+  background-color: #088A5B;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -94,7 +94,7 @@ footer {
 
 /* Copyright section styles */
 .copyright-content {
-  background-color: #006C44;
+  background-color: #088A5B;
   padding: 30px 0px;
   font-size: 17px;
   text-align: center;
@@ -105,7 +105,7 @@ footer {
 }
 
 .copyright-content div{
-    background-color: #006C44;
+    background-color: #088A5B;
 }
 .footer-left_content {
   padding-bottom: 10px;

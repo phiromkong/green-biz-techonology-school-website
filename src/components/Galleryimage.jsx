@@ -15,7 +15,7 @@ const Gallery = ({ itemData }) => {
         <div className="App">
             <LightGallery
                 onInit={onInit}
-                plugins={[lgThumbnail, lgZoom]} // Specify plugins
+                plugins={[lgThumbnail, lgZoom]} 
             >
                 {itemData.map((item) => (
                     <a href={item.img} key={item.id}>

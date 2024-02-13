@@ -1,0 +1,95 @@
+.flexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .contentSection {
+    flex: 1;
+    padding: 20px;
+    
+    
+  }
+  
+  .imageSection {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .heroImage {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .contact-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  .features {
+    margin-left: -47px; /* Adjust as needed */
+  }
+  
+  .feature {
+    font-size: 20px;
+    line-height: 1.8rem;
+    font-family: "Kantumruy Pro", sans-serif;
+  }
+  
+  .general-inquiry {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 20px;
+  }
+  
+  .contact-details {
+    font-size: 20px;
+    line-height: 2rem;
+    font-family: "Kantumruy Pro", sans-serif;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .flexContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .contentSection {
+      margin-top: 0; /* Adjust as needed */
+      font-size: 10px;
+    }
+  
+    .features {
+      margin-left: 0; /* Adjust as needed */
+      display: flex;
+        justify-content: center;
+    }
+    .feature {
+        font-size: 12px;
+        text-align: center;
+    }
+    .contact-heading {
+        font-size: 15px;
+        display: flex;
+        justify-content: center;
+    }
+    .general-inquiry {
+        font-size: 15px;
+        display: flex;
+        justify-content: center;
+    }
+    .contact-details {
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+  }
+  

@@ -30,7 +30,7 @@ nav .title {
     display: flex;
     justify-content: flex-end;;
     align-items: center;
-    background-color: #006C44;
+    background-color: #088A5B;
     height: 52px;
     width: auto;
 }
@@ -94,7 +94,7 @@ nav .menu span {
 
 @media (max-width: 1200px) {
     .logo {
-        width: 70%; /* Adjust the width for larger screens */
+        width: 55%; /* Adjust the width for larger screens */
         margin-left: -50px;
     }
     nav .menu {
