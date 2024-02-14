@@ -47,7 +47,8 @@ footer {
 }
 
 .footer-left p {
-  line-height: 25px;
+  padding-bottom: 30px;
+  line-height: 30px;
 }
 
 /* Social Icons styles */

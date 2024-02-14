@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-
+import Dropdown from './Dropdown'; // Import the Dropdown component
 import "./css/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 
-
 export const Navbar = () => {
+    
     const [menuOpen, setMenuOpen] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown
+
+    const handleDropdown = () => setDropdownOpen(!dropdownOpen); // Handler for dropdown
 
     return (
         <div>
-            <div className="login-rectangle">
+            <div className="login-rsectangle">
             </div>
             <nav>
                 <div>
@@ -29,20 +32,12 @@ export const Navbar = () => {
                     <li>
                         <NavLink to="/">Home</NavLink>
                     </li>
-                    <li>
+                    <li onClick={handleDropdown}>
                         <NavLink to="/about">About</NavLink>
+                        {dropdownOpen && <Dropdown />} {/* Render Dropdown if dropdownOpen is true */}
                     </li>
                     <li>
                         <NavLink to="/courses">Course</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/news">News</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/faculty">Faculty</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/gallery">Gallery</NavLink>
                     </li>
                     <li>
                         <NavLink to="/contact">Contact</NavLink>

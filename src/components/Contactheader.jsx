@@ -4,14 +4,14 @@ import './css/Contactheader.css';
 const Contactheader = () => {
     return (
         <div className="flexContainer">
-            <div className="imageSection">
+            <div className="posterSection">
                 <img
-                    className="heroImage"
+                    className="contactPoster"
                     src="./Img2.jpg"
                     alt="Poster"
                 />
             </div>
-            <div className="contentSection">
+            <div className="contactSection">
                 <div className="contact-heading">
                     <h1>Contact Details</h1>
                 </div>
@@ -23,8 +23,8 @@ const Contactheader = () => {
                     <h1> General Inquiry</h1>
                 </div>
                 <div className='contact-details'>
-                    <p>Telephone: (+855) 11 686 681 / (+855) 96 996 67 82&nbsp; <br /> Email: kimle.keo@gmail.com </p>
-                    <p></p>
+                    <p>Telephone: (+855) 11 686 681 / (+855) 96 996 67 82&nbsp; <br /> Email: kimle.keo@gmail.com</p>
+
                 </div>
             </div>
         </div>

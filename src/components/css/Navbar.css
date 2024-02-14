@@ -49,6 +49,7 @@ nav .title {
 }
 
 
+
 nav ul {
     display: flex;
 }
@@ -66,6 +67,7 @@ nav ul li a {
     border-radius: 0.5rem;
     font-family: "Kantumruy Pro", sans-serif;
     font-weight: bold;
+    font-size: 1.3rem;
 }
 
 nav ul li a:not(.active):hover {
@@ -108,7 +110,7 @@ nav .menu span {
 
     nav ul {
         display: none;
-        flex-direction: column;
+        flex-direction: column; 
         width: 100%;
         margin-bottom: 0.25rem;
     }

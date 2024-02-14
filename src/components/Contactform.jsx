@@ -2,28 +2,60 @@ import React, { useState } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import './css/Contactform.css';
 
-const Contactform = () => {
-    const [firstName, setFirstName] = useState("");
-    const [firstNameError, setFirstNameError] = useState(false);
+const Contactform = ({ onSubmit }) => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        message: '',
+    });
 
-    const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-    if (event.target.value === "") {
-        setFirstNameError(true);
-    } else {
-        setFirstNameError(false);
-    }
-    };
-    const [validated, setValidated] = useState(false);
-
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+    const [errors, setErrors] = useState({
+        firstName: false,
+        email: false,
+        phoneNumber: false,
+    });
+    
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    
+        let error = false;
+        if (value.trim() === '' && name !== 'message') {
+            error = true;
+        } else if (name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+            error = true;
+        } else if (name === 'phoneNumber' && !/^0\d{8,10}$/.test(value)) {
+            error = true;
         }
-        setValidated(true);
+        setErrors({ ...errors, [name]: error });
     };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (form.checkValidity() === false || Object.values(errors).some(error => error)) {
+            event.stopPropagation();
+        } else {
+            // Call onSubmit function passed from parent component with form data
+            onSubmit(formData);
+            // Reset form data after submission
+            setFormData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneNumber: '',
+                message: '',
+            });
+            // Reset errors state
+            setErrors({
+                firstName: false,
+                email: false,
+                phoneNumber: false,
+            });
+        }
+    };
+
 
     return (
         <div className="contact-form-wrapper">
@@ -36,25 +68,27 @@ const Contactform = () => {
                     '& .MuiTextField-root': { m: 2, width: '20%' },
                 }}
                 noValidate
-                validated={validated}
                 onSubmit={handleSubmit}
             >
                 <TextField
-                    error={firstNameError}
-                    onChange={handleFirstNameChange}    
+                    error={errors.firstName}
+                    onChange={handleChange}    
                     id="validationTooltip01"
+                    name="firstName"
                     label="First name"
-                    defaultValue=""
+                    value={formData.firstName}
                     required
-                    helperText="Please provide your first name."
+                    helperText={errors.firstName ? "Please provide your first name." : ""}
                 />
                 <TextField
-                    error
+                    error={errors.lastName}
+                    onChange={handleChange}
                     id="validationTooltip02"
+                    name="lastName"
                     label="Last name"
-                    defaultValue=""
+                    value={formData.lastName}
                     required
-                    helperText="Please provide your last name."
+                    helperText={errors.firstName ? "Please provide your last name." : ""}
                 />
                  <Box
                 component="form"
@@ -62,23 +96,29 @@ const Contactform = () => {
                     '& .MuiTextField-root': { m: 2, width: '20%'},
                 }}
                 noValidate
-                validated={validated}
                 onSubmit={handleSubmit}
             >
                     <TextField
+                        error={errors.email}
+                        onChange={handleChange}
                         id="validationTooltip03"
+                        name="email"
                         label="Email Address"
-                        defaultValue=""
-                        type="email" // Set type to email for email validation
-                        helperText="Please provide a valid email address."
+                        type="email"
+                        value={formData.email}
+                        required
+                        helperText={errors.email ? "Please provide a valid email address." : ""}
                         
                     />
                     <TextField
-                        id="validationTooltip03"
+                        error={errors.phoneNumber}
+                        onChange={handleChange}
+                        id="validationTooltip04"
+                        name="phoneNumber"
                         label="Phone Number"
+                        value={formData.phoneNumber}
                         required
-                        defaultValue=""
-                        helperText="Please provide a valid phone number."
+                        helperText={errors.phoneNumber ? "Please provide a valid phone number." : ""}
                         
                     />
                 </Box>
@@ -90,18 +130,21 @@ const Contactform = () => {
 
                 }}
                 noValidate
-                validated={validated}
                 onSubmit={handleSubmit}
             >
                     <TextField
-                        id="validationTooltip03"
+                        id="vali    dationTooltip05"
+                        name="message"
                         label="Message"
-                        defaultValue=""
+                        multiline
+                        rows={4}
+                        value={formData.message}
+                        onChange={handleChange}
                         
                     />
                 </Box>
                 {/* Add other TextField components here */}
-                <Button style={{marginBottom: '40px', backgroundColor: '#006C44', color: 'white', marginLeft: '18px'}} type="submit">
+                <Button style={{marginBottom: '40px', backgroundColor: '#006C44', color: 'white', marginLeft: '18px', borderRadius: '10px'}} type="submit">
                     Submit
                 </Button>
             </Box>

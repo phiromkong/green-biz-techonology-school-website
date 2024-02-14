@@ -2,21 +2,24 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
   }
   
-  .contentSection {
+  .contactSection {
     flex: 1;
     padding: 20px;
-    
-    
+    max-width: 600px;
+    color: white;
+    font-family: "Kantumruy Pro", sans-serif;
+      
   }
   
-  .imageSection {
+  .posterSection {
     flex: 1;
     padding: 20px;
   }
   
-  .heroImage {
+  .contactPoster {
     max-width: 100%;
     height: auto;
   }
@@ -24,19 +27,21 @@
   .contact-heading {
     font-size: 24px;
     margin-bottom: 10px;
-    font-family: "Kantumruy Pro", sans-serif;
+    
     font-weight: bold;
     font-style: italic;
   }
   
   .features {
-    margin-left: -47px; /* Adjust as needed */
+    color: white;
+    font-family: "Kantumruy Pro", sans-serif;
   }
   
   .feature {
     font-size: 20px;
-    line-height: 1.8rem;
+    line-height: 2rem;
     font-family: "Kantumruy Pro", sans-serif;
+    margin-top: 20px;
   }
   
   .general-inquiry {
@@ -46,6 +51,7 @@
     font-weight: bold;
     font-style: italic;
     margin-top: 20px;
+    color: white;
   }
   
   .contact-details {
@@ -53,6 +59,7 @@
     line-height: 2rem;
     font-family: "Kantumruy Pro", sans-serif;
     margin-top: 20px;
+    
   }
   
   @media (max-width: 768px) {
@@ -63,16 +70,15 @@
   
     .contentSection {
       margin-top: 0; /* Adjust as needed */
-      font-size: 10px;
     }
   
     .features {
       margin-left: 0; /* Adjust as needed */
       display: flex;
-        justify-content: center;
+      justify-content: center;
     }
     .feature {
-        font-size: 12px;
+        font-size: 14px;
         text-align: center;
     }
     .contact-heading {
