@@ -1,101 +1,100 @@
-.flexContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.contact-flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.contactSection {
+  flex: 1;
+  padding: 20px;
+  max-width: 600px;
+  color: white;
+  font-family: "Kantumruy Pro", sans-serif;
+}
+
+.posterSection {
+  flex: 1;
+  padding: 20px;
+}
+
+.contactPoster {
+  max-width: 100%;
+  height: auto;
+}
+
+.contact-heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center; /* Center align the heading */
+}
+
+.features {
+  color: white;
+  font-family: "Kantumruy Pro", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the features */
+}
+
+.feature {
+  font-size: 20px;
+  line-height: 2rem;
+  font-family: "Kantumruy Pro", sans-serif;
+  margin-top: 20px;
+}
+
+.general-inquiry {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-family: "Kantumruy Pro", sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 20px;
+  color: white;
+  text-align: center; /* Center align the general inquiry */
+}
+
+.contact-details {
+  font-size: 20px;
+  line-height: 2rem;
+  font-family: "Kantumruy Pro", sans-serif;
+  margin-top: 20px;
+  text-align: center; /* Center align the contact details */
+}
+
+@media (max-width: 768px) {
+  .contact-flexContainer {
+    flex-direction: column;
     align-items: center;
   }
-  
-  .contactSection {
-    flex: 1;
-    padding: 20px;
-    max-width: 600px;
-    color: white;
-    font-family: "Kantumruy Pro", sans-serif;
-      
+
+  .contentSection {
+    margin-top: 0; /* Adjust as needed */
   }
-  
-  .posterSection {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .contactPoster {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .contact-heading {
-    font-size: 24px;
-    margin-bottom: 10px;
-    
-    font-weight: bold;
-    font-style: italic;
-  }
-  
+
   .features {
-    color: white;
-    font-family: "Kantumruy Pro", sans-serif;
+    margin-left: 30px; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
   }
-  
+
   .feature {
-    font-size: 20px;
-    line-height: 2rem;
-    font-family: "Kantumruy Pro", sans-serif;
-    margin-top: 20px;
+    font-size: 14px;
   }
-  
+
+  .contact-heading {
+    font-size: 15px;
+  }
+
   .general-inquiry {
-    font-size: 24px;
-    margin-bottom: 10px;
-    font-family: "Kantumruy Pro", sans-serif;
-    font-weight: bold;
-    font-style: italic;
-    margin-top: 20px;
-    color: white;
+    font-size: 15px;
   }
-  
+
   .contact-details {
-    font-size: 20px;
-    line-height: 2rem;
-    font-family: "Kantumruy Pro", sans-serif;
-    margin-top: 20px;
-    
+    font-size: 12px;
+    text-align: center;
   }
-  
-  @media (max-width: 768px) {
-    .flexContainer {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .contentSection {
-      margin-top: 0; /* Adjust as needed */
-    }
-  
-    .features {
-      margin-left: 0; /* Adjust as needed */
-      display: flex;
-      justify-content: center;
-    }
-    .feature {
-        font-size: 14px;
-        text-align: center;
-    }
-    .contact-heading {
-        font-size: 15px;
-        display: flex;
-        justify-content: center;
-    }
-    .general-inquiry {
-        font-size: 15px;
-        display: flex;
-        justify-content: center;
-    }
-    .contact-details {
-        font-size: 12px;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-    }
-  }
-  
+}

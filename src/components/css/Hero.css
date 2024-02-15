@@ -41,19 +41,19 @@ p {
   font-weight: bold;
   font-style: italic;
   padding-top: 40px;
-  margin-left: 50px;
+  margin-left: 100px;
 }
 
 .hero-features {
   margin-top: 8px;
+  margin-left: 100px;
 }
 
 .hero-feature {
   margin-top: 30px; /* Adjusted margin */
   font-family: "Kantumruy Pro", sans-serif;
   font-weight: 500;
-  font-size: 16px; /* Adjusted font size */
-  margin-left: 50px;
+  font-size: 20px; /* Adjusted font size */
 }
 
 /* Right column styles */
@@ -92,8 +92,8 @@ p {
 
 @media (max-width: 767px) {
   .flexContainer {
-    flex-direction: column-reverse; /* Adjusted flex direction for smaller screens */
-    align-items: flex-start; /* Align items to the start */
+    flex-direction: column; /* Adjusted flex direction for smaller screens */
+    align-items: center; /* Center align items on smaller screens */
   }
 
   .heading {
@@ -103,10 +103,13 @@ p {
     font-size: 15px;
   }
 
-  .feature {
-    text-align: center; /* Center align the features on smaller screens */
+  .hero-features {
+    margin-left: 0; /* Center align the features on smaller screens */
+    text-align: center;
+  }
+
+  .hero-feature {
     margin-top: 20px; /* Adjusted margin */
-    margin-left: 0;
     font-size: 14px;
   }
 

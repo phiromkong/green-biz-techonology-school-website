@@ -149,7 +149,7 @@ function App() {
           <Route path="/courses/:id" element={<CoursesDetail courses={cardData} />} />
           <Route path="/news" element={<News />} />
           <Route path="/news/:id" element={<NewsDetails newsData={newsData} />} />
-          <Route path="/faculty" element={<Faculty />} />
+          <Route path="/our-team" element={<Faculty />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
