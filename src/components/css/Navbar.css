@@ -10,7 +10,7 @@ nav {
     z-index: 1000;
     justify-content: space-between;
     align-items: center;
-
+    align-items: center;
     top: 0;
     box-sizing: border-box;
     padding: 1rem;
@@ -150,7 +150,7 @@ nav .menu span {
 
 @media (max-width: 1200px) {
     .logo {
-        width: 55%; /* Adjust the width for larger screens */
+        width: 70%; /* Adjust the width for larger screens */
         margin-left: -50px;
     }
     nav .menu {
@@ -174,18 +174,24 @@ nav .menu span {
         display: flex;
         width: 70%;
     }
+    .logo-container {
+        order: 1; /* this will keep the logo at the top */
+    }
+
+    .menu {
+        order: 2; /* this will place the menu icon below the logo */
+    }
 
     nav ul li {
         text-align: center;
         width: 70%;
     }
-
     nav ul li a {
         margin: 0.2rem 0.5rem;
         font-size: 1rem;
         text-align: left;
-        padding: 10px 20px;
-        max-height: calc(100vh - 52px);
+
+
         width: 70%;
     }
     .dropdown-menu {
@@ -194,7 +200,7 @@ nav .menu span {
         box-shadow: none;
         padding: 10;
         background-color: #F0C52D;
-        width: 100vw;
+        width: 70vw;
     }
 
     .dropdown-menu a {

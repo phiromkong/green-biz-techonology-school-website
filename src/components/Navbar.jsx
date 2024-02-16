@@ -23,11 +23,10 @@ export const Navbar = () => {
 
     const handleMenuClick = () => {
         setMenuOpen(!menuOpen);
-        setDropdownOpen(false); // Close dropdown when menu is clicked
+        setDropdownOpen(true); // Close dropdown when menu is clicked
     };
 
     const handleDropdownClick = (e) => {
-        e.stopPropagation(); // Prevent menu from closing when dropdown is clicked
         toggleDropdown();
     };
 

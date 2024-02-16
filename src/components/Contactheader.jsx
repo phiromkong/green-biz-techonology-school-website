@@ -23,9 +23,7 @@ const Contactheader = () => {
                     <h1> General Inquiry</h1>
                 </div>
                 <div className='contact-details'>
-                    <p>Telephone: (+855) 11 686 681 / (+855) 96 996 67 82</p>
-                        <p> Email: kimle.keo@gmail.com</p>
-
+                    <p className='contact-detail'>Telephone: (+855) 11 686 681 / (+855) 96 996 67 82&nbsp; <br /> Email: kimle.keo@gmail.com</p>
                 </div>
             </div>
         </div>

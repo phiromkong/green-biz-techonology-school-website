@@ -7,7 +7,7 @@
 
 .contactSection {
   flex: 1;
-  padding: 20px;
+  margin-left: -90px;
   max-width: 600px;
   color: white;
   font-family: "Kantumruy Pro", sans-serif;
@@ -35,12 +35,13 @@
   color: white;
   font-family: "Kantumruy Pro", sans-serif;
   display: flex;
+  margin-right: 10px;
   flex-direction: column;
   align-items: center; /* Center align the features */
 }
 
 .feature {
-  font-size: 20px;
+  font-size: 19px;
   line-height: 2rem;
   font-family: "Kantumruy Pro", sans-serif;
   margin-top: 20px;
@@ -58,11 +59,19 @@
 }
 
 .contact-details {
-  font-size: 20px;
+  color: white;
+  font-family: "Kantumruy Pro", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin-left: 126px;
+}
+
+.contact-detail {
+  font-size: 19px;
   line-height: 2rem;
   font-family: "Kantumruy Pro", sans-serif;
   margin-top: 20px;
-  text-align: center; /* Center align the contact details */
 }
 
 @media (max-width: 768px) {
@@ -94,7 +103,13 @@
   }
 
   .contact-details {
-    font-size: 12px;
-    text-align: center;
+    margin-left: 65px ; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+  }
+
+  .contact-detail {
+    font-size: 14px;
+    margin-left: 50px;
   }
 }

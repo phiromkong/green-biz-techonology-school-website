@@ -1,202 +1,63 @@
-.admin-login {
-    background-color: #f7fafc;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .admin-login .div {
-    background-color: var(--x-100);
-    height: 900px;
-    position: relative;
-    width: 1440px;
-  }
-  
-  .admin-login .group {
-    height: 30px;
-    left: 78px;
-    position: absolute;
-    top: 25px;
-    transform: rotate(-35.24deg);
-    width: 30px;
-  }
-  
-  .admin-login .overlap-group {
-    height: 30px;
-    left: -2px;
-    position: relative;
-    width: 34px;
-  }
-  
-  .admin-login .polygon {
-    height: 22px;
-    left: 9px;
-    position: absolute;
-    top: 4px;
-    transform: rotate(35.24deg);
-    width: 21px;
-  }
-  
-  .admin-login .img {
-    height: 22px;
-    left: 4px;
-    position: absolute;
-    top: 4px;
-    transform: rotate(35.24deg);
-    width: 21px;
-  }
-  
-  .admin-login .overlap {
-    height: 561px;
-    left: 464px;
-    position: absolute;
-    top: 133px;
-    width: 512px;
-  }
-  
-  .admin-login .rectangle {
-    background-color: #ffffff;
-    border-radius: 10px;
-    height: 513px;
-    left: 0;
-    position: absolute;
-    top: 48px;
-    width: 512px;
-  }
-  
-  .admin-login .rectangle-2 {
-    background-color: var(--x-200);
-    border-radius: 5px;
-    height: 70px;
-    left: 42px;
-    position: absolute;
-    top: 122px;
-    width: 436px;
-  }
-  
-  .admin-login .rectangle-3 {
-    background-color: var(--x-200);
-    border-radius: 5px;
-    height: 70px;
-    left: 42px;
-    position: absolute;
-    top: 257px;
-    width: 436px;
-  }
-  
-  .admin-login .rectangle-4 {
-    background-color: #f0c52d;
-    border-radius: 5px;
-    height: 61px;
-    left: 155px;
-    position: absolute;
-    top: 370px;
-    width: 201px;
-  }
-  
-  .admin-login .rectangle-5 {
-    background-color: #006c44;
-    border-radius: 5px;
-    height: 61px;
-    left: 155px;
-    position: absolute;
-    top: 474px;
-    width: 201px;
-  }
-  
-  .admin-login .text-wrapper {
-    color: #2a4365;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
-    left: 76px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 77px;
-    white-space: nowrap;
-  }
-  
-  .admin-login .text-wrapper-2 {
-    color: #2a4365;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
-    left: 76px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 212px;
-    white-space: nowrap;
-  }
-  
-  .admin-login .text-wrapper-3 {
-    color: #ffffff;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
-    left: 220px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 387px;
-    white-space: nowrap;
-  }
-  
-  .admin-login .text-wrapper-4 {
-    color: #ffffff;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
-    left: 164px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 492px;
-    white-space: nowrap;
-  }
-  
-  .admin-login .lock {
-    height: 24px;
-    left: 42px;
-    position: absolute;
-    top: 77px;
-    width: 24px;
-  }
-  
-  .admin-login .mail {
-    height: 24px;
-    left: 42px;
-    position: absolute;
-    top: 213px;
-    width: 24px;
-  }
-  
-  .admin-login .text-wrapper-5 {
-    color: #2a4365;
-    font-family: "Khmer OS Siemreap-Regular", Helvetica;
-    font-size: 30px;
-    font-weight: 400;
-    left: 92px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 0;
-    width: 318px;
-  }
-  
-  .admin-login .text-wrapper-6 {
-    color: #2a4365;
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 30px;
-    font-weight: 400;
-    left: 506px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 97px;
-    width: 418px;
-  }
-  
+.mainContainer {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding-bottom: 30px;
+}
+
+.resultContainer, .historyItem { 
+  flex-direction: row;
+  display: flex;
+  width: 400px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.historyContainer {
+  flex-direction: column;
+  display: flex;
+  height: 200px;
+  align-items: center;
+  flex-grow: 5;
+  justify-content: flex-start;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 260px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.inputContainer > .errorLabel {
+  color: red;
+  font-size: 12px;
+}
+
+.inputBox {
+  height: 48px;
+  width: 400px;
+  font-size: large;
+  border-radius: 8px;
+  border: 1px solid grey;
+  padding-left: 8px;
+}
