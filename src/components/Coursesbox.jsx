@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import CourseCard from './Coursecard';
 import './css/Coursesbox.css';
+import './css/Coursecard.css'
 import Grid from '@mui/material/Grid';
-import { Link } from 'react-router-dom';
+
 import SearchBar from 'material-ui-search-bar';
 
 const Coursesbox = ({ courses }) => {
@@ -24,6 +25,7 @@ const Coursesbox = ({ courses }) => {
         <SearchBar
           className="search-bar"
           value={searchQuery}
+          name="searchBar"
           onChange={(newValue) => setSearchQuery(newValue)}
           onRequestSearch={() => console.log('Search triggered')}
         />
@@ -33,11 +35,9 @@ const Coursesbox = ({ courses }) => {
           {/* Display filtered courses */}
           {filteredCourses.map((course) => (
             <Grid item key={course.id} xs={12} sm={6} md={4} lg={3}>
-              <Link to={`/courses/${course.id}`}>
-                <CourseCard {...course} />
-              </Link>
+                <CourseCard {...course} to={`/courses/${course.id}`} />
             </Grid>
-          ))}
+        ))}
         </Grid>
       </div>
     </div>

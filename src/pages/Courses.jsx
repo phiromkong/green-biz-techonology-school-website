@@ -2,6 +2,7 @@
   import Navbar from '../components/Navbar';
   import Coursesbox from '../components/Coursesbox'; // Replace with the actual path to your CoursesBox component
   import Footer from '../components/Footer';
+  import '../components/css/Coursecard.css'
 
 
   const Courses = () => {

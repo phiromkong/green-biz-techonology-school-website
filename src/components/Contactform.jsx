@@ -98,24 +98,13 @@ const Contactform = ({ onSubmit }) => {
                 noValidate
                 onSubmit={handleSubmit}
             >
-                    <TextField
-                        error={errors.email}
-                        onChange={handleChange}
-                        id="validationTooltip03"
-                        name="email"
-                        label="Email Address"
-                        type="email"
-                        value={formData.email}
-                        required
-                        helperText={errors.email ? "Please provide a valid email address." : ""}
-                        
-                    />
+                    
                     <TextField
                         error={errors.phoneNumber}
                         onChange={handleChange}
                         id="validationTooltip04"
                         name="phoneNumber"
-                        label="Phone Number"
+                        label="Telegram Phone Number"
                         value={formData.phoneNumber}
                         required
                         helperText={errors.phoneNumber ? "Please provide a valid phone number." : ""}
@@ -126,18 +115,17 @@ const Contactform = ({ onSubmit }) => {
                 component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 2, width: '42%'},
-                    '& .MuiInputBase-input': { height: '200px' }, // Adjust this value
 
                 }}
                 noValidate
                 onSubmit={handleSubmit}
             >
                     <TextField
-                        id="vali    dationTooltip05"
+                        id="validationTooltip05"
                         name="message"
                         label="Message"
                         multiline
-                        rows={4}
+                        rows={10}
                         value={formData.message}
                         onChange={handleChange}
                         

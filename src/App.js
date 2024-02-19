@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import CoursesDetail from './components/Coursedetail'; 
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -155,6 +156,7 @@ function App() {
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/" element={<Home />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </Router>
     </>

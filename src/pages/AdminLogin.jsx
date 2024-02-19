@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'; 
 import "../components/css/AdminLogin.css"
 
 const AdminLogin = (props) => {
@@ -43,7 +44,6 @@ const AdminLogin = (props) => {
         <div className={"titleContainer"}>
           <img src="/logo2.png" alt="School Logo" className="logo" />
         </div>
-        <br />
         <div className={"inputContainer"}>
             <input
                 value={email}
@@ -56,7 +56,7 @@ const AdminLogin = (props) => {
         <div className={"inputContainer"}>
             <input
                 value={password}
-                placeholder="Enter your p assword here"
+                placeholder="Enter your password here"
                 onChange={ev => setPassword(ev.target.value)}
                 className={"inputBox"} />
             <label className="errorLabel">{passwordError}</label>
@@ -69,6 +69,8 @@ const AdminLogin = (props) => {
                 onClick={onButtonClick}
                 value={"Log in"} />
         </div>
+        <Link to="/"><button className="inputButtonTwo">Homepage</button></Link>
+
     </div>
 }
 

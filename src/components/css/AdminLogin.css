@@ -61,3 +61,26 @@
   border: 1px solid grey;
   padding-left: 8px;
 }
+
+.inputButton,
+.inputButtonTwo {
+  color: black;
+    background-color: #F0C52D;
+    padding: 8px 20px;
+    cursor: pointer;
+    width: auto;
+    font-size: 1.2rem;
+    font-family: "Kantumruy Pro", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    margin-top: 25px;
+    border-color: white;
+    width: 150px;
+}
+
+.inputButtonTwo {
+  background-color: #088A5B;
+  color: #fff;
+}

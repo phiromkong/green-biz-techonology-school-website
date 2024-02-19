@@ -6,7 +6,7 @@
 
 nav {
     display: flex;
-    position: relative; /* or absolute, fixed, or sticky */
+    position: sticky; /* or absolute, fixed, or sticky */
     z-index: 1000;
     justify-content: space-between;
     align-items: center;
@@ -151,16 +151,33 @@ nav .menu span {
 @media (max-width: 1200px) {
     .logo {
         width: 70%; /* Adjust the width for larger screens */
-        margin-left: -50px;
+        margin-left: -200px;
+        /* Add these lines to center the logo vertically */
+        position: relative;
+        top: 50%;
+        transform: translateY(-4    0%);
+    }
+    .logo-container {
+        /* Add these lines to center the logo container vertically */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        /* rest of your styles */
     }
     nav .menu {
         display: flex;
+        position: fixed;
+        top: 11.9%; 
+        transform: translateY(-10%); 
+        margin-right: 20px;
     }
     
 
     nav {
         flex-direction: column;
         align-items: flex-start;
+        width: 100%;
     }
 
     nav ul {
@@ -190,19 +207,20 @@ nav .menu span {
         margin: 0.2rem 0.5rem;
         font-size: 1rem;
         text-align: left;
-
-
         width: 70%;
     }
     .dropdown-menu {
-        position: static;
-        background-color: transparent;
-        box-shadow: none;
-        padding: 10;
+        display: none;
+        position: relative; /* Change this from absolute to relative */
         background-color: #F0C52D;
-        width: 70vw;
+        min-width: 160px;
+        max-width: 80vw; /* Set maximum width to 80% of the viewport width */
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+        white-space: nowrap; /* Prevent text from wrapping */
+        overflow-x: auto; /* Enable horizontal scrolling if necessary */
     }
-
     .dropdown-menu a {
         color: #088A5B;
         padding: 0.5rem;
