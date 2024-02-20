@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import './css/Coursecard.css';
 
-const CourseCard = ({ id, image, title, description, link }) => (
+const CourseCard = ({ id, image, title, description}) => (
   <Card className='course-card'>
     <CardActionArea component="a" href={`/courses/${id}`} className="card-action-area">
       <CardMedia component="img" height="140" image={image || `${process.env.PUBLIC_URL}/placeholder.jpg`} alt={title} className="card-media-img"/>

@@ -8,8 +8,8 @@ nav {
     display: flex;
     position: sticky; /* or absolute, fixed, or sticky */
     z-index: 1000;
+    height: auto;
     justify-content: space-between;
-    align-items: center;
     align-items: center;
     top: 0;
     box-sizing: border-box;
@@ -35,6 +35,7 @@ nav .title {
     background-color: #088A5B;
     height: 52px;
     width: auto;
+
 }
 
 .login-button:hover {

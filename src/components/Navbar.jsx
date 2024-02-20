@@ -12,6 +12,7 @@ export const Navbar = () => {
         { path: '/news', name: 'NEWS' },
         { path: '/our-team', name: 'OUR TEAM' },
         { path: '/gallery', name: 'GALLERY' },
+        { path: '/contact', name: 'CONTACT'},
         // Add more links here as needed
     ];
 
@@ -48,44 +49,47 @@ export const Navbar = () => {
     };
 
     return (
-        <nav>
-            <div className="login-rectangle"></div>
-            <div>
-                <Link to="/" className="title">
-                    <div className="logo-container">
-                        <img src="/logo2.png" alt="School Logo" className="logo" />
-                    </div>
-                </Link>
-            </div>
+        <>
+                <div className="login-rectangle"></div>
 
-            <div className="menu" onClick={handleMenuClick}>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul className={menuOpen ? "open" : ""}>
-                <li>
-                    <NavLink exact to="/" activeClassName="active">HOME</NavLink>
-                </li>
-                <li onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
-                    <Link to="/about" className={`dropdown-link ${isAboutUsActive ? "active" : ""}`}>ABOUT US</Link>
-                    {dropdownOpen && 
-                        <ul className='dropdown-menu'>
-                            {dropdownLinks.map(link => (
-                                <li key={link.path}><NavLink to={link.path} activeClassName="active">{link.name}</NavLink></li>
-                            ))}
-                        </ul>
-                    }
-                    <span className="dropdown-arrow" onClick={handleDropdownClick}></span>
-                </li>   
-                <li>
-                    <NavLink to="/courses">COURSES</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/contact">CONTACT</NavLink>
-                </li>
-            </ul>
-        </nav>
+                    <nav>
+                    <div>
+                        <Link to="/" className="title">
+                            <div className="logo-container">
+                                <img src="/logo2.png" alt="School Logo" className="logo" />
+                            </div>
+                        </Link>
+                    </div>
+
+                    <div className="menu" onClick={handleMenuClick}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul className={menuOpen ? "open" : ""}>
+                        <li>
+                            <NavLink exact to="/" activeClassName="active">HOME</NavLink>
+                        </li>
+                        <li onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+                            <Link to="/about" className={`dropdown-link ${isAboutUsActive ? "active" : ""}`}>ABOUT US</Link>
+                            {dropdownOpen && 
+                                <ul className='dropdown-menu'>
+                                    {dropdownLinks.map(link => (
+                                        <li key={link.path}><NavLink to={link.path} activeClassName="active">{link.name}</NavLink></li>
+                                    ))}
+                                </ul>
+                            }
+                            <span className="dropdown-arrow" onClick={handleDropdownClick}></span>
+                        </li>   
+                        <li>
+                            <NavLink to="/courses">COURSES</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/contact">ENROLL NOW</NavLink>
+                        </li>
+                </ul>
+            </nav>
+        </>
     );
 };
 

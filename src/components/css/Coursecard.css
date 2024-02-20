@@ -1,18 +1,8 @@
-.card-media-img {
-  max-width: 100%;
-  max-height: fit-content;
-}
-
-.card-action-area {
-  max-width: auto;
-}
-
-
 .course-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+
 }
 
 

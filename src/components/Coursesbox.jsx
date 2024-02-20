@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import CourseCard from './Coursecard';
+import CourseList from './Courselist'; // import the CourseList component
 import './css/Coursesbox.css';
 import './css/Coursecard.css'
 import Grid from '@mui/material/Grid';
 
-import SearchBar from 'material-ui-search-bar';
-
 const Coursesbox = ({ courses }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProgram, setSelectedProgram] = useState(null);
 
-  // Filter courses based on search query
-  const filteredCourses = courses.filter(course =>
-    course.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleCourseSelect = (program) => {
+    setSelectedProgram(program);
+  };
+
+  const filteredCourses = selectedProgram ? courses.filter((course) => course.program === selectedProgram) : courses;
 
   return (
     <div>
@@ -21,23 +21,16 @@ const Coursesbox = ({ courses }) => {
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px' }}>
         <div className='courses-box-title'>Our Program</div>
-        {/* Search bar */}
-        <SearchBar
-          className="search-bar"
-          value={searchQuery}
-          name="searchBar"
-          onChange={(newValue) => setSearchQuery(newValue)}
-          onRequestSearch={() => console.log('Search triggered')}
-        />
+        <CourseList courses={courses} onCourseSelect={handleCourseSelect} /> {/* Add the CourseList component here */}
       </div>
       <div className="courses-container">
         <Grid container spacing={10}>
-          {/* Display filtered courses */}
+          {/* Display courses */}
           {filteredCourses.map((course) => (
             <Grid item key={course.id} xs={12} sm={6} md={4} lg={3}>
                 <CourseCard {...course} to={`/courses/${course.id}`} />
             </Grid>
-        ))}
+          ))}
         </Grid>
       </div>
     </div>

@@ -24,6 +24,10 @@ const CoursesDetail = ({ courses }) => {
         navigate(-1);
     };
 
+    const handleContactClick = () => {
+        navigate('/contact', { state: { courseTitle: course.title } });
+    };
+
     return (
         <div>
             <Navbar />
@@ -38,7 +42,7 @@ const CoursesDetail = ({ courses }) => {
                     <h2>Program Outcome</h2>
                     <p>{course.programOutcome}</p>
                 </div>
-                <button>Contact Us to Register</button>
+                    <button onClick={handleContactClick}>Contact Us to Register</button>
                 <div>
                 <Button className='back-btn' style={{textTransform: 'none', width: '15%', boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px', borderRadius: '10px', padding: '10px 20px'}} onClick={handleBackClick}>Back</Button>
                 </div>
