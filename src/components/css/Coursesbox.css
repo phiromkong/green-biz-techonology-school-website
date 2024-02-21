@@ -1,11 +1,12 @@
 .courses-box-title {
     font-family: "Kantumruy Pro", sans-serif;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 25px;
     font-weight: 800;
     font-style: italic;
-    padding-top: 40px;
+    margin-top: 40px;
     margin-left: 80px;
+    cursor: pointer;
 }
 
 .header-image {
@@ -30,27 +31,15 @@
     padding-bottom: 80px;
   }
 
-  .program-list {
-    font-style: italic;
-    font-family: "Kantumruy Pro", sans-serif;
-    font-weight: bold;
-
-  }
-  .program-list.active {
-    color: #088A5B;
-  }
-  
+ 
   @media only screen and (max-width: 768px) {
     .courses-box-title {
-      font-size: 30px;
+      display: block;
+      font-size: 20px;
       margin-right: 20px;
-      margin-left: -10px;
+      margin-left: 10px;
+      text-align: center;
     
-    }
-    .search-bar {
-      width: 40%;
-      margin-top: 40px;
-      max-width: none;
     }
   }
   

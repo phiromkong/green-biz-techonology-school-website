@@ -6,6 +6,8 @@ import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 
 const Courselist = ({ courses, onCourseSelect, activeProgram }) => {
+  console.log('Active Program:', activeProgram);
+
   // Create a list of unique programs
   const programs = [...new Set(courses.map(course => course.program))];
 
@@ -17,7 +19,8 @@ const Courselist = ({ courses, onCourseSelect, activeProgram }) => {
             display: 'flex',
             minWidth: 240,
             borderRadius: 'md',
-            marginTop: '4%',
+            flexDirection:  'column',
+            
         }}
       >
         {programs.map((program) => (
@@ -25,13 +28,11 @@ const Courselist = ({ courses, onCourseSelect, activeProgram }) => {
             <ListItem 
               sx={{
                 cursor: 'pointer',
-                '&:hover': {
-                  backgroundColor: 'action.hover',
-                },
-                color: program === activeProgram ? 'red' : 'inherit',
+                width: 'auto',
+                backgroundColor: program === activeProgram ? '#F0C52D' : 'inherit',
               }}
             >
-              <Typography inset= "gutter"  level="body-xs" mb={2} onClick={() => onCourseSelect(program)}>
+              <Typography fontSize={'15px'} fontWeight={'bold'} inset= "gutter"  level="body-lg" mb={2} onClick={() => onCourseSelect(program)}>
                 {program}
               </Typography>
             </ListItem>

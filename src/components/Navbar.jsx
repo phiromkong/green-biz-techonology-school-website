@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./css/Navbar.css";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 export const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -16,10 +17,8 @@ export const Navbar = () => {
         // Add more links here as needed
     ];
 
-   // Check if the current location's path starts with any of the dropdown link paths or is the "About Us" page
+    // Check if the current location's path starts with any of the dropdown link paths or is the "About Us" page
     const isAboutUsActive = location.pathname === "/about" || dropdownLinks.some(link => location.pathname.startsWith(link.path));
-
-
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -49,47 +48,47 @@ export const Navbar = () => {
     };
 
     return (
-        <>
-                <div className="login-rectangle"></div>
+        <div className="parent-div">
+            <div className="login-rectangle"></div>
 
-                    <nav>
-                    <div>
-                        <Link to="/" className="title">
-                            <div className="logo-container">
-                                <img src="/logo2.png" alt="School Logo" className="logo" />
-                            </div>
-                        </Link>
-                    </div>
+            <nav>
+                <div>
+                    <Link to="/" className="title">
+                        <div className="logo-container">
+                            <img src="/logo2.png" alt="School Logo" className="logo" />
+                        </div>
+                    </Link>
+                </div>
 
-                    <div className="menu" onClick={handleMenuClick}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <ul className={menuOpen ? "open" : ""}>
-                        <li>
-                            <NavLink exact to="/" activeClassName="active">HOME</NavLink>
-                        </li>
-                        <li onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
-                            <Link to="/about" className={`dropdown-link ${isAboutUsActive ? "active" : ""}`}>ABOUT US</Link>
-                            {dropdownOpen && 
-                                <ul className='dropdown-menu'>
-                                    {dropdownLinks.map(link => (
-                                        <li key={link.path}><NavLink to={link.path} activeClassName="active">{link.name}</NavLink></li>
-                                    ))}
-                                </ul>
-                            }
-                            <span className="dropdown-arrow" onClick={handleDropdownClick}></span>
-                        </li>   
-                        <li>
-                            <NavLink to="/courses">COURSES</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/contact">ENROLL NOW</NavLink>
-                        </li>
+                <div className="menu" onClick={handleMenuClick}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul className={menuOpen ? "open" : ""}>
+                    <li>
+                        <NavLink exact to="/" activeClassName="active">HOME</NavLink>
+                    </li>
+                    <li onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+                        <Link to="/about" className={`dropdown-link ${isAboutUsActive ? "active" : ""}`}>ABOUT US</Link>
+                        {dropdownOpen && 
+                            <ul className='dropdown-menu'>
+                                {dropdownLinks.map(link => (
+                                    <li key={link.path}><NavLink to={link.path} activeClassName="active">{link.name}</NavLink></li>
+                                ))}
+                            </ul>
+                        }
+                        <span className="dropdown-arrow" onClick={handleDropdownClick}></span>
+                    </li>   
+                    <li>
+                        <NavLink to="/courses">COURSES</NavLink>
+                    </li>
+                    <li>
+                        <Button className="enroll_btn" variant="contained" component={Link} to="/contact">ENROLL NOW</Button>
+                    </li>   
                 </ul>
             </nav>
-        </>
+        </div>
     );
 };
 

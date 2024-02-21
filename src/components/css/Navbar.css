@@ -2,8 +2,6 @@
     color: #FF0000;
 }
 
-
-
 nav {
     display: flex;
     position: sticky; /* or absolute, fixed, or sticky */
@@ -38,18 +36,40 @@ nav .title {
 
 }
 
-.login-button:hover {
-    color: black; 
+nav ul li .enroll_btn {
+    color: #FFFFFF; 
+    background-color: #088A5B; 
+    padding: 7px 35px; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    font-family: "Kantumruy Pro", sans-serif; 
+    font-style: italic; 
+    border-radius: 0.8rem; 
+    transition: background-color 0.3s ease; 
+    width: 30px;
+    white-space: nowrap;
+    box-sizing: content-box;
+
 }
 
+nav ul li .enroll_btn:hover {
+    background-color: #088A5B; /* Button color when hovered over */
+}
+
+nav ul li .enroll_btn:hover:not(.active):hover{
+    color: #ffffff; /* Text color when hovered over */
+}
+
+
 .logo {
-    width: 40%; 
+    width: 30%; 
     height: auto;
 }
 
 .logo-container {
     margin-right: 10px; 
     transition: margin-right 0.3s ease;
+    width: auto;
 }
 nav ul {
     display: flex;
@@ -147,6 +167,11 @@ nav .menu span {
     border-radius: 0.2rem;
 }
 
+.parent-div {
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+}
 
 
 @media (max-width: 1200px) {
@@ -225,5 +250,13 @@ nav .menu span {
     .dropdown-menu a {
         color: #088A5B;
         padding: 0.5rem;
+    }
+
+    nav ul li .enroll_btn {
+        padding: 5px 20px; 
+        font-size: 0.8rem; 
+        width: auto;
+        display: flex;
+        flex: 1;
     }
 }
