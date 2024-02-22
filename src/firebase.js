@@ -1,8 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -21,25 +16,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-let auth;
+const app = initializeApp(firebaseConfig);
 
-function initializeFirebase() {
-  const app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-}
-
-initializeFirebase();
-
-export { auth };
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
-
+// Initialize Firebase Authentication and get a reference to the service
+export const auth = getAuth(app);
+export default app;

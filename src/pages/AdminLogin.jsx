@@ -1,72 +1,79 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'; 
-import "../components/css/AdminLogin.css"
+import { Link, useNavigate } from 'react-router-dom'; 
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+import "../components/css/AdminLogin.css";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import TextField from '@mui/material/TextField';
 
 const AdminLogin = (props) => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [emailError, setEmailError] = useState("")
-    const [passwordError, setPasswordError] = useState("")
-    
-        
-    const onButtonClick = () => {
-
-      // Set initial error values to empty
-      setEmailError("")
-      setPasswordError("")
-
-      // Check if the user has entered both fields correctly
-      if ("" === email) {
-          setEmailError("Please enter your email")
-          return
-      }
-
-      if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-          setEmailError("Please enter a valid email")
-          return
-      }
-
-      if ("" === password) {
-          setPasswordError("Please enter a password")
-          return
-      }
-
-      if (password.length < 7) {
-          setPasswordError("The password must be 8 characters or longer")
-          return
-      }
-
-      // Authentication calls will be made here...       
-
-  }
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState(null);
+       
+    const onLogin = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+        setError('Please fill in both fields');
+        return;
+    }
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigate("/")
+        console.log(user);
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found' || errorCode === 'auth/invalid-credential') {
+            setError('Invalid Credentials');
+        } else {
+            setError(errorMessage);
+        }
+        console.log(errorCode, errorMessage)
+    });
+}
 
     return <div className={"mainContainer"}>
         <div className={"titleContainer"}>
           <img src="/logo2.png" alt="School Logo" className="logo" />
         </div>
         <div className={"inputContainer"}>
-            <input
+            <TextField
+                error={error ? true : false}
+                helperText={error}
                 value={email}
-                placeholder="Enter your email here"
+                label="Email"
                 onChange={ev => setEmail(ev.target.value)}
                 className={"inputBox"} />
-            <label className="errorLabel">{emailError}</label>
         </div>
 
         <div className={"inputContainer"}>
-            <input
-                value={password}
-                placeholder="Enter your password here"
-                onChange={ev => setPassword(ev.target.value)}
-                className={"inputBox"} />
-            <label className="errorLabel">{passwordError}</label>
+            <div className="passwordContainer">
+                <TextField
+                    error={error ? true : false}
+                    helperText={error}
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    label="Password"
+                    onChange={ev => setPassword(ev.target.value)}
+                    className={"inputBox"} />
+            </div>
+            <div onClick={() => setShowPassword(!showPassword)} className="passwordIcon">
+                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </div>
         </div>
 
         <div className={"inputContainer"}>
             <input
                 className={"inputButton"}
                 type="button"
-                onClick={onButtonClick}
+                onClick={onLogin}
                 value={"Log in"} />
         </div>
         <Link to="/"><button className="inputButtonTwo">Homepage</button></Link>
@@ -74,4 +81,4 @@ const AdminLogin = (props) => {
     </div>
 }
 
-export default AdminLogin
+export default AdminLogin;

@@ -10,7 +10,7 @@ const Team = ({ teamMembers }) => {
         loop: teamMembers.length > 1,
         margin: 10,
         autoplay: true,
-        autoplayTimeout: 3000,
+        autoplayTimeout: 2700,
         autoplayHoverPause: true,
         dots: false,
     };

@@ -3,17 +3,20 @@
 .gallery-title {
   text-align: center;
   margin-top: 30px;
-  font-size: 40px;
+  font-size: 45px;
   text-transform: uppercase;
   font-family: "Kantumruy Pro";
   font-weight: bold;
   margin-bottom: 30px;
+  margin-left: 6%;
+  font-style: italic;
+  cursor: pointer;
+  padding: 10px, 20px;
 }
 
 .gallery-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin-top: 30px;
 }
@@ -21,7 +24,6 @@
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust min and max width as needed */
-
   margin: 0 20px; 
 }
 
@@ -30,6 +32,15 @@
   height: auto;
   cursor: pointer;
 }
+.pagination-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 40px;
+  margin-top: -1vw;
+}
+
 
 @media (max-width: 768px) {
   .gallery-title {
