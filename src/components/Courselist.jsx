@@ -29,8 +29,8 @@ const Courselist = ({ courses, onCourseSelect, activeProgram }) => {
             minWidth: 240,
             borderRadius: 'md',
             flexDirection:  'column',
-
-
+            padding: 0,
+            margin: 0,
         }}
       >
         {programs.map((program) => (

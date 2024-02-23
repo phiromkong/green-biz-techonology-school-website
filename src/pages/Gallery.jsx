@@ -64,7 +64,7 @@ const Gallery = () => {
         <div>
             <Navbar />
             <div className="gallery-container">
-            <h1 className='gallery-title' onClick={() => setSelectedProgram(null)}>Gallery</h1>               
+            <div className='gallery-title' onClick={() => setSelectedProgram(null)}><h1>Gallery</h1></div>               
              <div className='gallery-grid'>
              <Galleryimg itemData={currentItems} setSelectedProgram={setSelectedProgram} selectedProgram={selectedProgram} />               
              </div>

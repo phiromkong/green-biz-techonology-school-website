@@ -14,71 +14,90 @@ const AdminLogin = (props) => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(null);
        
-    const onLogin = (e) => {
-    e.preventDefault();
-    if (!email || !password) {
-        setError('Please fill in both fields');
-        return;
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
     }
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        navigate("/")
-        console.log(user);
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found' || errorCode === 'auth/invalid-credential') {
-            setError('Invalid Credentials');
-        } else {
-            setError(errorMessage);
+
+    const validatePassword = (password) => {
+        // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        return re.test(password);
+    }
+
+    
+    const onLogin = (e) => {
+        e.preventDefault();
+
+        if (!validateEmail(email)) {
+            setError('Invalid email format');
+            return;
         }
-        console.log(errorCode, errorMessage)
-    });
-}
 
-    return <div className={"mainContainer"}>
-        <div className={"titleContainer"}>
-          <img src="/logo2.png" alt="School Logo" className="logo" />
-        </div>
-        <div className={"inputContainer"}>
-            <TextField
-                error={error ? true : false}
-                helperText={error}
-                value={email}
-                label="Email"
-                onChange={ev => setEmail(ev.target.value)}
-                className={"inputBox"} />
-        </div>
+        if (!validatePassword(password)) {
+            setError('Invalid password format');
+            return;
+        }
 
-        <div className={"inputContainer"}>
-            <div className="passwordContainer">
-                <TextField
-                    error={error ? true : false}
-                    helperText={error}
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    label="Password"
-                    onChange={ev => setPassword(ev.target.value)}
-                    className={"inputBox"} />
-            </div>
-            <div onClick={() => setShowPassword(!showPassword)} className="passwordIcon">
-                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                navigate('/admin');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
+            });
+    }
+
+    return (
+        <div className="loginWrapper">
+            <div className="mainContainer">
+                <div className={"titleContainer"}>
+                    <img src="/logo3.png" alt="School Logo" className="logo" />
                 </div>
-        </div>
+                <div className={"inputContainer"}>
+                    <TextField
+                        error={error ? true : false}
+                        helperText={error}
+                        value={email}
+                        label="Email"
+                        onChange={ev => setEmail(ev.target.value)}
+                        className={"inputBox"} />
+                </div>
 
-        <div className={"inputContainer"}>
-            <input
-                className={"inputButton"}
-                type="button"
-                onClick={onLogin}
-                value={"Log in"} />
-        </div>
-        <Link to="/"><button className="inputButtonTwo">Homepage</button></Link>
+                <div className={"inputContainer"}>
+                    <div className="passwordContainer">
+                        <TextField
+                            error={error ? true : false}
+                            helperText={error}
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            label="Password"
+                            onChange={ev => setPassword(ev.target.value)}
+                            className={"inputBox"} />
+                    </div>
+                    <div onClick={() => setShowPassword(!showPassword)} className="passwordIcon">
+                        {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </div>
+                </div>
 
-    </div>
+                <div className={"inputContainer"}>
+                    <div className={"buttonContainer"}>
+                        <button className={"inputButton"} onClick={onLogin}>
+                            Log in
+                        </button>
+                        <button className={"inputButtonTwo"}>
+                            <Link to="/">Homepage</Link>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default AdminLogin;

@@ -1,0 +1,12 @@
+.course-list {
+    display: flex; 
+    justify-content: center; 
+    margin-top: 5%;
+    margin-left: 20%;
+}
+
+@media (max-width: 768px) {
+  .course-list {
+    margin-left: 0;
+  }
+}

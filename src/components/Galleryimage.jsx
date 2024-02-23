@@ -7,6 +7,7 @@ import lgThumbnail from 'lightgallery/plugins/thumbnail'; // Import lightgallery
 import lgZoom from 'lightgallery/plugins/zoom'; // Import lightgallery zoom plugin
 import CourseList from './Courselist'; // import the CourseList component
 import Grid from '@mui/material/Grid';
+import './css/Galleryimage.css';
 
 
 const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
@@ -34,20 +35,15 @@ const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
         <div>
             <Grid container spacing={10}>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <div style={{ 
-                        display: 'flex', 
-                        justifyContent: 'flex-start', 
-                        marginLeft: '20%',
-                        marginTop: '5%',
-                    }}>
-                        <CourseList courses={itemData} onCourseSelect={handleCourseSelect} activeProgram={selectedProgram} />
-                    </div>
+                <div className="course-list">
+                    <CourseList courses={itemData} onCourseSelect={handleCourseSelect} activeProgram={selectedProgram} />
+                </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={7} lg={8}>
                     <LightGallery plugins={[lgThumbnail, lgZoom]} onAfterOpen={() => handleLightGalleryEvents('onAfterOpen')} onBeforeClose={() => handleLightGalleryEvents('onBeforeClose')}>
                         {filteredCourses.map((item) => (
                             <a href={item.img} key={item.id}>
-                                <img alt={item.title} src={item.img} />
+                                <img alt={item.title} src={item.img} /> 
                             </a>
                         ))}
                     </LightGallery>
