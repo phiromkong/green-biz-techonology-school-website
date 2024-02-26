@@ -12,6 +12,8 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import CoursesDetail from './components/Coursedetail'; 
 import NotFound from './components/NotFound';
+import Privateroute from './components/Privateroute';
+
 
 
 function App() {
@@ -116,7 +118,7 @@ function App() {
       id: 6, 
       title: "Course 6", 
       image: "../Img3.jpg", 
-      program: "Program 3",
+      program: "Program 3", 
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
       programOverview: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
       programOutcome: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
@@ -172,7 +174,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="/dashboard" element={<Privateroute element={<AdminDashboard />} />} />
           <Route path="/" element={<Home />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

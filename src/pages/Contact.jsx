@@ -9,7 +9,6 @@ import { useLocation } from 'react-router-dom';
 const Contact = () => {
   const location = useLocation();
   const courseTitle = location.state?.courseTitle;
-
   const handleFormSubmit = (formData) => {
     // Send formData to Telegram bot using an HTTP request
     fetch(`https://api.telegram.org/bot6254588965:AAH4nb5FOeZcLNpeKWi4UpaHQD7lxcTjABY/sendMessage`, {

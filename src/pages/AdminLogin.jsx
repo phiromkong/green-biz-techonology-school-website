@@ -28,17 +28,19 @@ const AdminLogin = (props) => {
     
     const onLogin = (e) => {
         e.preventDefault();
-
-        if (!validateEmail(email)) {
-            setError('Invalid email format');
+    
+        // Check if email is empty or not in valid format
+        if (!email) {
+            setError('Please fill in your email');
             return;
         }
-
-        if (!validatePassword(password)) {
-            setError('Invalid password format');
+    
+        // Check if password is empty or not in valid format
+        if (!password) {
+            setError('Please fill in your password');
             return;
         }
-
+    
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
@@ -47,9 +49,11 @@ const AdminLogin = (props) => {
                 navigate('/admin');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setError(errorMessage);
+                if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                    setError('Invalid Credentials');
+                } else {
+                    setError(error.message);
+                }
             });
     }
 
@@ -57,12 +61,12 @@ const AdminLogin = (props) => {
         <div className="loginWrapper">
             <div className="mainContainer">
                 <div className={"titleContainer"}>
-                    <img src="/logo3.png" alt="School Logo" className="logo" />
+                    <img src="/logo3.png" alt="School Logo" className="logo-admin" />
                 </div>
                 <div className={"inputContainer"}>
                     <TextField
                         error={error ? true : false}
-                        helperText={error}
+                        helperText={error && !email ? error : ''}
                         value={email}
                         label="Email"
                         onChange={ev => setEmail(ev.target.value)}
@@ -73,7 +77,7 @@ const AdminLogin = (props) => {
                     <div className="passwordContainer">
                         <TextField
                             error={error ? true : false}
-                            helperText={error}
+                            helperText={error && !password ? error : ''}
                             type={showPassword ? "text" : "password"}
                             value={password}
                             label="Password"

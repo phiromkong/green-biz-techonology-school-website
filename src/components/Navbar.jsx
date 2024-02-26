@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./css/Navbar.css";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
-
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 export const Navbar = () => {
+
     const [menuOpen, setMenuOpen] = useState(false);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+    const [langDropdownOpen, setLangDropdownOpen] = useState(false);
     const location = useLocation();
 
     // Define the dropdown links
@@ -14,7 +16,6 @@ export const Navbar = () => {
         { path: '/our-team', name: 'OUR TEAM' },
         { path: '/gallery', name: 'GALLERY' },
         { path: '/contact', name: 'CONTACT'},
-        // Add more links here as needed
     ];
 
     // Check if the current location's path starts with any of the dropdown link paths or is the "About Us" page
@@ -22,34 +23,61 @@ export const Navbar = () => {
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (dropdownOpen && !event.target.closest(".dropdown-link")) {
-                setDropdownOpen(false);
+            if (aboutDropdownOpen && !event.target.closest(".about-dropdown-link")) {
+                setAboutDropdownOpen(false);
+            }
+            if (langDropdownOpen && !event.target.closest(".lang-dropdown-link")) {
+                setLangDropdownOpen(false);
             }
         }
         document.body.addEventListener("click", handleClickOutside);
         return () => {
             document.body.removeEventListener("click", handleClickOutside);
         };
-    }, [dropdownOpen]);
+    }, [aboutDropdownOpen, langDropdownOpen]);
 
-    const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+    const toggleAboutDropdown = () => {
+        setAboutDropdownOpen(!aboutDropdownOpen);
+    };
 
-    const handleMenuClick = () => {
-        setMenuOpen(!menuOpen);
-        if (!menuOpen) {
-            setDropdownOpen(true);
-        }
+    const toggleLangDropdown = (event) => {
+        event.stopPropagation();
+        console.log("toggleLangDropdown called");
+        setLangDropdownOpen(!langDropdownOpen);
     };
-    
-    const handleDropdownClick = (e) => {
-        if (menuOpen) {
-            setDropdownOpen(!dropdownOpen);
-        }
-    };
+
+const handleMenuClick = () => {
+    setMenuOpen(!menuOpen);
+    if (!menuOpen) {
+        setAboutDropdownOpen(true);
+    }
+};
 
     return (
         <div className="parent-div">
-            <div className="login-rectangle"></div>
+            <div className="login-rectangle">
+                <Link to="/contact" className="top_header_text">Apply for admission to study</Link>
+                <div className="blog_lang">
+                    <div className="btn_lang_position">
+                        <ul className="lang-dropdown" style={{ listStyle: "none" }}>
+                            <li>
+                                <div className="p-dropdown lang_drop_down" >
+                                    <a className="lang_box">
+                                        ENGLISH                                                
+                                        <ArrowDropDownIcon className="dropdown-icon" onClick={toggleLangDropdown}/>
+                                    </a>
+                                    {langDropdownOpen && (
+                                        <ul className="p-dropdown-content p-0 drop_content" style={{ display: langDropdownOpen ? 'block' : 'none', listStyle: "none" }}>
+                                            <li>KHMER</li>
+                                            <li>ENGLISH</li>
+                                        </ul>
+                                    )}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <nav>
                 <div>
@@ -69,16 +97,15 @@ export const Navbar = () => {
                     <li>
                         <NavLink exact to="/" activeClassName="active">HOME</NavLink>
                     </li>
-                    <li onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
+                    <li onMouseEnter={toggleAboutDropdown} onMouseLeave={toggleAboutDropdown}>
                         <Link to="/about" className={`dropdown-link ${isAboutUsActive ? "active" : ""}`}>ABOUT US</Link>
-                        {dropdownOpen && 
+                        {aboutDropdownOpen &&  
                             <ul className='dropdown-menu'>
                                 {dropdownLinks.map(link => (
                                     <li key={link.path}><NavLink to={link.path} activeClassName="active">{link.name}</NavLink></li>
                                 ))}
                             </ul>
                         }
-                        <span className="dropdown-arrow" onClick={handleDropdownClick}></span>
                     </li>   
                     <li>
                         <NavLink to="/courses">COURSES</NavLink>

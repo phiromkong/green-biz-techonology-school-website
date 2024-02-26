@@ -5,7 +5,6 @@
 nav {
     display: flex;
     position: sticky; /* or absolute, fixed, or sticky */
-    z-index: 1000;
     height: auto;
     justify-content: space-between;
     align-items: center;
@@ -28,13 +27,91 @@ nav .title {
 }
 .login-rectangle {
     display: flex;
-    justify-content: flex-end;;
     align-items: center;
+    justify-content: center;
     background-color: #088A5B;
     height: 52px;
     width: auto;
+    top: 0;
+    padding: 5px;
+}
+
+.top_header_text {
+    color: #ffffff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang_box {
+    /* border: 2px solid #fff !important; */
+    padding: 5px !important;
+    font-weight: 700;
+    font-size: 13px;
+    border: 2px solid #fff !important;
+    color: #fff;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+.dropdown-icon {
+    margin-left:  5px; /* Adjust the margin as needed */
+    cursor: pointer;    
+}
+
+
+.lang_list {
+    padding: 2px 0px !important;
+}
+
+.lang_list:hover {
+    color: #006C44 !important;
+}
+
+.lang_drop_down {
+    min-width: 7rem;
+    padding: 0.2rem;
+}
+
+.btn_lang_position {
+    position: absolute;
+    right: 30px;
+    /* left: 50%; */
+    top: -3%;
 
 }
+
+.lang_box i {
+    transition: transform  0.3s ease;
+}
+
+/* Style the dropdown menu */
+.p-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F0C52D;
+    min-width:  80px;
+    box-shadow:  0px  8px  16px  0px rgba(0,0,0,0.2);
+    padding:  12px  16px;
+    z-index:  1;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    list-style: none; /* This removes the bullet points */
+}
+
+
+
+.p-dropdown .p-dropdown-content,
+.p-dropdown ul.p-dropdown-content {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+/* Add a smooth transition for the dropdown menu */
+.p-dropdown-content {
+    transition: opacity  0.3s ease, transform  0.3s ease;
+}
+
 
 nav ul li .enroll_btn {
     color: #FFFFFF; 
