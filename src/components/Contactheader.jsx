@@ -1,7 +1,9 @@
 import React from 'react';
 import './css/Contactheader.css';
+import { useTranslation } from 'react-i18next';
 
 const Contactheader = () => {
+    const {t} = useTranslation();
     return (
         <div className="contact-flexContainer">
             <div className="posterSection">
@@ -13,17 +15,16 @@ const Contactheader = () => {
             </div>
             <div className="contactSection">
                 <div className="contact-heading">
-                    <h1>Contact Details</h1>
+                    <h1>{t('contactDetail')}</h1>
                 </div>
                 <div className="features">
-                    <p className='feature'>Kampong Svay Village,&nbsp; <br /> Sangkat Kampong Svay,&nbsp; <br /> Serei 
-                    Saophoan Municipality,&nbsp; <br /> Banteay Meanchey, 010801, Cambodia</p>
+                    <p className='feature'>{t('village')}&nbsp; <br /> {t('sangkat')}&nbsp; <br /> {t('municipality')}&nbsp; <br /> {t('province')}</p>
                 </div>
                 <div className='general-inquiry'>
-                    <h1> General Inquiry</h1>
+                    <h1> {t('generalInquiry')}</h1>
                 </div>
                 <div className='contact-details'>
-                    <p className='contact-detail'>Telephone: (+855) 11 686 681 / (+855) 96 996 67 82&nbsp; <br /> Email: kimle.keo@gmail.com</p>
+                    <p className='contact-detail'>{t('phoneNum')}: (+855) 11 686 681 / (+855) 96 996 67 82&nbsp; <br /> {t('email')}: kimle.keo@gmail.com</p>
                 </div>
             </div>
         </div>

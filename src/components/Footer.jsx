@@ -2,22 +2,22 @@ import React from 'react';
 import "./css/Footer.css";
 import { SocialIcon } from 'react-social-icons'
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 const Footer = () => {
+  const {t} = useTranslation();
   return (
     <footer>
       <div className="footer-container">
         {/* Left Column */}
         <div className="footer-left">
-          <h4>ADDRESS</h4>
-          <p>Kampong Svay Village, Sangkat Kampong Svay, Serei 
-              Saophoan Municipality, Banteay Meanchey Province
-            </p>
+          <h4>{t('address')}</h4>
+          <p>{t('Address')}</p>
           <div className="footer-left__content">
-            <h4>CONTACT US</h4>
-            <p>Contact Number: 011 686 681 / 096 996 67 82</p>
-            <p>E-mail: kimle.keo@gmail.com</p>
+            <h4>{t('contact')}</h4>
+            <p>{t('contactNum')}: 011 686 681 / 096 996 67 82</p>
+            <p>{t('email')}: kimle.keo@gmail.com</p>
           </div>
           {/* Social Icons */}
           <div className="social-icons">

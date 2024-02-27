@@ -4,6 +4,7 @@ import Newspost from '../components/Newspost';
 import Pagination from '../components/Pagination';
 import Footer from '../components/Footer';
 import "../components/css/NewsPage.css"
+import { useTranslation } from 'react-i18next';
 
 const NewsPage = ({ newsData }) => {
   const staticPosts = [
@@ -63,12 +64,14 @@ const NewsPage = ({ newsData }) => {
     },
   ];
 
+  const {t} = useTranslation();
   const postsPerPage = 5; // Set the number of posts per page
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = staticPosts.slice(indexOfFirstPost, indexOfLastPost);
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -81,7 +84,7 @@ const NewsPage = ({ newsData }) => {
           <div className="content col-lg-10 blog_header">
             <div className="post-container">
               <div className="page-title mb-5">
-                <h2 className="home_title" style={{color: 'black'}}>Recent Post</h2>
+                <h2 className="home_title" style={{color: 'black'}}>{t('recentPost')}</h2>
               </div>
               {currentPosts.map((post) => (
                 <Newspost

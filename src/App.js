@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -13,10 +13,20 @@ import AdminDashboard from './pages/AdminDashboard';
 import CoursesDetail from './components/Coursedetail'; 
 import NotFound from './components/NotFound';
 import Privateroute from './components/Privateroute';
+import i18n from './i18next';
 
 
 
 function App() {
+  const [isI18nInitialized, setIsI18nInitialized] = useState(false);
+
+  useEffect(() => {
+    i18n.on('initialized', () => setIsI18nInitialized(true));
+  }, []);
+
+  if (!isI18nInitialized) {
+    return null; // or a loading spinner
+  }
   const newsData = [
     {
       id: 1,

@@ -9,15 +9,13 @@ import CourseList from './Courselist'; // import the CourseList component
 import Grid from '@mui/material/Grid';
 import './css/Galleryimage.css';
 
-
 const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
-
-
     const handleCourseSelect = (program) => {
-      setSelectedProgram(program);
+        setSelectedProgram(program);
     }
 
     const filteredCourses = selectedProgram ? itemData.filter((course) => course.program === selectedProgram) : itemData;
+
     const handleLightGalleryEvents = (event) => {
         const parentDiv = document.querySelector('.parent-div');
         if (parentDiv) {
@@ -35,15 +33,15 @@ const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
         <div>
             <Grid container spacing={10}>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
-                <div className="course-list">
-                    <CourseList courses={itemData} onCourseSelect={handleCourseSelect} activeProgram={selectedProgram} />
-                </div>
+                    <div className="course-list">
+                        <CourseList courses={itemData} onCourseSelect={handleCourseSelect} activeProgram={selectedProgram} />
+                    </div>
                 </Grid>
-                <Grid item xs={12} sm={6} md={7} lg={8}>
+                <Grid item xs={12} sm={6} md={8} lg={9} className="gallery-grid-item">
                     <LightGallery plugins={[lgThumbnail, lgZoom]} onAfterOpen={() => handleLightGalleryEvents('onAfterOpen')} onBeforeClose={() => handleLightGalleryEvents('onBeforeClose')}>
                         {filteredCourses.map((item) => (
                             <a href={item.img} key={item.id}>
-                                <img alt={item.title} src={item.img} /> 
+                                <img className="gallery-image" alt={item.title} src={item.img} /> 
                             </a>
                         ))}
                     </LightGallery>

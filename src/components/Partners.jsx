@@ -3,8 +3,10 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './css/Partners.css';
+import { useTranslation } from 'react-i18next';
 
 const Partners = ({ images }) => {
+  const {t} = useTranslation();
     const owlOptions = {
         loop: images.length > 1,
         margin: 10,
@@ -24,7 +26,7 @@ const Partners = ({ images }) => {
     return (
       <div className="bg_gray text-center">
         <div className="partner-container">
-          <h2 className="font_bold text-uppercase partner_title">Our Partners</h2>
+          <h2 className="font_bold text-uppercase partner_title">{t('ourPartners')}</h2>
           <OwlCarousel className="owl-theme" {...owlOptions}>
             {images.map((partner, index) => (
               <div key={index} className="item">

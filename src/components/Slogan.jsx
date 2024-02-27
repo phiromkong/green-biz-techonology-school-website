@@ -1,11 +1,13 @@
 import React from 'react';
 import './css/Slogan.css';
+import { useTranslation } from 'react-i18next';
 
 const Slogan = () => {
- return (
+  const { t } = useTranslation();
+  return (
     <div className="Slogan">
-      <div className='part1'>"JOURNEY TOWARDS</div>
-      <div className="part2"> MODERN TECHNOLOGY"</div>
+      <div className='part1'>{t('sloganPart1')}</div>
+      <div className="part2">{t('sloganPart2')}</div>
     </div>
  );
 };

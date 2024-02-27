@@ -11,14 +11,6 @@
     margin-left: 50px;
 }
 
-.form{
-    margin-top: 20px;
-}
-
-.submit-btn {
-    margin-bottom: 40px;
-}
-
 @media (max-width: 768px) {
     .MuiTextField-root {
         width: 90% !important;

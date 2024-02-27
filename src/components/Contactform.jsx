@@ -3,8 +3,10 @@ import { Box, TextField, Button } from '@mui/material';
 import { FormControl, InputLabel, FormHelperText } from '@mui/material';
 import { Select, MenuItem } from '@mui/material';
 import './css/Contactform.css';
+import { useTranslation } from 'react-i18next';
 
 const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add defaultCourse to the destructured props
+    const {t} = useTranslation();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -62,12 +64,12 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
     return (
         <div className="contact-form-wrapper">
             <div className='form-heading'>
-                <h1>Send Us a Message</h1>
+                <h1>{t('headerForm')}</h1>
             </div>
             <Box
                 component="form"
                 sx={{
-                    '& .MuiTextField-root': { m: 2, width: '20%' },
+                    '& .MuiTextField-root': { m: 2, width: '20%' },   
                 }}
                 noValidate
                 onSubmit={handleSubmit}
@@ -77,17 +79,17 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                     onChange={handleChange}    
                     id="validationTooltip01"
                     name="firstName"
-                    label="First name"
+                    label={t("firstName")}
                     value={formData.firstName}
                     required
                     helperText={errors.firstName ? "Please provide your first name." : ""}
-                />
+                    />
                 <TextField
                     error={errors.lastName}
                     onChange={handleChange}
                     id="validationTooltip02"
                     name="lastName"
-                    label="Last name"
+                    label={t("lastName")}
                     value={formData.lastName}
                     required
                     helperText={errors.lastName ? "Please provide your last name." : ""}
@@ -106,7 +108,7 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                         onChange={handleChange}
                         id="validationTooltip04"
                         name="phoneNumber"
-                        label="Telegram Phone Number"
+                        label={t("telegramNum")}
                         value={formData.phoneNumber}
                         required
                         helperText={errors.phoneNumber ? "Please provide a valid phone number." : ""}
@@ -114,12 +116,12 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                     />
                     
                     <FormControl error={errors.course} required sx={{ width: '20%', marginLeft: '16px', marginTop: '16px' }}>
-                        <InputLabel id="course-label">Course</InputLabel>
+                        <InputLabel id="course-label" style={{fontFamily: "Kantumruy Pro",}}>{t('courses')}</InputLabel>
                         <Select
                             labelId="course-label"
                             value={formData.course}
                             onChange={handleChange}
-                            label="Courses"
+                            label='Courses'
                             name="course"
                         >
                             {cardData.map((course, index) => (
@@ -143,17 +145,17 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                     <TextField
                         id="validationTooltip05"
                         name="message"
-                        label="Message"
+                        label={t('message')}
                         multiline
                         rows={10}
                         value={formData.message}
                         onChange={handleChange}
-                        
+                        sx={{fontFamily: "Kantumruy Pro",}}
                     />
                 </Box>
                 {/* Add other TextField components here */}
-                <Button style={{marginBottom: '40px', backgroundColor: '#006C44', color: 'white', marginLeft: '18px', borderRadius: '10px'}} type="submit">
-                    Submit
+                <Button style={{fontFamily: "Kantumruy Pro",  marginBottom: '40px', backgroundColor: '#006C44', color: 'white', marginLeft: '18px', borderRadius: '10px', padding: '10px 60px'}} type="submit">
+                    {t('submit')}
                 </Button>
             </Box>
         </div>

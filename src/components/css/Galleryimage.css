@@ -1,9 +1,15 @@
 .course-list {
+  position: relative;
     display: flex; 
     justify-content: center; 
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: 20%;
 }
+
+.gallery-image {
+  margin: 10px; /* Adjust this value to increase or decrease the gap */
+}
+
 
 @media (max-width: 768px) {
   .course-list {
