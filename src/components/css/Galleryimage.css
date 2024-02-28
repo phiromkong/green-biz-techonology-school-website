@@ -1,5 +1,5 @@
 .course-list {
-  position: relative;
+
     display: flex; 
     justify-content: center; 
     margin-top: 3%;
@@ -11,8 +11,14 @@
 }
 
 
+
+
 @media (max-width: 768px) {
   .course-list {
     margin-left: 0;
+  }
+
+  .gallery-image {
+    margin: 0;
   }
 }

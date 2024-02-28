@@ -28,7 +28,7 @@ function Dashboardnav() {
     <AppBar position="static" style={{backgroundColor: '#088A5B'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src={'../logo4.png'} alt="Logo" style={{display: { xs: 'none', md: 'flex'}, width: '30%'}}/>
+          <img src={'../logo4.png'} alt="Logo" style={{display: { xs: 'none', md: 'flex'}, width: '30%', marginLeft: '-10rem'}}/>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

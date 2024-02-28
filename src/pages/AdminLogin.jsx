@@ -12,48 +12,47 @@ const AdminLogin = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState(null);
+    const [emailError, setEmailError] = useState(null);
+    const [passwordError, setPasswordError] = useState(null);
+    const [loading, setLoading] = useState(false); // Added loading state
        
-    const validateEmail = (email) => {
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-
-    const validatePassword = (password) => {
-        // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
-        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        return re.test(password);
-    }
-
-    
     const onLogin = (e) => {
         e.preventDefault();
-    
-        // Check if email is empty or not in valid format
+        setLoading(true); // Set loading state to true at the start of the login attempt
+
         if (!email) {
-            setError('Please fill in your email');
+            setEmailError('Please fill in your email');
+            setLoading(false); // Reset loading state
             return;
         }
     
-        // Check if password is empty or not in valid format
         if (!password) {
-            setError('Please fill in your password');
+            setPasswordError('Please fill in your password');
+            setLoading(false); // Reset loading state
             return;
         }
     
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
-                navigate('/admin');
+                setEmailError(null);
+                setPasswordError(null);
+                navigate('/dashboard');
             })
             .catch((error) => {
-                if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
-                    setError('Invalid Credentials');
+                // Set error message based on the type of error
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    setEmailError('Invalid Credentials');
+                    setPasswordError('Invalid Credentials');
+                } else if (error.code === 'auth/invalid-email') {
+                    setEmailError('Please enter a valid email address');
+                    setPasswordError(null); // Assuming password error is not relevant for this specific error
                 } else {
-                    setError(error.message);
+                    setEmailError(error.message);
+                    setPasswordError(error.message);
                 }
+            })
+            .finally(() => {
+                setLoading(false); // Ensure loading state is set to false in both success and error cases
             });
     }
 
@@ -65,8 +64,8 @@ const AdminLogin = (props) => {
                 </div>
                 <div className={"inputContainer"}>
                     <TextField
-                        error={error ? true : false}
-                        helperText={error && !email ? error : ''}
+                        error={emailError ? true : false}
+                        helperText={emailError}
                         value={email}
                         label="Email"
                         onChange={ev => setEmail(ev.target.value)}
@@ -76,8 +75,8 @@ const AdminLogin = (props) => {
                 <div className={"inputContainer"}>
                     <div className="passwordContainer">
                         <TextField
-                            error={error ? true : false}
-                            helperText={error && !password ? error : ''}
+                            error={passwordError ? true : false}
+                            helperText={passwordError}
                             type={showPassword ? "text" : "password"}
                             value={password}
                             label="Password"
@@ -91,8 +90,8 @@ const AdminLogin = (props) => {
 
                 <div className={"inputContainer"}>
                     <div className={"buttonContainer"}>
-                        <button className={"inputButton"} onClick={onLogin}>
-                            Log in
+                        <button className={"inputButton"} onClick={onLogin} disabled={loading}>
+                            {loading ? 'Logging in...' : 'Log in'}
                         </button>
                         <button className={"inputButtonTwo"}>
                             <Link to="/">Homepage</Link>

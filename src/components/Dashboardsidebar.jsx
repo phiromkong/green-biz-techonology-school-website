@@ -26,7 +26,7 @@ export default function PermanentDrawerLeft() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            marginTop: '153px'
+            marginTop: '153px',
           },
         }}
         variant="permanent"

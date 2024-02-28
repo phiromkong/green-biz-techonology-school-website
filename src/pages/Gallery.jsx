@@ -56,6 +56,7 @@ const Gallery = () => {
     // Handle pagination change
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
+        setSelectedProgram(null); // Reset selected program when changing pagination page
     };
 
     const [selectedProgram, setSelectedProgram] = useState(null);
@@ -64,24 +65,23 @@ const Gallery = () => {
         <div>
             <Navbar />
             <div className="gallery-container">
-            <div className='gallery-title' onClick={() => setSelectedProgram(null)}>
-                <h1>Gallery</h1>
-                </div>               
-             <div className='gallery-grid'>
-             <Galleryimg itemData={currentItems} setSelectedProgram={setSelectedProgram} selectedProgram={selectedProgram} />               
-             </div>
+                <div className='gallery-title' onClick={() => setSelectedProgram(null)}>
+                    <h1>Gallery</h1>
+                </div>
+                <div className='gallery-grid'>
+                    <Galleryimg itemData={currentItems} setSelectedProgram={setSelectedProgram} selectedProgram={selectedProgram} />
+                </div>
                 <div className="pagination-container">
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Pagination
-                        postsPerPage={itemsPerPage}
-                        totalPosts={itemData.length}
-                        paginate={handlePageChange}
-                        currentPage={currentPage}
-                    />
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Pagination
+                            postsPerPage={itemsPerPage}
+                            totalPosts={itemData.length}
+                            paginate={handlePageChange}
+                            currentPage={currentPage}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-
             <Footer />
         </div>
     );

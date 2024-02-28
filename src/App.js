@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Courses from './pages/Courses';
@@ -22,6 +22,7 @@ function App() {
 
   useEffect(() => {
     i18n.on('initialized', () => setIsI18nInitialized(true));
+    console.log('Null');
   }, []);
 
   if (!isI18nInitialized) {
@@ -174,21 +175,24 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path="/courses/:id" element={<CoursesDetail courses={cardData} />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/news/:id" element={<NewsDetails newsData={newsData} />} />
-          <Route path="/our-team" element={<Faculty />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/dashboard" element={<Privateroute element={<AdminDashboard />} />} />
-          <Route path="/" element={<Home />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/:id" element={<CoursesDetail courses={cardData} />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/news/:id" element={<NewsDetails newsData={newsData} />} />
+        <Route path="/our-team" element={<Faculty />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route element={<Privateroute/>}>
+              <Route path='/dashboard' element={<AdminDashboard/>} />
+        </Route>       
+        <Route path="/" element={<Home />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </Router>
+
     </>
   );
 }

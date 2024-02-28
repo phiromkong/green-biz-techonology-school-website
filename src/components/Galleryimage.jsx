@@ -30,9 +30,9 @@ const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
     };
 
     return (
-        <div>
-            <Grid container spacing={10}>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
+        <div className="gallery-container">
+            <Grid container spacing={5}>
+                <Grid item xs={12} sm={6} md={3} lg={3}>
                     <div className="course-list">
                         <CourseList courses={itemData} onCourseSelect={handleCourseSelect} activeProgram={selectedProgram} />
                     </div>
@@ -49,6 +49,7 @@ const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
             </Grid>
         </div>
     );
+    
 };
 
 export default Galleryimage;
