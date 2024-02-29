@@ -15,19 +15,13 @@ import NotFound from './components/NotFound';
 import Privateroute from './components/Privateroute';
 import i18n from './i18next';
 
-
-
 function App() {
-  const [isI18nInitialized, setIsI18nInitialized] = useState(false);
-
+  const [setIsI18nInitialized] = useState(false);
   useEffect(() => {
     i18n.on('initialized', () => setIsI18nInitialized(true));
-    console.log('Null');
-  }, []);
+  });
 
-  if (!isI18nInitialized) {
-    return null; // or a loading spinner
-  }
+  
   const newsData = [
     {
       id: 1,

@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { useTranslation } from 'react-i18next';
+
 export const Navbar = () => {
 
 const [menuOpen, setMenuOpen] = useState(false);
@@ -62,7 +63,6 @@ const toggleAboutDropdown = () => {
 
 const toggleLangDropdown = (event) => {
     event.stopPropagation();
-    console.log("toggleLangDropdown called");
     setLangDropdownOpen(!langDropdownOpen);
 };
 
@@ -130,7 +130,7 @@ const handleMenuClick = () => {
                         }
                     </li>   
                     <li>
-                        <NavLink to="/courses">{t('courses')}</NavLink>
+                        <NavLink to="/courses">{t('COURSES')}</NavLink>
                     </li>
                     <li>
                         <Button className="enroll_btn" variant="contained" component={Link} to="/contact">{t('enrollNow')}</Button>

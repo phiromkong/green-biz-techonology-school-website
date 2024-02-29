@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'; 
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import "../components/css/AdminLogin.css";
@@ -7,54 +7,54 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import TextField from '@mui/material/TextField';
 
-const AdminLogin = (props) => {
-    const navigate = useNavigate();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [emailError, setEmailError] = useState(null);
-    const [passwordError, setPasswordError] = useState(null);
-    const [loading, setLoading] = useState(false); // Added loading state
-       
-    const onLogin = (e) => {
-        e.preventDefault();
-        setLoading(true); // Set loading state to true at the start of the login attempt
+const AdminLogin = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-        if (!email) {
-            setEmailError('Please fill in your email');
-            setLoading(false); // Reset loading state
-            return;
-        }
-    
-        if (!password) {
-            setPasswordError('Please fill in your password');
-            setLoading(false); // Reset loading state
-            return;
-        }
-    
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                setEmailError(null);
-                setPasswordError(null);
-                navigate('/dashboard');
-            })
-            .catch((error) => {
-                // Set error message based on the type of error
-                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-                    setEmailError('Invalid Credentials');
-                    setPasswordError('Invalid Credentials');
-                } else if (error.code === 'auth/invalid-email') {
-                    setEmailError('Please enter a valid email address');
-                    setPasswordError(null); // Assuming password error is not relevant for this specific error
-                } else {
-                    setEmailError(error.message);
-                    setPasswordError(error.message);
-                }
-            })
-            .finally(() => {
-                setLoading(false); // Ensure loading state is set to false in both success and error cases
-            });
+  const onLogin = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (!email) {
+      setEmailError('Please fill in your email');
+      setLoading(false);
+      return;
     }
+
+    if (!password) {
+      setPasswordError('Please fill in your password');
+      setLoading(false);
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        setEmailError(null);
+        setPasswordError(null);
+        navigate('/dashboard'); // Redirect to dashboard after successful login
+      })
+      .catch((error) => {
+        // Handle login errors
+        if (error.code === 'auth/invalid-credential' ) {
+          setEmailError('Invalid Credentials');
+          setPasswordError('Invalid Credentials');
+        } else if (error.code === 'auth/invalid-email') {
+          setEmailError('Please enter a valid email address');
+          setPasswordError(null);
+        } else {
+          setEmailError(error.message);
+          setPasswordError(error.message);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 
     return (
         <div className="loginWrapper">

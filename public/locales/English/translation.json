@@ -1,7 +1,8 @@
     {
       "about": "ABOUT US",
       "apply": "Apply for admission to study",
-      "courses": "COURSES",
+      "COURSES": "COURSES",
+      "courses": "Courses",
       "news": "NEWS",
       "ourTeam": "OUR TEAM",
       "gallery": "GALLERY",

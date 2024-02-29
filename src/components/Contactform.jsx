@@ -5,7 +5,7 @@ import { Select, MenuItem } from '@mui/material';
 import './css/Contactform.css';
 import { useTranslation } from 'react-i18next';
 
-const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add defaultCourse to the destructured props
+const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  
     const {t} = useTranslation();
     const [formData, setFormData] = useState({
         firstName: '',
@@ -30,14 +30,17 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
             error = true;
         } else if (name === 'phoneNumber' && !/^0\d{8,10}$/.test(value)) {
             error = true;
+        }else if (name === 'message' && value.trim() === '') {
+            error = true;
         }
         setErrors({ ...errors, [name]: error });
     };
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
-        if (form.checkValidity() === false || Object.values(errors).some(error => error) || formData.course === '') {
+        if (form.checkValidity() === false || Object.values(errors).some(error => error) || formData.course === '' || formData.message === '') {
             // Check if a course is selected
+            setErrors({ ...errors, message: formData.message === '' });
             setErrors({ ...errors, course: formData.course === '' });
             event.stopPropagation();
         } else {
@@ -83,6 +86,7 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                     value={formData.firstName}
                     required
                     helperText={errors.firstName ? "Please provide your first name." : ""}
+                    sx={{ "& label": {fontFamily: "Kantumruy Pro",}}}
                     />
                 <TextField
                     error={errors.lastName}
@@ -93,7 +97,8 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                     value={formData.lastName}
                     required
                     helperText={errors.lastName ? "Please provide your last name." : ""}
-                />
+                    sx={{ "& label": {fontFamily: "Kantumruy Pro",}}}
+                    />
                  <Box
                 component="form"
                 sx={{
@@ -112,17 +117,19 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                         value={formData.phoneNumber}
                         required
                         helperText={errors.phoneNumber ? "Please provide a valid phone number." : ""}
+                        sx={{ "& label": {fontFamily: "Kantumruy Pro",}}}
                         
                     />
                     
                     <FormControl error={errors.course} required sx={{ width: '20%', marginLeft: '16px', marginTop: '16px' }}>
-                        <InputLabel id="course-label" style={{fontFamily: "Kantumruy Pro",}}>{t('courses')}</InputLabel>
+                        <InputLabel id="course-label" style={{fontFamily: "Kantumruy Pro"}}>{t('courses')}</InputLabel>
                         <Select
                             labelId="course-label"
                             value={formData.course}
                             onChange={handleChange}
                             label='Courses'
-                            name="course"
+                            name='course'
+
                         >
                             {cardData.map((course, index) => (
                                 <MenuItem key={index} value={course.title}>
@@ -143,14 +150,17 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  // Add default
                 onSubmit={handleSubmit}
             >
                     <TextField
+                        error={errors.message}
                         id="validationTooltip05"
                         name="message"
                         label={t('message')}
+                        required
                         multiline
                         rows={10}
                         value={formData.message}
                         onChange={handleChange}
-                        sx={{fontFamily: "Kantumruy Pro",}}
+                        sx={{ "& label": {fontFamily: "Kantumruy Pro",}}}
+                        helperText={errors.message ? "Please provide a message." : ""}
                     />
                 </Box>
                 {/* Add other TextField components here */}
