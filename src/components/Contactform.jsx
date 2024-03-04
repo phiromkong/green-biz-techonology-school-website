@@ -121,7 +121,16 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                         
                     />
                     
-                    <FormControl error={errors.course} required sx={{ width: '20%', marginLeft: '16px', marginTop: '16px' }}>
+                    <FormControl 
+                        error={errors.course} 
+                        required 
+                        sx={{ width: {
+                            xs: '90%', 
+                            sm: '90%',  
+                            md: '20%'    
+                        },  
+                        marginLeft: '16px', 
+                        marginTop: '16px' }}>
                         <InputLabel id="course-label" style={{fontFamily: "Kantumruy Pro"}}>{t('courses')}</InputLabel>
                         <Select
                             labelId="course-label"

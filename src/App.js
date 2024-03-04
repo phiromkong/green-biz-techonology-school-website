@@ -13,6 +13,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import CoursesDetail from './components/Coursedetail'; 
 import NotFound from './components/NotFound';
 import Privateroute from './components/Privateroute';
+import AdminProfile from './pages/AdminProfile';
+import AdminAccount from './pages/AdminAccount';
 import i18n from './i18next';
 
 function App() {
@@ -181,6 +183,8 @@ function App() {
         <Route path="/admin" element={<AdminLogin />} />
         <Route element={<Privateroute/>}>
               <Route path='/dashboard' element={<AdminDashboard/>} />
+              <Route path='/dashboard/profile' element={<AdminProfile/>} />
+              <Route path='/dashboard/account' element={<AdminAccount/>} />
         </Route>       
         <Route path="/" element={<Home />} />
         <Route path='*' element={<NotFound />} />

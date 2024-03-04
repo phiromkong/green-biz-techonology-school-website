@@ -7,12 +7,10 @@ import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -26,17 +24,23 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="">
+        Green Biz Technology School
       </Link>{' '}
-      {new Date().getFullYear()}
+      {'2022'}
       {'.'}
     </Typography>
   );
 }
 
 const drawerWidth = 240;
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [
+  { name: 'Profile', path: '/dashboard/profile' },
+  { name: 'Account', path: '/dashboard/account' },
+  { name: 'Dashboard', path: '/dashboard' },
+  { name: 'Logout', path: '/logout' },
+ ];
+ 
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -158,26 +162,36 @@ export default function Dashboard() {
                 <Avatar alt="Profile" src={profilePicURL || "/static/images/avatar/default.jpg"} />
               </IconButton>
               <Menu
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={setting === 'Logout' ? handleLogout : handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+            >
+            {settings.map((setting) => (
+                <MenuItem
+                  key={setting.name}
+                  onClick={() => {
+                    if (setting.name === 'Logout') {
+                      handleLogout();
+                    } else {
+                      navigate(setting.path);
+                    }
+                    handleCloseUserMenu();
+                  }}
+                >
+                  <Typography textAlign="center">{setting.name}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
             </div>
           </Toolbar>
         </AppBar>
@@ -209,44 +223,11 @@ export default function Dashboard() {
             overflow: 'auto',
           }}
         >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                </Paper>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ pt: 4 }} />
-          </Container>
         </Box>
       </Box>
+      <Container maxWidth="lg" sx={{ mt: 1, mb: 1 }}>
+          <Copyright sx={{ pt: -10 }} />
+      </Container>
     </ThemeProvider>
-  );
+  );  
 }

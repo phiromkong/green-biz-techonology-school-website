@@ -88,6 +88,7 @@
 
   .contentSection {
     margin-top: 0; /* Adjust as needed */
+    padding-left: -20px;
   }
 
   .features {
@@ -98,6 +99,7 @@
 
   .feature {
     font-size: 14px;
+    margin-left: 80px;
   }
 
   .contact-heading {
