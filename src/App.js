@@ -16,6 +16,7 @@ import Privateroute from './components/Privateroute';
 import AdminProfile from './pages/AdminProfile';
 import AdminAccount from './pages/AdminAccount';
 import i18n from './i18next';
+import AdminNews from './pages/AdminNews';
 
 function App() {
   const [setIsI18nInitialized] = useState(false);
@@ -23,57 +24,6 @@ function App() {
     i18n.on('initialized', () => setIsI18nInitialized(true));
   });
 
-  
-  const newsData = [
-    {
-      id: 1,
-      title: 'Healthy living choices!',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '16 January 2024',
-      thumbnailImage: "../Img2.jpg",
-      newsImages: ["../Img2.jpg", "../Img3.jpg", "../Img2.jpg", "../Img3.jpg"],
-    },
-    {
-      id: 2,
-      title: 'Another post title',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '17 January 2024',
-      thumbnailImage: "../Img4.jpg",
-      newsImages: ["../Img4.jpg", "../Img5.jpg"],
-    },
-    {
-      id: 3,
-      title: 'Healthy living choices!',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '16 January 2024',
-      thumbnailImage: "../Img2.jpg",
-      newsImages: ["../Img2.jpg", "../Img3.jpg"],
-    },
-    {
-      id: 4,
-      title: 'Another post title',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '17 January 2024',
-      thumbnailImage: "../Img4.jpg",
-      newsImages: ["../Img4.jpg", "../Img5.jpg"],
-    },
-    {
-      id: 5,
-      title: 'Healthy living choices!',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '16 January 2024',
-      thumbnailImage: "../Img2.jpg",
-      newsImages: ["../Img2.jpg", "../Img3.jpg"],
-    },
-    {
-      id: 6,
-      title: 'Another post title',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '17 January 2024',  
-      thumbnailImage: "../Img4.jpg",
-      newsImages: ["../Img4.jpg", "../Img5.jpg"],
-    },
-  ];
   const cardData = [
     { 
       id: 1, 
@@ -176,7 +126,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:id" element={<CoursesDetail courses={cardData} />} />
         <Route path="/news" element={<News />} />
-        <Route path="/news/:id" element={<NewsDetails newsData={newsData} />} />
+        <Route path="/news/:id" element={<NewsDetails />} />
         <Route path="/our-team" element={<Faculty />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
@@ -185,6 +135,7 @@ function App() {
               <Route path='/dashboard' element={<AdminDashboard/>} />
               <Route path='/dashboard/profile' element={<AdminProfile/>} />
               <Route path='/dashboard/account' element={<AdminAccount/>} />
+              <Route path='/dashboard/news' element={<AdminNews/>} />
         </Route>       
         <Route path="/" element={<Home />} />
         <Route path='*' element={<NotFound />} />

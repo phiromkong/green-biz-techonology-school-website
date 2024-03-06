@@ -96,7 +96,8 @@ const CustomAppBar = ({ open, toggleDrawer }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-          Dashboard
+        Dashboard
+
         </Typography>
         <div> {/* Separate div for IconButton and Menu */}
           <IconButton color="inherit" onClick={handleOpenUserMenu}>

@@ -330,7 +330,7 @@
     }
 
     .logo {
-        width: 40%; 
+        width: 30%; 
         height: auto;
     }
 
@@ -441,17 +441,13 @@
 @media (max-width: 1200px) {
 
     .logo {
-        width: 50%; /* Adjust the width for larger screens */
-        
-        /* Add these lines to center the logo vertically */
+        width: 40%; /* Adjust the width for larger screens */
     }
 
     .lang_drop_down {
         min-width: 5rem; /* Adjust minimum width */
         display: none;
-
     }
-
  
 }
 

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,7 +9,7 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 const defaultTheme = createTheme();
 function AdminAccount() {
     const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
+    const toggleDrawer = () => {
     setOpen(!open);
   };
 
