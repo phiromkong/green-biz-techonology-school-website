@@ -17,6 +17,7 @@ import AdminProfile from './pages/AdminProfile';
 import AdminAccount from './pages/AdminAccount';
 import i18n from './i18next';
 import AdminNews from './pages/AdminNews';
+import AddNews from './pages/AddNews';
 
 function App() {
   const [setIsI18nInitialized] = useState(false);
@@ -136,6 +137,7 @@ function App() {
               <Route path='/dashboard/profile' element={<AdminProfile/>} />
               <Route path='/dashboard/account' element={<AdminAccount/>} />
               <Route path='/dashboard/news' element={<AdminNews/>} />
+              <Route path='/dashboard/news/add' element={<AddNews/>} />
         </Route>       
         <Route path="/" element={<Home />} />
         <Route path='*' element={<NotFound />} />

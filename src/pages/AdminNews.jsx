@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
@@ -16,8 +17,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-
-import { collection, getDocs } from 'firebase/firestore';
+import Stack from '@mui/material/Stack';
+import AddIcon from '@mui/icons-material/Add';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase'; // Make sure this path is correct
 import '../components/css/AdminNews.css';
 
@@ -37,11 +39,18 @@ const AdminNews = () => {
         const fetchPosts = async () => {
             const querySnapshot = await getDocs(collection(db, "news"));
             const newPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    
+            // Sort the posts array by date in descending order
+            newPosts.sort((a, b) => {
+                return b.date.toMillis() - a.date.toMillis();
+            });
+    
             setPosts(newPosts);
         };
-
+    
         fetchPosts();
-    }, []); // This hook will run once when the component mounts
+    }, []);
+     // This hook will run once when the component mounts
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -60,11 +69,23 @@ const AdminNews = () => {
         setDeletePostId(id);
         setDeleteDialogOpen(true);
     };
-    const handleDeleteConfirm = () => {
-        const updatedPosts = posts.filter(post => post.id !== deletePostId);
-        setPosts(updatedPosts);
-        setDeletePostId(null);
-        setDeleteDialogOpen(false);
+
+    const handleDeleteConfirm = async () => {
+        try {
+            // Delete the document from Firestore
+            await deleteDoc(doc(db, "news", deletePostId));
+            console.log('Deleted post with ID:', deletePostId);
+
+            // Filter the posts array to remove the deleted post from the UI
+            const updatedPosts = posts.filter(post => post.id !== deletePostId);
+            setPosts(updatedPosts);
+
+            setDeletePostId(null);
+            setDeleteDialogOpen(false);
+        } catch (error) {
+            console.error("Error deleting document: ", error);
+            // Handle error
+        }
     };
     
     const handleDeleteCancel = () => {
@@ -82,6 +103,11 @@ const AdminNews = () => {
                 <Container>
                     <div className="row justify-content-center">
                         <div className="content col-lg-10 blog_header">
+                        <Stack direction="row" spacing={1}>
+                        <Button component={Link} to="/dashboard/news/add" variant="contained" startIcon={<AddIcon />}>
+                            New Post
+                        </Button>
+                    </Stack>
                             <div className="post-container">
                                 <div className="page-title mb-5">
                                 </div>
@@ -93,7 +119,7 @@ const AdminNews = () => {
                                             title={post.enTitle}
                                             content={post.enContent}
                                             description={post.enDescription}
-                                            date={post.enDate}
+                                            date={post.date ? post.date.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''}
                                             thumbnailImage={post.thumbnailImage} 
                                         />
                                         <IconButton
@@ -147,27 +173,26 @@ const AdminNews = () => {
                         </div>
                     </div>
                     <Dialog
-    open={deleteDialogOpen}
-    onClose={handleDeleteCancel}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
->
-    <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
-    <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this news post?
-        </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-        <Button onClick={handleDeleteCancel} color="primary">
-            Cancel
-        </Button>
-        <Button onClick={handleDeleteConfirm} color="primary" autoFocus>
-            Delete
-        </Button>
-    </DialogActions>
-</Dialog>
-
+                        open={deleteDialogOpen}
+                        onClose={handleDeleteCancel}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                                Are you sure you want to delete this news post?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleDeleteCancel} color="primary">
+                                Cancel
+                            </Button>
+                            <Button onClick={handleDeleteConfirm} color="primary" autoFocus>
+                                Delete
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Container>
             </Box>
         </ThemeProvider>
