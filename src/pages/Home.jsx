@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { db } from '../firebase'; // Ensure you have this configured correctly
 import Navbar from '../components/Navbar';
 import Slider from '../components/Slider';
 import Slogan from '../components/Slogan';
@@ -9,78 +11,29 @@ import Partners from '../components/Partners';
 import Footer from '../components/Footer';
 
 const Home = () => {
-  const partnerLogos = [
-    { icon: "./IFLS-Logo.png" },
-    { icon: "./Vattanac-Logo.png" },
-    { icon: "./IFLS-Logo.png" },
-    { icon: "./IFLS-Logo.png" },
-    { icon: "./Vattanac-Logo.png" },
-    { icon: "./IFLS-Logo.png" },
-    { icon: "./IFLS-Logo.png" },
-    { icon: "./Vattanac-Logo.png" },
-    { icon: "./IFLS-Logo.png" },
-    { icon: "./IFLS-Logo.png" },
-    { icon: "./Vattanac-Logo.png" },
-    { icon: "./IFLS-Logo.png" },
-  ];
+  const [partnerLogos, setPartnerLogos] = useState([]);
+  const [newsData, setNewsData] = useState([]);
+ 
+  useEffect(() => {
+    const fetchPartners = async () => {
+      const partnersCollection = collection(db, "partners");
+      const partnersSnapshot = await getDocs(partnersCollection);
+      const partnersList = partnersSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      setPartnerLogos(partnersList);
+    };
 
-  const newsData = [
-    {
-      id: 1,
-      title: 'Healthy living choices!',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '16 January 2024',
-      thumbnailImage: "../Img2.jpg",
-      newsImages: ["../Img2.jpg", "../Img3.jpg", "../Img2.jpg", "../Img3.jpg"],
-    },
-    {
-      id: 2,
-      title: 'Another post title',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '17 January 2024',
-      thumbnailImage: "../Img4.jpg",
-      newsImages: ["../Img4.jpg", "../Img5.jpg"],
-    },
-    {
-      id: 3,
-      title: 'Healthy living choices!',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '16 January 2024',
-      thumbnailImage: "../Img2.jpg",
-      newsImages: ["../Img2.jpg", "../Img3.jpg"],
-    },
-    {
-      id: 4,
-      title: 'Another post title',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '17 January 2024',
-      thumbnailImage: "../Img4.jpg",
-      newsImages: ["../Img4.jpg", "../Img5.jpg"],
-    },
-    {
-      id: 5,
-      title: 'Healthy living choices!',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '16 January 2024',
-      thumbnailImage: "../Img2.jpg",
-      newsImages: ["../Img2.jpg", "../Img3.jpg"],
-    },
-    {
-      id: 6,
-      title: 'Another post title',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur....',
-      date: '17 January 2024',  
-      thumbnailImage: "../Img4.jpg",
-      newsImages: ["../Img4.jpg", "../Img5.jpg"],
-    },
-  ];
+    const fetchNews = async () => {
+      const newsCollection = collection(db, "news");
+      const q = query(newsCollection, orderBy("date", "desc"), limit(3));
+      const newsSnapshot = await getDocs(q);
+      const newsList = newsSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      setNewsData(newsList);
+    };
 
+    fetchPartners();
+    fetchNews();
+ }, []);
+  
   const cardData = [
     { id: 1, title: "Course 1", image: "../Img1.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" },
     { id: 2, title: "Course 2", image: "../Img2.jpg", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"},
@@ -111,9 +64,9 @@ const Home = () => {
         {newsData.map((news, index) => (
           <NewsCard
             key={index}
-            title={news.title}
+            title={news.enTitle}
             imgUrl={news.thumbnailImage}
-            description={news.description}
+            description={news.enDescription}
             id={news.id}
           />
         ))}

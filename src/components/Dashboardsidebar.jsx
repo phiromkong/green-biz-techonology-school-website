@@ -19,8 +19,9 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import ArticleIcon from '@mui/icons-material/Article';
 import GroupIcon from '@mui/icons-material/Group';
 import CollectionsIcon from '@mui/icons-material/Collections';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
-import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';import { Link } from 'react-router-dom'; // Assuming you're using react-router-dom
+import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import { Link } from 'react-router-dom'; // Assuming you're using react-router-dom
 
 const drawerWidth = 240;
 
@@ -113,7 +114,7 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
                 <ListItemText primary="News" />
               </ListItemButton>
             </List>
-            <List component={Link} to="/" disablePadding
+            <List component={Link} to="/dashboard/our-team" disablePadding
               sx={{
                 textDecorationColor: 'none',
                 color: 'black',
@@ -139,25 +140,18 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
                 <ListItemText primary="Gallery" />
               </ListItemButton>
             </List>
-            <List component={Link} to="/" disablePadding
-              sx={{
-                textDecorationColor: 'none',
-                color: 'black',
-              }}
-            >
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <ContactPageIcon />
-                </ListItemIcon>
-                <ListItemText primary="Contact" />
-              </ListItemButton>
-            </List>
           </Collapse>
-          <ListItem component={Link} to="/dashboard">
+          <ListItem component={Link} to="/dashboard/courses">
             <ListItemIcon>
               <SlowMotionVideoIcon />
             </ListItemIcon>
             <ListItemText primary="Courses" />
+          </ListItem>
+          <ListItem component={Link} to="/dashboard/partners">
+            <ListItemIcon>
+              <HandshakeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Partners" />
           </ListItem>
         </List>
       </Drawer>

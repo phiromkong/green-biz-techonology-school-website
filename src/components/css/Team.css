@@ -1,4 +1,23 @@
-.team_img {
-    width: 30%;
-}
+    .row {
+        display: flex;
+        align-items: center; /* Vertically align items in the center */
+    }
 
+    .owl-carousel .owl-stage {
+    position: relative;
+   }
+
+    .col-md-9 .col-md-12 .col-sm-12 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+   }
+
+   .owl-carousel .owl-item img {
+        display: flex;
+        width: 30%;
+        height: auto;
+   }
+
+   

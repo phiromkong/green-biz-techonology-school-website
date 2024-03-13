@@ -18,6 +18,15 @@ import AdminAccount from './pages/AdminAccount';
 import i18n from './i18next';
 import AdminNews from './pages/AdminNews';
 import AddNews from './pages/AddNews';
+import EditNews from './pages/EditNews';
+import AdminOurTeam from './pages/AdminOurTeam';
+import AddOurTeam from './pages/AddOurTeam';
+import EditOurTeam from './pages/EditOurTeam';
+import AdminPartners from './pages/AdminPartners';
+import AddPartners from './pages/AddPartners';
+import EditPartners from './pages/EditPartners';
+import AdminCourses from './pages/AdminCourses';
+
 
 function App() {
   const [setIsI18nInitialized] = useState(false);
@@ -138,6 +147,14 @@ function App() {
               <Route path='/dashboard/account' element={<AdminAccount/>} />
               <Route path='/dashboard/news' element={<AdminNews/>} />
               <Route path='/dashboard/news/add' element={<AddNews/>} />
+              <Route path='/dashboard/news/edit/:postId' element={<EditNews/>} />
+              <Route path='/dashboard/our-team' element={<AdminOurTeam/>} />
+              <Route path='/dashboard/our-team/add' element={<AddOurTeam/>} />
+              <Route path='/dashboard/our-team/edit/:memberId' element={<EditOurTeam/>} />
+              <Route path='/dashboard/partners' element={<AdminPartners/>} />
+              <Route path='/dashboard/partners/add' element={<AddPartners/>} />
+              <Route path='/dashboard/partners/edit/:partnerId' element={<EditPartners/>} />
+              <Route path='/dashboard/courses' element={<AdminCourses />} />
         </Route>       
         <Route path="/" element={<Home />} />
         <Route path='*' element={<NotFound />} />

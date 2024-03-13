@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
@@ -19,6 +20,8 @@ const AddNews = () => {
     const [open, setOpen] = useState(true);
     const [thumbnailURL, setThumbnailURL] = useState('');
     const [newsImagesURLs, setNewsImagesURLs] = useState([]);
+    const [uploading, setUploading] = useState(false); // Add state to track file upload status
+    const navigate = useNavigate();
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -53,6 +56,13 @@ const AddNews = () => {
     };
 
     const handleFileUpload = async (files) => {
+        if (files.length === 0) {
+            console.error("No files selected for upload.");
+            return;
+        }
+
+        setUploading(true); // Set uploading state to true while files are being uploaded
+
         const storageRef = ref(getStorage(), 'news');
         const uploadPromises = files.map(file => {
             const fileRef = ref(storageRef, file.name);
@@ -62,20 +72,27 @@ const AddNews = () => {
                 });
             });
         });
-        const uploadedFiles = await Promise.all(uploadPromises);
-        const thumbnail = uploadedFiles[0]; // Get the first uploaded file
-        setThumbnailURL(thumbnail.url); // Set thumbnailURL with the URL of the first uploaded file
-        const newsImages = uploadedFiles.slice(1); // Exclude the thumbnail
-        setNewsImagesURLs(newsImages.map(file => file.url)); // Set newsImagesURLs with URLs of other uploaded files
+
+        try {
+            const uploadedFiles = await Promise.all(uploadPromises);
+            const thumbnail = uploadedFiles[0]; // Get the first uploaded file
+            setThumbnailURL(thumbnail.url); // Set thumbnailURL with the URL of the first uploaded file
+            const newsImages = uploadedFiles.slice(1); // Exclude the thumbnail
+            setNewsImagesURLs(newsImages.map(file => file.url)); // Set newsImagesURLs with URLs of other uploaded files
+        } catch (error) {
+            console.error("Error uploading files: ", error);
+            // Handle error appropriately
+        } finally {
+            setUploading(false); // Set uploading state to false after files are uploaded (whether success or failure)
+        }
     };
-    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("clicked");
-        if (Object.values(errors).some(error => error)) {
-            // Handle form validation errors
-            console.log("Form validation failed");
+        if (Object.values(errors).some(error => error) || uploading) {
+            // Handle form validation errors or uploading in progress
+            console.log("Form validation failed or uploading in progress");
             return;
         } else {
             try {
@@ -87,6 +104,7 @@ const AddNews = () => {
                 };
                 const docRef = await addDoc(collection(db, "news"), newsData);
                 console.log("Document written with ID: ", docRef.id);
+                navigate('/dashboard/news');
                 // Redirect or show success message
             } catch (error) {
                 console.error("Error adding document: ", error);
@@ -125,7 +143,7 @@ const AddNews = () => {
                                 required
                                 error={errors.khTitle}
                                 label="Khmer Title"
-                                id="enTitle"
+                                id="khTitle"
                                 name="khTitle" 
                                 onChange={handleChange}
                                 helperText={errors.khTitle ? "Please provide a title in Khmer." : ""}
@@ -149,22 +167,17 @@ const AddNews = () => {
                                     name="khDescription" 
                                     onChange={handleChange} 
                                     helperText={errors.khDescription ? "Please provide a description in Khmer." : ""}
-
+                                    
                                 />
                                 <input
                                     type="file"
                                     id="fileUpload"
                                     accept="image/*"
-                                    style={{ display: 'none' }}
+                                    style={{ display: 'flex', marginLeft: '1.5rem' }}
                                     multiple
                                     onChange={(e) => {
                                         const selectedFiles = Array.from(e.target.files); // Convert FileList to array
-                                        handleFileUpload(selectedFiles).then(uploadedFiles => {
-                                            const thumbnail = uploadedFiles[0]; // Assuming the first file is the thumbnail
-                                            setThumbnailURL(thumbnail.url);
-                                            const newsImages = uploadedFiles.slice(1); // Exclude the thumbnail
-                                            setNewsImagesURLs(newsImages.map(file => file.url));
-                                        });
+                                        handleFileUpload(selectedFiles);
                                     }}
                                 />
 
@@ -175,9 +188,11 @@ const AddNews = () => {
                                     tabIndex={-1}
                                     startIcon={<CloudUploadIcon />}
                                     htmlFor="fileUpload"
+                                    style={{marginLeft: '1.5rem'}}
                                 >
                                     Upload Images
                                 </Button>
+                                {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                             </div>
                             <Box
                                 component="form"

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 const Partners = ({ images }) => {
   const {t} = useTranslation();
     const owlOptions = {
-        loop: images.length > 1,
+        loop: images.length > 4,
         margin: 10,
         responsive: {
             0: {
@@ -30,7 +30,7 @@ const Partners = ({ images }) => {
           <OwlCarousel className="owl-theme" {...owlOptions}>
             {images.map((partner, index) => (
               <div key={index} className="item">
-                <img src={partner.icon} alt={`Partner ${index + 1}`} />
+                <img src={partner.image} alt={`Partner ${index + 1}`} style={{width: '100%'}} />
               </div>
             ))}
           </OwlCarousel>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom'; // Import useHistory
 import { Link } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -34,6 +35,8 @@ const AdminNews = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [posts, setPosts] = useState([]); // Initialize posts as an empty array
     const openMore = Boolean(anchorEl);
+    const navigate = useNavigate(); // Use the useHistory hook
+
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -52,8 +55,9 @@ const AdminNews = () => {
     }, []);
      // This hook will run once when the component mounts
 
-    const handleClick = (event) => {
+    const handleClick = (event, postId) => {
         setAnchorEl(event.currentTarget);
+        setDeletePostId(postId);
     };
 
     const handleClose = () => {
@@ -65,35 +69,37 @@ const AdminNews = () => {
     };
 
     // Function to delete a post by its ID
-    const deletePost = (id) => {
-        setDeletePostId(id);
-        setDeleteDialogOpen(true);
-    };
-
-    const handleDeleteConfirm = async () => {
+    const deletePost = async (postId) => { 
         try {
             // Delete the document from Firestore
-            await deleteDoc(doc(db, "news", deletePostId));
-            console.log('Deleted post with ID:', deletePostId);
-
-            // Filter the posts array to remove the deleted post from the UI
-            const updatedPosts = posts.filter(post => post.id !== deletePostId);
+            await deleteDoc(doc(db, "news", postId));
+            console.log('Deleted post with ID:', postId);
+    
+            // Filter the posts array to remove the deleted post from the UI using the post index
+            const updatedPosts = posts.filter((post) => post.id !== postId);
             setPosts(updatedPosts);
-
-            setDeletePostId(null);
+    
             setDeleteDialogOpen(false);
         } catch (error) {
             console.error("Error deleting document: ", error);
             // Handle error
         }
-    };
+    };    
+    
+    const handleDeleteConfirm = async () => {
+        if (deletePostId) {
+            await deletePost(deletePostId);
+        }
+    };    
     
     const handleDeleteCancel = () => {
         setDeletePostId(null);
         setDeleteDialogOpen(false);
-    };    
+    };   
+    const handleEdit = (postId) => {
+        navigate(`/dashboard/news/edit/${postId}`); // Navigate to the edit page with the post ID
+    }; 
     
-
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -103,18 +109,16 @@ const AdminNews = () => {
                 <Container>
                     <div className="row justify-content-center">
                         <div className="content col-lg-10 blog_header">
-                        <Stack direction="row" spacing={1}>
-                        <Button component={Link} to="/dashboard/news/add" variant="contained" startIcon={<AddIcon />}>
-                            New Post
-                        </Button>
-                    </Stack>
+                            <Stack direction="row" spacing={1}>
+                                <Button component={Link} to="/dashboard/news/add" variant="contained" startIcon={<AddIcon />}>
+                                    New Post
+                                </Button>
+                            </Stack>
                             <div className="post-container">
-                                <div className="page-title mb-5">
-                                </div>
+                                <div className="page-title mb-5"></div>
                                 {posts.map((post) => (
-                                    <div style={{ position: 'relative' }}>
+                                    <div style={{ position: 'relative' }} key={post.id}>
                                         <Newspost
-                                            key={post.id}
                                             id={post.id} 
                                             title={post.enTitle}
                                             content={post.enContent}
@@ -128,11 +132,11 @@ const AdminNews = () => {
                                             aria-controls={openMore ? 'long-menu' : undefined}
                                             aria-expanded={openMore ? 'true' : undefined}
                                             aria-haspopup="true"
-                                            onClick={handleClick}
+                                            onClick={(event) => handleClick(event, post.id)}
                                             sx={{
-                                            position: 'absolute',
-                                            top: '20px', // Adjust as needed to align with the news description
-                                            right: '10px', // Adjust as needed to position from the right edge
+                                                position: 'absolute',
+                                                top: '20px', // Adjust as needed to align with the news description
+                                                right: '10px', // Adjust as needed to position from the right edge
                                             }}
                                         >
                                             <MoreVertIcon />
@@ -158,8 +162,9 @@ const AdminNews = () => {
                                                     onClick={() => {
                                                         handleClose();
                                                         if (option === 'Delete') {
-                                                            deletePost(post.id);
-                                                            console.log('Deleted post with ID:', post.id);
+                                                            setDeleteDialogOpen(true);
+                                                        }else if(option === 'Edit'){
+                                                             handleEdit(deletePostId);
                                                         }
                                                     }}
                                                 >
