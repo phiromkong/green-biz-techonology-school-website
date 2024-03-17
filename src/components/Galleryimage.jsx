@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LightGallery from 'lightgallery/react';
 import 'lightgallery/css/lightgallery.css'; // Import lightgallery CSS
 import 'lightgallery/css/lg-zoom.css'; // Import lightgallery zoom CSS
@@ -10,12 +10,11 @@ import Grid from '@mui/material/Grid';
 import './css/Galleryimage.css';
 
 const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
-    const handleCourseSelect = (program) => {
-        setSelectedProgram(program);
-    }
+    const handleCourseSelect = (programId) => {
+        setSelectedProgram(programId);
+    }   
 
-    const filteredCourses = selectedProgram ? itemData.filter((course) => course.program === selectedProgram) : itemData;
-
+    const filteredCourses = selectedProgram ? itemData.filter((gallery) => gallery.programId === selectedProgram) : itemData;
     const handleLightGalleryEvents = (event) => {
         const parentDiv = document.querySelector('.parent-div');
         if (parentDiv) {
@@ -40,8 +39,8 @@ const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
                 <Grid item xs={12} sm={6} md={8} lg={9} className="gallery-grid-item">
                     <LightGallery plugins={[lgThumbnail, lgZoom]} onAfterOpen={() => handleLightGalleryEvents('onAfterOpen')} onBeforeClose={() => handleLightGalleryEvents('onBeforeClose')}>
                         {filteredCourses.map((item) => (
-                            <a href={item.img} key={item.id}>
-                                <img className="gallery-image" alt={item.title} src={item.img} /> 
+                            <a href={item.image} key={item.id}>
+                                <img className="gallery-image"  src={item.image} /> 
                             </a>
                         ))}
                     </LightGallery>

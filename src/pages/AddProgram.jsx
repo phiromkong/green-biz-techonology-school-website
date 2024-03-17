@@ -14,22 +14,27 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const defaultTheme = createTheme();
 
-const AddPartners = () => {
+const AddProgram = () => {
     const navigate = useNavigate(); // Use useNavigate hook
     const [open, setOpen] = React.useState(true);
-    const [partnerName, setPartnerName] = useState('');
-    const [partnerLogo, setPartnerLogo] = useState('');
+    const [enTitle, setEnTitle] = useState('');
+    const [khTitle, setKhTitle] = useState('');
+    const [programImage, setProgramImage] = useState('');
     const [uploading, setUploading] = useState(false); // Add state to track file upload status
 
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
-    const handleNameChange = (e) => {
-        setPartnerName(e.target.value);
+    const handleEnTitleChange = (e) => {
+        setEnTitle(e.target.value);
     };
 
-    const handleLogoChange = async (e) => {
+    const handleKhTitleChange = (e) => {
+        setKhTitle(e.target.value);
+    };
+
+    const handleImageChange = async (e) => {
         if (e.target.files.length === 0) {
             console.error("No files selected for upload.");
             return;
@@ -38,10 +43,10 @@ const AddPartners = () => {
         setUploading(true); // Set uploading state to true while files are being uploaded
 
         const file = e.target.files[0];
-        const storageRef = ref(getStorage(), `partners/${file.name}`);
+        const storageRef = ref(getStorage(), `programs/${file.name}`);
         await uploadBytes(storageRef, file).then(snapshot => {
             return getDownloadURL(snapshot.ref).then(url => {
-                setPartnerLogo(url); // Set partnerLogo with the URL of the uploaded file
+                setProgramImage(url); // Set programImage with the URL of the uploaded file
             });
         });
 
@@ -55,26 +60,28 @@ const AddPartners = () => {
             return;
         } else {
             try {
-                const partnerData = {
-                    name: partnerName,
-                    image: partnerLogo,
+                const programData = {
+                    enTitle: enTitle,
+                    khTitle: khTitle,
+                    image: programImage,
                 };
-                const docRef = await addDoc(collection(db, "partners"), partnerData);
+                const docRef = await addDoc(collection(db, "program"), programData);
                 console.log("Document written with ID: ", docRef.id);
-                navigate('/dashboard/partners'); // Navigate to /dashboard/partners after adding the partner
+                navigate('/dashboard/program'); // Navigate to /dashboard/programs after adding the program
             } catch (error) {
                 console.error("Error adding document: ", error);
                 // Handle error
             }
         }
     };
-
+    
     const handleCancel = () => {
         // Reset form fields to their initial state
-        setPartnerName('');
-        setPartnerLogo('');
-        // Navigate back to the partners dashboard
-        navigate('/dashboard/partners');
+        setEnTitle('');
+        setKhTitle('');
+        setProgramImage('');
+        // Navigate back to the programs dashboard
+        navigate('/dashboard/programs');
     };
     
 
@@ -97,17 +104,24 @@ const AddPartners = () => {
                         <div>
                             <TextField
                                 required
-                                onChange={handleNameChange}
-                                id="partnerName"
-                                name="partnerName"
-                                label="Partner Name"
+                                onChange={handleEnTitleChange}
+                                id="enTitle"
+                                name="enTitle"
+                                label="English Title"
+                            />
+                            <TextField
+                                required
+                                onChange={handleKhTitleChange}
+                                id="khTitle"
+                                name="khTitle"
+                                label="Khmer Title"
                             />
                             <input
                                 type="file"
                                 id="fileUpload"
                                 accept="image/*"
                                 style={{ display: 'flex', marginLeft: '1.5rem' }}
-                                onChange={handleLogoChange}
+                                onChange={handleImageChange}
                             />
                             {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                         </div>
@@ -119,7 +133,7 @@ const AddPartners = () => {
                         color="primary"
                         sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
                     >
-                        Add Partner
+                        Add Program
                     </Button>
                     <Button
                         variant="contained"
@@ -135,4 +149,4 @@ const AddPartners = () => {
     );
 };
 
-export default AddPartners;
+export default AddProgram;

@@ -172,6 +172,10 @@ const EditNews = ({ match }) => {
             console.error("Error updating document: ", error); // Log error message
         }
     };
+
+    const handleCancel = () => {
+        navigate('/dashboard/news'); // Adjust the path as needed
+    };
     
     
     return (
@@ -354,6 +358,14 @@ const EditNews = ({ match }) => {
                         sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
                     >
                         Update News
+                    </Button>
+                    <Button
+                        onClick={handleCancel}
+                        variant="contained"
+                        color="primary"
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                    >
+                        Cancle
                     </Button>
                     <Dialog
                         open={deleteConfirmationOpen}

@@ -113,6 +113,23 @@ const AddNews = () => {
         }
     };
 
+    const handleCancel = () => {
+        // Reset form fields to their initial state
+        setNewsPost({
+            enTitle: '',
+            enContent: '',
+            enDescription: '',
+            khTitle: '',
+            khContent: '',
+            khDescription: '',
+        });
+        setThumbnailURL('');
+        setNewsImagesURLs([]);
+        // Navigate back to the news dashboard
+        navigate('/dashboard/news');
+    };
+    
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -234,6 +251,14 @@ const AddNews = () => {
                         sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
                     >
                         Create News
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        onClick={handleCancel}
+                    >
+                        Cancel
                     </Button>
                 </Container> 
             </Box>

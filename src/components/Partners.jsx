@@ -7,8 +7,21 @@ import { useTranslation } from 'react-i18next';
 
 const Partners = ({ images }) => {
   const {t} = useTranslation();
+  const calculateItemsToDisplay = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth < 600) {
+      return 1;
+    } else if (windowWidth < 1000) {
+      return 3;
+    } else {
+      return 5;
+    }
+ };
+
+ const itemsToDisplay = calculateItemsToDisplay();
+ const loop = images.length > itemsToDisplay;
     const owlOptions = {
-        loop: images.length > 4,
+        loop: loop,
         margin: 10,
         responsive: {
             0: {
