@@ -35,7 +35,13 @@
         "lastName": "Last Name",
         "telegramNum": "Telegram Phone Number",
         "message": "Message",
-        "submit": "Submit"
+        "submit": "Submit",
+        "meetOurHeadOfSchool" : "Meet our Head of School",
+        "mission": "Mission",
+        "vission": "Vission",
+        "missionStatement": "Create educational programs and technologies to instruct young individuals and establish partnerships to facilitate job placements and internships.",
+        "vissionStatement": "Aspire to be a computer and technology training institute, empowering young individuals with distinct skills and high proficiency."
+
       }
 
     

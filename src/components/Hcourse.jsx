@@ -15,7 +15,7 @@ const Hcourse = ({ courses }) => {
         <Grid container spacing={1}>
           {courses.map((course, index) => (
             <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-              <CourseCard {...course} />
+              <CourseCard key={course.id} {...course} />
             </Grid>
           ))}
         </Grid>

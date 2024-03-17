@@ -67,7 +67,7 @@ const AddTeamMember = () => {
             console.error("No files selected for upload.");
             return;
         }
-
+  
         setUploading(true); // Set uploading state to true while files are being uploaded
 
         const storageRef = ref(getStorage(), 'team');
@@ -103,7 +103,26 @@ const AddTeamMember = () => {
             }
         }
     };
-
+    
+    const handleCancel = () => {
+        // Reset form fields to their initial state
+        setTeamMember({
+            enFirstName: '',
+            enLastName: '',
+            enPosition: '',
+            enQuote: '',
+            image: '',
+            khFirstName: '',
+            khLastName: '',
+            khPosition: '',
+            khQuote: '',
+            sex: '',
+        });
+        setImageURL('');
+        // Navigate back to the team dashboard
+        navigate('/dashboard/our-team');
+    };
+    
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -232,6 +251,14 @@ const AddTeamMember = () => {
                         sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
                     >
                         Add Team Member
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        onClick={handleCancel}
+                    >
+                        Cancel
                     </Button>
                 </Container> 
             </Box>

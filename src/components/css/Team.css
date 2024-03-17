@@ -1,23 +1,33 @@
-    .row {
-        display: flex;
-        align-items: center; /* Vertically align items in the center */
-    }
+.team-owl-carousel .team-owl-stage {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    justify-content: center; /* Center the .team-item horizontally */
+}
 
-    .owl-carousel .owl-stage {
-    position: relative;
-   }
+.team-row {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: flex-start; /* Align items to the start of the container */
+    height: 25rem;
+    width: 80%;
+    margin: 0 auto; /* Center the .team-row within its parent */
+}
 
-    .col-md-9 .col-md-12 .col-sm-12 {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-   }
+.team-team_img {
+    width: 20%; /* Adjust the width as needed */
+    margin-right: 20px; /* Add some space between the image and the text */
+}
 
-   .owl-carousel .owl-item img {
-        display: flex;
-        width: 30%;
-        height: auto;
-   }
+.team-col-md-9, .team-col-md-12, .team-col-sm-12 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the start of the container */
+}
 
-   
+.team-owl-carousel .owl-item img {
+    max-width: 100%; /* Adjusted to ensure the image does not exceed the container's width */
+    max-height: 100%; /* Adjusted to ensure the image does not exceed the container's height */
+    object-fit: cover;
+}

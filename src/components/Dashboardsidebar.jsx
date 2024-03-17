@@ -87,7 +87,7 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItem>
-          <ListItem component={Link} to="/dashboard">
+          <ListItem component={Link} to="/dashboard/account">
             <ListItemIcon>
               <ManageAccountsIcon />
             </ListItemIcon>
@@ -127,7 +127,7 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
                 <ListItemText primary="Our Team" />
               </ListItemButton>
             </List>
-            <List component={Link} to="/" disablePadding
+            <List component={Link} to="/dashboard/gallery" disablePadding
               sx={{
                 textDecorationColor: 'none',
                 color: 'black',
@@ -141,11 +141,11 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
               </ListItemButton>
             </List>
           </Collapse>
-          <ListItem component={Link} to="/dashboard/courses">
+          <ListItem component={Link} to="/dashboard/program">
             <ListItemIcon>
               <SlowMotionVideoIcon />
             </ListItemIcon>
-            <ListItemText primary="Courses" />
+            <ListItemText primary="Program" />
           </ListItem>
           <ListItem component={Link} to="/dashboard/partners">
             <ListItemIcon>
