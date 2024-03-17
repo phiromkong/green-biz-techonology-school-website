@@ -1,23 +1,23 @@
 import React from 'react';
 import './css/MVission.css';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+
 const MVission = () => {
+  const { t } = useTranslation(); // Use the useTranslation hook
+
     return (
         <div className="missionVisionContainer">
           <div className="mission">
-            <h2>Mission</h2>
+            <h2>{t('mission')}</h2>
             <p>
-            Create educational programs and technologies to instruct young 
-            individuals and establish partnerships to facilitate job placements 
-            and internships. 
+            {t('missionStatement')}
             </p>
           </div>
           <div className="divider"></div>
           <div className="vision">
-            <h2>Vision</h2>
+            <h2>{t('vission')}</h2>
             <p>
-            Aspire to be a computer and technology training institute,
-            empowering young individuals with distinct skills and 
-            high proficiency.
+            {t('vissionStatement')}
             </p>
           </div>
         </div>

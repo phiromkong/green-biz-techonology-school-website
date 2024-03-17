@@ -279,7 +279,7 @@ const  EditOurTeam = () => {
 
 
                                 <label htmlFor="fileUpload">
-                                    <Button component="span" variant="contained" style={{marginLeft: '1rem'}}>
+                                    <Button component="span" variant="contained" style={{marginLeft: '-0.5rem'}}>
                                         Replace
                                     </Button>
                                 </label>
