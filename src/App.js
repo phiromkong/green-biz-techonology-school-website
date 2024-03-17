@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -80,7 +80,10 @@ function App() {
               <Route path='/dashboard/programs/:programId/edit/:courseId' element={<EditCourse />} />
               <Route path='/dashboard/gallery' element={<AdminGallery />} />
         </Route>       
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+        <Suspense fallback={<div>Loading...</div>}>
+          <Home />
+        </Suspense>} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>
