@@ -17,7 +17,7 @@ const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [courses, setCourses] = useState([]); // State for courses
   const [loading, setLoading] = useState(true); // Add a loading state
-  const { t, i18n } = useTranslation(); // Use the useTranslation hook
+  const { i18n } = useTranslation(); // Use the useTranslation hook
 
   useEffect(() => {
     const fetchPartners = async () => {
@@ -49,11 +49,6 @@ const Home = () => {
     fetchNews();
     fetchCourses();
  }, []);
-
- const newsTitle = i18n.language === 'Khmer' ? newsData.khTitle : newsData.enTitle;
- const newsDescription = i18n.language === 'Khmer' ? newsData.khDescription : newsData.enDescription;
-
-
   
 
   const slides = [
@@ -80,16 +75,18 @@ const Home = () => {
       </div>
       <Slogan />
       <Hnews title="News and Update" limit={4}>
-        {newsData.map((news, index) => (
-          console.log(news),
-          <NewsCard
-            key={index}
-            title={i18n.language === 'Khmer' ? news.khTitle : news.enTitle}
-            imgUrl={news.thumbnailImage}
-            description={i18n.language === 'Khmer' ? news.khDescription : news.enDescription}
-            id={news.id}
-          />
-        ))}
+        {newsData.map((news, index) => {
+          console.log(news);
+          return (
+              <NewsCard
+                key={index}
+                title={i18n.language === 'Khmer' ? news.khTitle : news.enTitle}
+                imgUrl={news.thumbnailImage}
+                description={i18n.language === 'Khmer' ? news.khDescription : news.enDescription}
+                id={news.id}
+              />
+          );
+          })}
       </Hnews>
       <Hcourse courses={courses} />
       <Partners images={partnerLogos} />

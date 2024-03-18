@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -45,7 +45,7 @@ const EditNews = ({ match }) => {
         khDescription: '',
     });
 
-    const [errors, setErrors] = useState({
+    const [errors] = useState({
         enTitle: false,
         enContent: false,
         enDescription: false,
@@ -92,9 +92,6 @@ const EditNews = ({ match }) => {
     
             // Get download URL of the uploaded file
             const downloadURL = await getDownloadURL(snapshot.ref);
-    
-            // Determine the field to update in Firestore
-            const fieldToUpdate = isThumbnail ? 'thumbnailImage' : 'newsImages';
     
             // Update the specific image URL in Firestore document
             if (isThumbnail) {

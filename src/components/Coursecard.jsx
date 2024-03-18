@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import './css/Coursecard.css';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from '../firebase'; // Ensure this path correctly points to your Firebase configuration
 
 const CourseCard = ({ id }) => {
