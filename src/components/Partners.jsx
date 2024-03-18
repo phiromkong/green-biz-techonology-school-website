@@ -41,9 +41,9 @@ const Partners = ({ images }) => {
         <div className="partner-container">
           <h2 className="font_bold text-uppercase partner_title">{t('ourPartners')}</h2>
           <OwlCarousel className="owl-theme" {...owlOptions}>
-            {images.map((partner, index) => (
-              <div key={index} className="item">
-                <img src={partner.image} alt={`Partner ${index + 1}`} style={{width: '100%'}} />
+          {images.map((partner, index) => (
+              <div key={index} className="item partner-image-wrapper">
+                <img src={partner.image} alt={`Partner ${index + 1}`} className="partner-carousel-image" />
               </div>
             ))}
           </OwlCarousel>
