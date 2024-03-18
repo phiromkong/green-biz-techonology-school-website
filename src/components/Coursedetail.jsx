@@ -5,7 +5,7 @@ import { db } from '../firebase'; // Ensure this path correctly points to your F
 import Navbar from './Navbar';
 import Footer from './Footer';
 import './css/Coursedetail.css';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const CoursesDetail = () => {
