@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom'
 import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import CssBaseline from '@mui/material/CssBaseline';

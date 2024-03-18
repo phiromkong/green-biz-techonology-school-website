@@ -3,7 +3,7 @@ import "./css/Navbar.css";
 import {  Link, NavLink, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive"; 
 import { IoClose, IoMenu } from "react-icons/io5";
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
