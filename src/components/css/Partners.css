@@ -44,7 +44,7 @@
 }
 
 .partner-image-wrapper {
-  height: 350px; /* Set a fixed height for all images */
+  height: 320px; /* Set a fixed height for all images */
   overflow: hidden; /* Hide any part of the image that exceeds the div's dimensions */
  }
  
