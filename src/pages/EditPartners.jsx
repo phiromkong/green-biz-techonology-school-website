@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db } from '../firebase'; // Ensure you have this configured correctly
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -64,17 +64,6 @@ const EditPartners = () => {
         });
     
         setPartner(prevPartner => ({ ...prevPartner, image: downloadURL })); // Update local state
-    };
-
-    const handleDeleteImage = async () => {
-        const storageRef = ref(getStorage(), partner.image);
-        await deleteObject(storageRef);
-        console.log("Image deleted successfully");
-        // Update Firestore document to remove the image URL
-        await updateDoc(doc(db, "partners", partnerId), {
-            image: '',
-        });
-        setPartner(prevPartner => ({ ...prevPartner, image: '' })); // Update local state
     };
 
     const handleSubmit = async (event) => {

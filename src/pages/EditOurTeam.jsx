@@ -10,7 +10,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const defaultTheme = createTheme();
 
@@ -104,20 +104,6 @@ const  EditOurTeam = () => {
         setUploading(false);
     };
 
-    const handleDeleteImage = async (imageUrl) => {
-        // Extract the file path from the URL
-        const path = imageUrl.split('o/')[1].split('?')[0];
-        const storageRef = ref(getStorage(), path);
-    
-        try {
-            await deleteObject(storageRef);
-            console.log("Image deleted successfully");
-        } catch (error) {
-            console.error("Error deleting image: ", error);
-        }
-    }
-    
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (uploading) {
@@ -137,13 +123,6 @@ const  EditOurTeam = () => {
             }
         }
     };
-
-    const deleteImage = async (imagePath) => {
-        const storageRef = ref(getStorage(), imagePath);
-        await deleteObject(storageRef);
-        console.log("Image deleted successfully");
-    };
-    
 
     return (
         <ThemeProvider theme={defaultTheme}>

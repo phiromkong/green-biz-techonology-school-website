@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LightGallery from 'lightgallery/react';
 import 'lightgallery/css/lightgallery.css'; // Import lightgallery CSS
 import 'lightgallery/css/lg-zoom.css'; // Import lightgallery zoom CSS
@@ -40,7 +40,7 @@ const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
                     <LightGallery plugins={[lgThumbnail, lgZoom]} onAfterOpen={() => handleLightGalleryEvents('onAfterOpen')} onBeforeClose={() => handleLightGalleryEvents('onBeforeClose')}>
                         {filteredCourses.map((item) => (
                             <a href={item.image} key={item.id}>
-                                <img className="gallery-image"  src={item.image} /> 
+                                <img className="gallery-image" alt= {item.enTitle}  src={item.image} /> 
                             </a>
                         ))}
                     </LightGallery>
