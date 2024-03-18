@@ -5,9 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
-import AddIcon from '@mui/icons-material/Add';
-import Stack from '@mui/material/Stack';
-import { useNavigate, Link, useParams } from 'react-router-dom'; // Import useParams
+import { useNavigate, useParams } from 'react-router-dom'; // Import useParams
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -41,14 +39,6 @@ function AddImage() {
         const newTitles = files.map(() => ({ enTitle: '', khTitle: '' }));
         setTitles(newTitles);
     
-        const previews = files.map((file) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                setImagePreviews((prev) => [...prev, reader.result]);
-            };
-            return reader.result;
-        });
     };
 
     const validateTitles = () => {

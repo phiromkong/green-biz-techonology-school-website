@@ -14,7 +14,7 @@ const NewsDetail = () => {
  const { id } = useParams();
  const navigate = useNavigate();
  const [post, setPost] = useState(null); // Initialize post as null
- const { t, i18n } = useTranslation(); // Use i18next for language switching
+ const { i18n } = useTranslation(); // Use i18next for language switching
 
  useEffect(() => {
  const fetchPost = async () => {
@@ -49,8 +49,6 @@ const NewsDetail = () => {
  const language = i18n.language;
  const titleKey = language === 'English' ? 'enTitle' : 'khTitle';
  const contentKey = language === 'English' ? 'enContent' : 'khContent';
- const descriptionKey = language === 'en' ? 'enDescription' : 'khDescription';
-
  return (
     <div>
       <Navbar />

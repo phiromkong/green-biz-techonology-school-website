@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { Timestamp } from 'firebase/firestore';
 
 const defaultTheme = createTheme();
 

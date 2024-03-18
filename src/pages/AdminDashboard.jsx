@@ -11,11 +11,7 @@ const defaultTheme = createTheme();
 
 const AdminDashboard = () => {
   const [open, setOpen] = useState(true);
-  const [pages, setPages] = useState([
-    { title: 'Page 1', createdAt: '2024-01-24', status: 'Published', author: 'Admin' },
-    { title: 'Page 2', createdAt: '2024-01-25', status: 'Draft', author: 'User' },
-    // Add more sample page objects as needed
-  ]);
+
 
   const toggleDrawer = () => {
     setOpen(!open);

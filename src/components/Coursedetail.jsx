@@ -12,7 +12,7 @@ const CoursesDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [course, setCourse] = useState(null);
-    const { t, i18n } = useTranslation(); // Use the useTranslation hook
+    const { i18n } = useTranslation(); // Use the useTranslation hook
 
     useEffect(() => {
         const fetchCourse = async () => {

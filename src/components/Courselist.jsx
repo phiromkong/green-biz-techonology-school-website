@@ -4,7 +4,7 @@ import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
 import Typography from "@mui/joy/Typography";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from '../firebase'; // Ensure this path correctly points to your Firebase configuration
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const Courselist = ({ courses, onCourseSelect, activeProgram }) => {
  const [programs, setPrograms] = useState([]);
- const { t, i18n } = useTranslation();
+ const { i18n } = useTranslation();
 
  useEffect(() => {
   const fetchPrograms = async () => {
