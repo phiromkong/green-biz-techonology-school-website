@@ -34,6 +34,10 @@ import AddCourse from './pages/AddCourse';
 import EditCourse from './pages/EditCourse';
 import AddAdmin from './pages/AddAdmin';
 import AddImage from './pages/AddImage';
+import AdminCourses from './pages/AdminCourses';
+import AddCourses from './pages/AddCourses';
+import EditCourses from './pages/EditCourses';
+
 
 
 function App() {
@@ -57,31 +61,37 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path='/dashboard' element={<AdminDashboard/>} />
-        <Route path='/dashboard/profile' element={<AdminProfile/>} />
-        <Route path='/dashboard/account' element={<AdminAccount/>} />
-        <Route path='/dashboard/account/add' element={<AddAdmin/>} />
-        <Route path='/dashboard/news' element={<AdminNews/>} />
-        <Route path='/dashboard/news/add' element={<AddNews/>} />
-        <Route path='/dashboard/news/edit/:postId' element={<EditNews/>} />
-        <Route path='/dashboard/our-team' element={<AdminOurTeam/>} />
-        <Route path='/dashboard/our-team/add' element={<AddOurTeam/>} />
-        <Route path='/dashboard/our-team/edit/:memberId' element={<EditOurTeam/>} />
-        <Route path='/dashboard/partners' element={<AdminPartners/>} />
-        <Route path='/dashboard/partners/add' element={<AddPartners/>} />
-        <Route path='/dashboard/partners/edit/:partnerId' element={<EditPartners/>} />
-        <Route path='/dashboard/program' element={<AdminProgram />} />
-        <Route path='/dashboard/programs/:programId' element={<ProgramCourses />} />
-        <Route path='/dashboard/programs/add' element={<AddProgram/>} />
-        <Route path='/dashboard/programs/edit/:programId' element={<EditPrograms/>} />
-        <Route path='/dashboard/programs/:programId/addCourse' element={<AddCourse />} />
-        <Route path='/dashboard/programs/:programId/addImage' element={<AddImage />} />
-        <Route path='/dashboard/programs/:programId/edit/:courseId' element={<EditCourse />} />
-        <Route path='/dashboard/gallery' element={<AdminGallery />} />
+        <Route element={<Privateroute/>}>
+              <Route path='/dashboard' element={<AdminDashboard/>} />
+              <Route path='/dashboard/profile' element={<AdminProfile/>} />
+              <Route path='/dashboard/account' element={<AdminAccount/>} />
+              <Route path='/dashboard/account/add' element={<AddAdmin/>} />
+              <Route path='/dashboard/news' element={<AdminNews/>} />
+              <Route path='/dashboard/news/add' element={<AddNews/>} />
+              <Route path='/dashboard/news/edit/:postId' element={<EditNews/>} />
+              <Route path='/dashboard/our-team' element={<AdminOurTeam/>} />
+              <Route path='/dashboard/our-team/add' element={<AddOurTeam/>} />
+              <Route path='/dashboard/our-team/edit/:memberId' element={<EditOurTeam/>} />
+              <Route path='/dashboard/partners' element={<AdminPartners/>} />
+              <Route path='/dashboard/partners/add' element={<AddPartners/>} />
+              <Route path='/dashboard/partners/edit/:partnerId' element={<EditPartners/>} />
+              <Route path='/dashboard/program' element={<AdminProgram />} />
+              <Route path='/dashboard/programs/:programId' element={<ProgramCourses />} />
+              <Route path='/dashboard/programs/add' element={<AddProgram/>} />
+              <Route path='/dashboard/programs/edit/:programId' element={<EditPrograms/>} />
+              <Route path='/dashboard/programs/:programId/addCourse' element={<AddCourse />} />
+              <Route path='/dashboard/programs/:programId/addImage' element={<AddImage />} />
+              <Route path='/dashboard/programs/:programId/edit/:courseId' element={<EditCourse />} />
+              <Route path='/dashboard/courses' element={<AdminCourses />} />
+              <Route path='/dashboard/courses/add' element={<AddCourses />} />
+              <Route path='/dashboard/courses/edit/:courseId' element={<EditCourses />} />
+              <Route path='/dashboard/gallery' element={<AdminGallery />} />
+        </Route>       
         <Route path="/" element={<Home />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Router>
+
     </>
   );
 }
