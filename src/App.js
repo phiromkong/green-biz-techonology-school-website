@@ -34,6 +34,10 @@ import AddCourse from './pages/AddCourse';
 import EditCourse from './pages/EditCourse';
 import AddAdmin from './pages/AddAdmin';
 import AddImage from './pages/AddImage';
+import AdminCourses from './pages/AdminCourses';
+import AddCourses from './pages/AddCourses';
+import EditCourses from './pages/EditCourses';
+
 
 
 function App() {
@@ -78,6 +82,9 @@ function App() {
               <Route path='/dashboard/programs/:programId/addCourse' element={<AddCourse />} />
               <Route path='/dashboard/programs/:programId/addImage' element={<AddImage />} />
               <Route path='/dashboard/programs/:programId/edit/:courseId' element={<EditCourse />} />
+              <Route path='/dashboard/courses' element={<AdminCourses />} />
+              <Route path='/dashboard/courses/add' element={<AddCourses />} />
+              <Route path='/dashboard/courses/edit/:courseId' element={<EditCourses />} />
               <Route path='/dashboard/gallery' element={<AdminGallery />} />
         </Route>       
         <Route path="/" element={<Home />} />

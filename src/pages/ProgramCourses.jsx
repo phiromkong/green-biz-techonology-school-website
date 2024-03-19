@@ -112,17 +112,17 @@ function ProgramCourses() {
                                         }}>Delete</Button>
                                     </CardActions>
                                 </Card>
-                                <Button 
-                                onClick={() => navigate(-1)}
-                                sx={{ marginTop: '2rem', marginLeft: '1rem' }}
-                                variant="contained"
-                                color="primary"
-                                >
-                                    Back
-                                </Button>
                             </Grid>
                         ))}
                     </Grid>
+                    <Button 
+                    onClick={() => navigate(-1)}
+                    sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                    variant="contained"
+                    color="primary"
+                    >
+                        Back
+                    </Button>
                     <Dialog
                         open={deleteDialogOpen}
                         onClose={handleDeleteCancel}

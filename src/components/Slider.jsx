@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+
+
+
 const slideStyles = {
   width: "100%",
   height: "100%",
@@ -67,6 +70,14 @@ export const Slider = ({ slides }) => {
   const containerRef = useRef(null);
   const [parentWidth, setParentWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on component unmount
+ }, [slides.length]);
 
   const updateDimensions = useCallback(() => {
     if (containerRef.current) {
