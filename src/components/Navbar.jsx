@@ -140,8 +140,8 @@ const Navbar = () => {
                   </span>
                   {langDropdownOpen && (
                     <ul className="p-dropdown-content p-0 drop_content" style={{ display: langDropdownOpen ? 'block' : 'none', listStyle: "none" }}>
-                      <li onClick={() => changeLanguage('Khmer')}>{t('khmer')}</li>
-                      <li onClick={() => changeLanguage('English')}>{t('english')}</li>
+                      <li onClick={() => changeLanguage('kh')}>{t('kh')}</li>
+                      <li onClick={() => changeLanguage('en')}>{t('en')}</li>
                     </ul>
                   )}
                 </div>

@@ -84,7 +84,7 @@ const EditPrograms = () => {
                 image: program.image,
             });
             console.log("Program updated successfully");
-            navigate('/dashboard/program');
+            navigate('/dashboard/programs');
         } catch (error) {
             console.error("Error updating document: ", error);
         }

@@ -36,21 +36,21 @@ const AddNews = () => {
     });
 
     const [errors, setErrors] = useState({
-        enTitle: true,
-        enContent: true,
-        enDescription: true,
-        khTitle: true,
-        khContent: true,
-        khDescription: true,
+        enTitle: '',
+        enContent: '',
+        enDescription: '',
+        khTitle: '',
+        khContent: '',
+        khDescription: '',
     });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setNewsPost({ ...newsPost, [name]: value });
 
-        let error = false;
+        let error = '';
         if (value.trim() === '') {
-            error = true;
+            error = 'This field is required';
         }
         setErrors({ ...errors, [name]: error });
     };
@@ -90,9 +90,30 @@ const AddNews = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("clicked");
-        if (Object.values(errors).some(error => error) || uploading) {
-            // Handle form validation errors or uploading in progress
-            console.log("Form validation failed or uploading in progress");
+
+        // Manually trigger validation for all fields
+        const newErrors = {
+            enTitle: newsPost.enTitle.trim() === '' ? 'This field is required' : '',
+            enContent: newsPost.enContent.trim() === '' ? 'This field is required' : '',
+            enDescription: newsPost.enDescription.trim() === '' ? 'This field is required' : '',
+            khTitle: newsPost.khTitle.trim() === '' ? 'This field is required' : '',
+            khContent: newsPost.khContent.trim() === '' ? 'This field is required' : '',
+            khDescription: newsPost.khDescription.trim() === '' ? 'This field is required' : '',
+        };
+
+        // Update the errors state with the new validation results
+        setErrors(newErrors);
+
+        // Check if there are any errors in the form
+        const hasErrors = Object.values(newErrors).some(error => error !== '');
+        if (hasErrors) {
+            console.log("Form has errors, submission prevented.");
+            // Optionally, show an error message to the user
+            return;
+        }
+
+        if (uploading) {
+            console.log("Uploading in progress");
             return;
         } else {
             try {
@@ -149,7 +170,7 @@ const AddNews = () => {
                         <div>
                             <TextField
                                 required
-                                error={errors.enTitle}
+                                error={Boolean(errors.enTitle)}
                                 onChange={handleChange}
                                 id="enTitle"
                                 name="enTitle"
@@ -158,7 +179,7 @@ const AddNews = () => {
                             />
                             <TextField
                                 required
-                                error={errors.khTitle}
+                                error={Boolean(errors.khTitle)}
                                 label="Khmer Title"
                                 id="khTitle"
                                 name="khTitle" 
@@ -167,7 +188,7 @@ const AddNews = () => {
                             />
                             <TextField
                                 required
-                                error={errors.enDescription}
+                                error={Boolean(errors.enDescription)}
                                 id="enDescription"
                                 label="English Description"
                                 name="enDescription" 
@@ -179,7 +200,7 @@ const AddNews = () => {
                                 <TextField
                                     required
                                     id="khDescription"
-                                    error={errors.khDescription}
+                                    error={Boolean(errors.khDescription)}
                                     label="Khmer Description"
                                     name="khDescription" 
                                     onChange={handleChange} 

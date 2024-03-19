@@ -75,7 +75,7 @@ function App() {
               <Route path='/dashboard/partners' element={<AdminPartners/>} />
               <Route path='/dashboard/partners/add' element={<AddPartners/>} />
               <Route path='/dashboard/partners/edit/:partnerId' element={<EditPartners/>} />
-              <Route path='/dashboard/program' element={<AdminProgram />} />
+              <Route path='/dashboard/programs' element={<AdminProgram />} />
               <Route path='/dashboard/programs/:programId' element={<ProgramCourses />} />
               <Route path='/dashboard/programs/add' element={<AddProgram/>} />
               <Route path='/dashboard/programs/edit/:programId' element={<EditPrograms/>} />
