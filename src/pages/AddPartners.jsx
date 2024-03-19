@@ -21,12 +21,24 @@ const AddPartners = () => {
     const [partnerLogo, setPartnerLogo] = useState('');
     const [uploading, setUploading] = useState(false); // Add state to track file upload status
 
+    const [errors, setErrors] = useState({
+        partnerName: '',
+    });
+
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
     const handleNameChange = (e) => {
-        setPartnerName(e.target.value);
+        const value = e.target.value;
+        setPartnerName(value);
+
+        // Validate partnerName field
+        let error = '';
+        if (value.trim() === '') {
+            error = 'This field is required';
+        }
+        setErrors({ ...errors, partnerName: error });
     };
 
     const handleLogoChange = async (e) => {
@@ -50,6 +62,23 @@ const AddPartners = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Manually trigger validation for all fields
+        const newErrors = {
+            partnerName: partnerName.trim() === '' ? 'This field is required' : '',
+        };
+
+        // Update the errors state with the new validation results
+        setErrors(newErrors);
+
+        // Check if there are any errors in the form
+        const hasErrors = Object.values(newErrors).some(error => error !== '');
+        if (hasErrors) {
+            console.log("Form has errors, submission prevented.");
+            // Optionally, show an error message to the user
+            return;
+        }
+
         if (uploading) {
             console.log("Uploading in progress");
             return;
@@ -101,16 +130,29 @@ const AddPartners = () => {
                                 id="partnerName"
                                 name="partnerName"
                                 label="Partner Name"
+                                error={Boolean(errors.partnerName)}
+                                helperText={errors.partnerName}
                             />
                             <input
                                 type="file"
                                 id="fileUpload"
                                 accept="image/*"
-                                style={{ display: 'flex', marginLeft: '1.5rem' }}
+                                style={{ display: 'none' }}
                                 onChange={handleLogoChange}
                             />
                             {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                         </div>
+                        <Button
+                                component="label"
+                                role={undefined}
+                                variant="contained"
+                                tabIndex={-1}
+                                htmlFor="fileUpload"
+                                style={{ marginLeft: '1.5rem'}}
+                            >
+                                Upload Image
+                        </Button>
+                        {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                     </Box>
                     <Button
                         onClick={handleSubmit}

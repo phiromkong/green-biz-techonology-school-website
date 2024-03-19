@@ -62,16 +62,16 @@ function AddCourses() {
  });
 
  const [errors, setErrors] = useState({
-    enDescription: '',
-    enProgramOutcome: '',
-    enProgramOverview: '',
-    enTitle: '',
-    imageURL: '',
-    khDescription: '',
-    khProgramOutcome: '',
-    khProgramOverview: '',
-    khTitle: '',
-    programId: '',
+    enDescription: true,
+    enProgramOutcome: true,
+    enProgramOverview: true,
+    enTitle: true,
+    imageURL: true,
+    khDescription: true,
+    khProgramOutcome: true,
+    khProgramOverview: true,
+    khTitle: true,
+    programId: true,
  });
 
  useEffect(() => {
@@ -96,10 +96,10 @@ function AddCourses() {
     // Validate fields
     let error = '';
     if (value.trim() === '') {
-      error = 'This field is required';
+        error = 'This field is required';
     }
     setErrors({ ...errors, [name]: error });
- };
+};
 
  const handleProgramChange = (event) => {
     const programId = event.target.value;
@@ -128,21 +128,51 @@ function AddCourses() {
  };
 
  const handleSubmit = async (e) => {
-    console.log(courses);
     e.preventDefault();
-    const courseData = {
-      ...courses,
-      programId: selectedProgram,
+    console.log("clicked");
+
+    // Manually trigger validation for all fields
+    const newErrors = {
+        enDescription: courses.enDescription.trim() === '' ? 'This field is required' : '',
+        enProgramOutcome: courses.enProgramOutcome.trim() === '' ? 'This field is required' : '',
+        enProgramOverview: courses.enProgramOverview.trim() === '' ? 'This field is required' : '',
+        enTitle: courses.enTitle.trim() === '' ? 'This field is required' : '',
+        khDescription: courses.khDescription.trim() === '' ? 'This field is required' : '',
+        khProgramOutcome: courses.khProgramOutcome.trim() === '' ? 'This field is required' : '',
+        khProgramOverview: courses.khProgramOverview.trim() === '' ? 'This field is required' : '',
+        khTitle: courses.khTitle.trim() === '' ? 'This field is required' : '',
+        programId: selectedProgram === '' ? 'This field is required' : '',
     };
-    try {
-      await addDoc(collection(db, "courses"), courseData);
-      navigate('/dashboard/courses');
-      // Handle success, e.g., navigate to another page or show a success message
-    } catch (error) {
-      console.error("Error adding document: ", error);
-      // Handle error
+
+    // Update the errors state with the new validation results
+    setErrors(newErrors);
+
+    // Check if there are any errors in the form
+    const hasErrors = Object.values(newErrors).some(error => error !== '');
+    if (hasErrors) {
+        console.log("Form has errors, submission prevented.");
+        // Optionally, show an error message to the user
+        return;
     }
- };
+
+    if (uploading) {
+        console.log("Uploading in progress");
+        return;
+    } else {
+        try {
+            const courseData = {
+                ...courses,
+                programId: selectedProgram,
+            };
+            await addDoc(collection(db, "courses"), courseData);
+            navigate('/dashboard/courses');
+            // Handle success, e.g., navigate to another page or show a success message
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            // Handle error
+        }
+    }
+};
 
  const handleCancel = () => {
     // Reset form fields to their initial state

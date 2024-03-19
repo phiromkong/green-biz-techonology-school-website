@@ -30,14 +30,14 @@ const AddCourse = () => {
     const [uploading, setUploading] = useState(false);
 
     const [errors, setErrors] = useState({
-        enTitle: false,
-        khTitle: false,
-        enDescription: false,
-        khDescription: false,
-        enProgramOutcome: false,
-        khProgramOutcome: false,
-        enProgramOverview: false,
-        khProgramOverview: false,
+        enTitle: true,
+        khTitle: true,
+        enDescription: true,
+        khDescription: true,
+        enProgramOutcome: true,
+        khProgramOutcome: true,
+        enProgramOverview: true,
+        khProgramOverview: true,
     });
 
     const toggleDrawer = () => {
@@ -74,37 +74,31 @@ const AddCourse = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let hasErrors = false;
-    
-        // Check each field for emptiness and update errors state accordingly
+        console.log("clicked");
+
+        // Manually trigger validation for all fields
         const newErrors = {
-            enTitle: !enTitle.trim(),
-            khTitle: !khTitle.trim(),
-            enDescription: !enDescription.trim(),
-            khDescription: !khDescription.trim(),
-            enProgramOutcome: !enProgramOutcome.trim(),
-            khProgramOutcome: !khProgramOutcome.trim(),
-            enProgramOverview: !enProgramOverview.trim(),
-            khProgramOverview: !khProgramOverview.trim(),
+            enTitle: enTitle.trim() === '' ? 'This field is required' : '',
+            khTitle: khTitle.trim() === '' ? 'This field is required' : '',
+            enDescription: enDescription.trim() === '' ? 'This field is required' : '',
+            khDescription: khDescription.trim() === '' ? 'This field is required' : '',
+            enProgramOutcome: enProgramOutcome.trim() === '' ? 'This field is required' : '',
+            khProgramOutcome: khProgramOutcome.trim() === '' ? 'This field is required' : '',
+            enProgramOverview: enProgramOverview.trim() === '' ? 'This field is required' : '',
+            khProgramOverview: khProgramOverview.trim() === '' ? 'This field is required' : '',
         };
-    
-        // If any field is empty, set hasErrors to true
-        for (let field in newErrors) {
-            if (newErrors[field]) {
-                hasErrors = true;
-                break;
-            }
-        }
-    
+
+        // Update the errors state with the new validation results
         setErrors(newErrors);
-    
-        // If there are any errors, do not proceed with form submission
+
+        // Check if there are any errors in the form
+        const hasErrors = Object.values(newErrors).some(error => error !== '');
         if (hasErrors) {
-            console.log("Validation errors present");
+            console.log("Form has errors, submission prevented.");
+            // Optionally, show an error message to the user
             return;
         }
-    
-        // Proceed with form submission if no errors are found
+
         if (uploading) {
             console.log("Uploading in progress");
             return;
@@ -120,11 +114,12 @@ const AddCourse = () => {
                     enProgramOverview,
                     khProgramOverview,
                     imageURL: courseImage,
-                    programId ,
+                    programId,
                 };
                 const docRef = await addDoc(collection(db, "courses"), courseData);
                 console.log("Document written with ID: ", docRef.id);
                 navigate(`/dashboard/programs/${programId}`);
+                // Reset form fields to their initial state
                 setEnTitle('');
                 setKhTitle('');
                 setEnDescription('');
@@ -136,6 +131,7 @@ const AddCourse = () => {
                 setCourseImage('');
             } catch (error) {
                 console.error("Error adding document: ", error);
+                // Handle error
             }
         }
     };
@@ -181,8 +177,8 @@ const AddCourse = () => {
                                 label="English Title"
                                 value={enTitle}
                                 onChange={(e) => handleInputChange(setEnTitle, 'enTitle', e.target.value)}
-                                error={errors.enTitle}
-                                helperText={errors.enTitle ? "This field is required." : ""}
+                                error={Boolean(errors.enTitle)}
+                                helperText={errors.enTitle}
                             />
                             <TextField
                                 required
@@ -191,8 +187,8 @@ const AddCourse = () => {
                                 label="Khmer Title"
                                 value={khTitle}
                                 onChange={(e) => handleInputChange(setKhTitle, 'khTitle', e.target.value)}
-                                error={errors.khTitle}
-                                helperText={errors.khTitle ? "This field is required." : ""}
+                                error={Boolean(errors.khTitle)}
+                                helperText={errors.khTitle}
                             />
                             <TextField
                                 required
@@ -201,14 +197,14 @@ const AddCourse = () => {
                                 label="English Description"
                                 value={enDescription}
                                 onChange={(e) => handleInputChange(setEnDescription, 'enDescription', e.target.value)}
-                                error={errors.enDescription}
-                                helperText={errors.enDescription ? "This field is required." : ""}
+                                error={Boolean(errors.enDescription)}
+                                helperText={errors.enDescription}
                             />
                             <TextField
                                 required
                                 onChange={(e) => handleInputChange(setKhDescription, 'khDescription', e.target.value)}
-                                error={errors.khDescription}
-                                helperText={errors.khDescription ? "This field is required." : ""}
+                                error={Boolean(errors.khDescription)}
+                                helperText={errors.khDescription}
                                 id="khDescription"
                                 name="khDescription"
                                 label="Khmer Description"
@@ -217,8 +213,8 @@ const AddCourse = () => {
                             <TextField
                                 required
                                 onChange={(e) => handleInputChange(setEnProgramOutcome, 'enProgramOutcome', e.target.value)}
-                                error={errors.enProgramOutcome}
-                                helperText={errors.enProgramOutcome ? "This field is required." : ""}
+                                error={Boolean(errors.enProgramOutcome)}
+                                helperText={errors.enProgramOutcome}
                                 id="enProgramOutcome"
                                 name="enProgramOutcome"
                                 label="English Program Outcome"
@@ -227,8 +223,8 @@ const AddCourse = () => {
                             <TextField
                                 required
                                 onChange={(e) => handleInputChange(setKhProgramOutcome, 'khProgramOutcome', e.target.value)}
-                                error={errors.khProgramOutcome}
-                                helperText={errors.khProgramOutcome ? "This field is required." : ""}
+                                error={Boolean(errors.khProgramOutcome)}
+                                helperText={errors.khProgramOutcome}
                                 id="khProgramOutcome"
                                 name="khProgramOutcome"
                                 label="Khmer Program Outcome"
@@ -237,8 +233,8 @@ const AddCourse = () => {
                             <TextField
                                 required
                                 onChange={(e) => handleInputChange(setEnProgramOverview, 'enProgramOverview', e.target.value)}
-                                error={errors.enProgramOverview}
-                                helperText={errors.enProgramOverview ? "This field is required." : ""}
+                                error={Boolean(errors.enProgramOverview)}
+                                helperText={errors.enProgramOverview}
                                 id="enProgramOverview"
                                 name="enProgramOverview"
                                 label="English Program Overview"
@@ -247,8 +243,8 @@ const AddCourse = () => {
                             <TextField
                                 required
                                 onChange={(e) => handleInputChange(setKhProgramOverview, 'khProgramOverview', e.target.value)}
-                                error={errors.khProgramOverview}
-                                helperText={errors.khProgramOverview ? "This field is required." : ""}
+                                error={Boolean(errors.khProgramOverview)}
+                                helperText={errors.khProgramOverview}
                                 id="khProgramOverview"
                                 name="khProgramOverview"
                                 label="Khmer Program Overview"
