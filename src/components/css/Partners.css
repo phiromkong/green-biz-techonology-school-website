@@ -1,7 +1,8 @@
 .partner-container {
     background-color: #E1E1E1;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 20px;  
+
   }
   
   .partner_title {
@@ -42,6 +43,20 @@
   max-height: 100%;
   object-fit: cover;
 }
+
+.partner-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.partner-carousel-image {
+  max-height: 300px; /* Adjust the value according to your design */
+  max-width: 100%; /* Ensures the image doesn't overflow its container */
+}
+
+ 
 
   
   @media (max-width: 768px) {

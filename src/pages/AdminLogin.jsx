@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase';
 import "../components/css/AdminLogin.css";
@@ -14,6 +14,8 @@ import Typography from '@mui/joy/Typography';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -34,18 +36,20 @@ const AdminLogin = () => {
   };
 
   useEffect(() => {
-    // Check if user is already logged in
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUserEmail(user.email); // Set current user email
-        setModalOpen(true); // Open modal if user is logged in
-      }
+       // Check if the user is logged in and the current pathname is /admin
+       if (user && pathname === '/admin') {
+         setCurrentUserEmail(user.email);
+         setModalOpen(true);
+       } else {
+         setModalOpen(false);
+       }
     });
-
-    // Cleanup subscription on unmount
+   
     return () => unsubscribe();
-  }, []);
-
+   }, [pathname]); // Ensure pathname is a dependency
+   
+   
   const onLogin = (e) => {
     e.preventDefault();
     setLoading(true);

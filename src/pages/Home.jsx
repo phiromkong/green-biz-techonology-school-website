@@ -52,11 +52,11 @@ const Home = () => {
   
 
   const slides = [
-    { url: "http://localhost:3000/Img1.jpg", title: "NA" },
-    { url: "http://localhost:3000/Img2.jpg", title: "NA" },
-    { url: "http://localhost:3000/Img3.jpg", title: "NA" },
-    { url: "http://localhost:3000/Img4.jpg", title: "NA" },
-    { url: "http://localhost:3000/Img5.jpg", title: "NA" },
+    { url: "./Img1.jpg", title: "NA" },
+    { url: "./Img2.jpg", title: "NA" },
+    { url: "./Img3.jpg", title: "NA" },
+    { url: "./Img4.jpg", title: "NA" },
+    { url: "./Img5.jpg", title: "NA" },
   ];
 
   const containerStyles = {

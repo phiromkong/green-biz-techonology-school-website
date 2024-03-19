@@ -21,6 +21,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import SchoolIcon from '@mui/icons-material/School';
 import { Link } from 'react-router-dom'; // Assuming you're using react-router-dom
 
 const drawerWidth = 240;
@@ -143,9 +144,15 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
           </Collapse>
           <ListItem component={Link} to="/dashboard/program">
             <ListItemIcon>
-              <SlowMotionVideoIcon />
+              <SchoolIcon />
             </ListItemIcon>
             <ListItemText primary="Program" />
+          </ListItem>
+          <ListItem component={Link} to="/dashboard/courses">
+            <ListItemIcon>
+              <SlowMotionVideoIcon />
+            </ListItemIcon>
+            <ListItemText primary="Courses" />
           </ListItem>
           <ListItem component={Link} to="/dashboard/partners">
             <ListItemIcon>
