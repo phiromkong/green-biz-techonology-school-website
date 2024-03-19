@@ -142,7 +142,7 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
               </ListItemButton>
             </List>
           </Collapse>
-          <ListItem component={Link} to="/dashboard/program">
+          <ListItem component={Link} to="/dashboard/programs">
             <ListItemIcon>
               <SchoolIcon />
             </ListItemIcon>

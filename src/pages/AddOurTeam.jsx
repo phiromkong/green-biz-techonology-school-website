@@ -82,6 +82,31 @@ const AddTeamMember = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("clicked");
+    
+        // Manually trigger validation for all fields
+        const newErrors = {
+            enFirstName: teamMember.enFirstName.trim() === '' ? 'This field is required' : '',
+            enLastName: teamMember.enLastName.trim() === '' ? 'This field is required' : '',
+            enPosition: teamMember.enPosition.trim() === '' ? 'This field is required' : '',
+            enQuote: teamMember.enQuote.trim() === '' ? 'This field is required' : '',
+            khFirstName: teamMember.khFirstName.trim() === '' ? 'This field is required' : '',
+            khLastName: teamMember.khLastName.trim() === '' ? 'This field is required' : '',
+            khPosition: teamMember.khPosition.trim() === '' ? 'This field is required' : '',
+            khQuote: teamMember.khQuote.trim() === '' ? 'This field is required' : '',
+            sex: teamMember.sex.trim() === '' ? 'This field is required' : '',
+        };
+    
+        // Update the errors state with the new validation results
+        setErrors(newErrors);
+    
+        // Check if there are any errors in the form
+        const hasErrors = Object.values(newErrors).some(error => error !== '');
+        if (hasErrors) {
+            console.log("Form has errors, submission prevented.");
+            // Optionally, show an error message to the user
+            return;
+        }
+    
         if (uploading) {
             console.log("Uploading in progress");
             return;
@@ -223,24 +248,24 @@ const AddTeamMember = () => {
                                 type="file"
                                 id="fileUpload"
                                 accept="image/*"
-                                style={{ display: 'flex', marginLeft: '1.5rem' }}
+                                style={{ display: 'none' }}
                                 onChange={(e) => {
                                     const selectedFiles = Array.from(e.target.files); // Convert FileList to array
                                     handleFileUpload(selectedFiles);
                                 }}
                             />
-                            <Button
+                        </div>
+                        <Button
                                 component="label"
                                 role={undefined}
                                 variant="contained"
                                 tabIndex={-1}
                                 htmlFor="fileUpload"
-                                style={{marginLeft: '1.5rem'}}
+                                style={{ marginLeft: '1.5rem'}}
                             >
                                 Upload Image
                             </Button>
                             {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
-                        </div>
                     </Box>
                     <Button
                         onClick={handleSubmit}
