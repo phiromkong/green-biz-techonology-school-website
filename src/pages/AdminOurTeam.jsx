@@ -94,10 +94,10 @@ const AdminOurTeam = () => {
                     image={member.image} // Assuming imageURL is the field name for the image
                  />
                  <CardContent>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h5" component="div" sx={{fontSize: '1rem'}}>
                       {`${member.enFirstName} ${member.enLastName}`}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" sx={{fontSize: '0.7rem'}}>
                       {member.enPosition}
                     </Typography>
                  </CardContent>

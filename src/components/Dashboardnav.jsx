@@ -10,12 +10,17 @@ import Avatar from '@mui/material/Avatar';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { getDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase'; // Ensure this points to your Firebase instance
+import { onAuthStateChanged } from 'firebase/auth';
+import Divider from '@mui/material/Divider';
+
+
 
 const drawerWidth = 240;
 const settings = [
-  { name: 'Profile', path: '/dashboard/profile' },
-  { name: 'Account', path: '/dashboard/account' },
   { name: 'Dashboard', path: '/dashboard' },
+  { name: 'Admin Account', path: '/dashboard/account' },
   { name: 'Logout', path: '/logout' },
  ];
 
@@ -39,7 +44,10 @@ const AppBar = styled(MuiAppBar, {
 
 const CustomAppBar = ({ open, toggleDrawer }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [profilePicURL, setProfilePicURL] = useState(null); // State to store profile picture URL
+  const [profilePicURL, setProfilePicURL] = useState(null); 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
 
   const navigate = useNavigate();
 
@@ -70,15 +78,46 @@ const CustomAppBar = ({ open, toggleDrawer }) => {
   };
 
   useEffect(() => {
-    // Fetch current user data from Firebase Auth
-    const currentUser = auth.currentUser;
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+       if (user) {
+         // User is signed in, fetch the profile picture and user details
+         const fetchProfilePictureAndDetails = async () => {
+           try {
+             const docRef = doc(db, "admins", user.uid);
+             const docSnap = await getDoc(docRef);
+   
+             if (docSnap.exists()) {
+               const adminData = docSnap.data();
+               if (adminData.profilePicture) {
+                 setProfilePicURL(adminData.profilePicture);
+               }
+               // Set user details
+               setFirstName(adminData.firstName);
+               setLastName(adminData.lastName);
+               setEmail(adminData.email);
+             }
+           } catch (error) {
+             console.error("Error fetching admin profile picture and details:", error);
+           }
+         };
+   
+         fetchProfilePictureAndDetails();
+       } else {
+         // User is signed out, handle accordingly
+         setProfilePicURL(null);
+         setFirstName('');
+         setLastName('');
+         setEmail('');
+       }
+    });
+   
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+   }, []); // Removed auth.currentUser from the dependency array
+   
 
-    if (currentUser) {
-      // Retrieve profile picture URL from current user's data
-      const photoURL = currentUser.photoURL;
-      setProfilePicURL(photoURL);
-    }
-  }, []);
+   
+
 
   return (
     <AppBar position="absolute" open={open}>
@@ -96,12 +135,13 @@ const CustomAppBar = ({ open, toggleDrawer }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-        Dashboard
-
+          Dashboard
         </Typography>
         <div> {/* Separate div for IconButton and Menu */}
           <IconButton color="inherit" onClick={handleOpenUserMenu}>
-            <Avatar alt="Profile" src={profilePicURL || "/static/images/avatar/default.jpg"} />
+          <IconButton color="inherit" onClick={handleOpenUserMenu}>
+          <Avatar alt="Profile" src={profilePicURL}></Avatar>
+          </IconButton>
           </IconButton>
           <Menu
             id="menu-appbar"
@@ -117,7 +157,18 @@ const CustomAppBar = ({ open, toggleDrawer }) => {
             }}
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
+            PaperProps={{
+              style: {
+                width: '300px',
+              },
+            }}
             >
+            <Typography variant="subtitle1" style={{ padding: '14px' }}>
+              {`${firstName} ${lastName}`}
+              <br />
+              {email}
+          </Typography>
+          <Divider />
             {settings.map((setting) => (
                 <MenuItem
                   key={setting.name}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, query, where } from 'firebase/firestore';
 import { db } from '../firebase'; // Ensure you have this configured correctly
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -48,10 +48,22 @@ function AdminCourses() {
     }, []);
 
     const handleDelete = async (programId) => {
+        // Fetch all courses associated with the program
+        const coursesCollection = collection(db, "courses"); // Adjust the collection name as needed
+        const querySnapshot = await getDocs(query(coursesCollection, where("programId", "==", programId)));
+    
+        // Delete each course associated with the program
+        const deletePromises = querySnapshot.docs.map(doc => deleteDoc(doc.ref));
+        await Promise.all(deletePromises);
+    
+        // Now delete the program
         await deleteDoc(doc(db, "program", programId));
+    
+        // Update the local state to reflect the deletion
         setPrograms(programs.filter(program => program.id !== programId));
         setDeleteProgramId(null); // Clear the deleteProgramId state
     };
+    
 
     const handleDeleteConfirm = async () => {
         if (deleteProgramId) {
@@ -92,7 +104,7 @@ function AdminCourses() {
                                         image={program.image}
                                     />
                                     <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
+                                        <Typography gutterBottom variant="h5" component="div" sx={{fontSize: '1rem'}}>
                                             {program.enTitle}
                                         </Typography>
                                     </CardContent>

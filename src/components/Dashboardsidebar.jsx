@@ -13,7 +13,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
 import ListItemButton from '@mui/material/ListItemButton';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';import ExpandLess from '@mui/icons-material/ExpandLess';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import GroupsIcon from '@mui/icons-material/Groups';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -22,10 +23,10 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import SchoolIcon from '@mui/icons-material/School';
-import { Link } from 'react-router-dom'; // Assuming you're using react-router-dom
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
-
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
  ({ theme, open }) => ({
@@ -54,12 +55,38 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
  }),
 );
 
-const Dashboardsidebar = ({ open, toggleDrawer }) => {
-  const [openList, setOpenList] = React.useState(true);
+const CustomListItem = ({ to, primary, icon }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
 
-  const handleClick = () => {
+  return (
+    <ListItem
+      button
+      component={Link}
+      to={to}
+      sx={{
+        color: isActive ? 'primary.main' : 'inherit',
+        fontWeight: isActive ? 'bold' : 'normal',
+        '&:hover': {
+          color: 'primary.main',
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={primary} />
+    </ListItem>
+  );
+};
+
+
+const Dashboardsidebar = ({ open, toggleDrawer }) => {
+ const [openList, setOpenList] = React.useState(true);
+
+ const handleClick = () => {
     setOpenList(!openList);
-  };
+ };
+
  return (
     <div>
       <Drawer variant="permanent" open={open}>
@@ -71,7 +98,6 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
             px: [1],
           }}
         >
-
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
@@ -82,84 +108,37 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
             marginTop: "1rem",
           }}
         >
-          <ListItem component={Link} to="/dashboard">
-            <ListItemIcon>
-            <GridViewSharpIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-          <ListItem component={Link} to="/dashboard/account">
-            <ListItemIcon>
-              <ManageAccountsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Admin Management" />
-          </ListItem>
+          <CustomListItem to="/dashboard" primary="Dashboard" icon={<GridViewSharpIcon />} />
+          <CustomListItem to="/dashboard/account" primary="Admin Management" icon={<ManageAccountsIcon />} />
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
               <GroupsIcon />
             </ListItemIcon>
-            <ListItemText primary="About Us" component={Link} to="/" />
+            <ListItemText primary="About Us" />
             {openList ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={openList} timeout="auto" unmountOnExit>
-            <List component={Link} to="/dashboard/news" disablePadding
-              sx={{
-                textDecorationColor: 'none',
-                color: 'black',
-              }}
-            >
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon >
-                  <ArticleIcon />
-                </ListItemIcon>
-                <ListItemText primary="News" />
-              </ListItemButton>
-            </List>
-            <List component={Link} to="/dashboard/our-team" disablePadding
-              sx={{
-                textDecorationColor: 'none',
-                color: 'black',
-              }}
-            >
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <GroupIcon />
-                </ListItemIcon>
-                <ListItemText primary="Our Team" />
-              </ListItemButton>
-            </List>
-            <List component={Link} to="/dashboard/gallery" disablePadding
-              sx={{
-                textDecorationColor: 'none',
-                color: 'black',
-              }}
-            >
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <CollectionsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Gallery" />
-              </ListItemButton>
+            <List disablePadding>
+              <CustomListItem
+                to="/dashboard/news"
+                primary="News"
+                icon={<ArticleIcon />}
+              />
+              <CustomListItem
+                to="/dashboard/our-team"
+                primary="Our Team"
+                icon={<GroupIcon />}
+              />
+              <CustomListItem
+                to="/dashboard/gallery"
+                primary="Gallery"
+                icon={<CollectionsIcon />}
+              />
             </List>
           </Collapse>
-          <ListItem component={Link} to="/dashboard/programs">
-            <ListItemIcon>
-              <SchoolIcon />
-            </ListItemIcon>
-            <ListItemText primary="Program" />
-          </ListItem>
-          <ListItem component={Link} to="/dashboard/courses">
-            <ListItemIcon>
-              <SlowMotionVideoIcon />
-            </ListItemIcon>
-            <ListItemText primary="Courses" />
-          </ListItem>
-          <ListItem component={Link} to="/dashboard/partners">
-            <ListItemIcon>
-              <HandshakeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Partners" />
-          </ListItem>
+          <CustomListItem to="/dashboard/programs" primary="Program" icon={<SchoolIcon />} />
+          <CustomListItem to="/dashboard/courses" primary="Courses" icon={<SlowMotionVideoIcon />} />
+          <CustomListItem to="/dashboard/partners" primary="Partners" icon={<HandshakeIcon />} />
         </List>
       </Drawer>
       <Box
@@ -177,6 +156,6 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
       </Box>
     </div>
  );
-}
+};
 
 export default Dashboardsidebar;

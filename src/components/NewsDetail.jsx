@@ -75,8 +75,8 @@ const NewsDetail = () => {
  };
 
  const language = i18n.language;
- const titleKey = language === 'English' ? 'enTitle' : 'khTitle';
- const contentKey = language === 'English' ? 'enContent' : 'khContent';
+ const titleKey = language === 'en' ? 'enTitle' : 'khTitle';
+ const contentKey = language === 'en' ? 'enContent' : 'khContent';
 
  return (
     <div>

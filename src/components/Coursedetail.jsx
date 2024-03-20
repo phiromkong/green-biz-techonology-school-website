@@ -45,9 +45,9 @@ const CoursesDetail = () => {
     };
 
     // Determine the title based on the current language
-    const courseTitle = i18n.language === 'Khmer' ? course.khTitle : course.enTitle;
-    const programOverview = i18n.language === 'Khmer' ? course.khProgramOverview : course.enProgramOverview;
-    const programOutcome = i18n.language === 'Khmer' ? course.khProgramOutcome : course.enProgramOutcome;
+    const courseTitle = i18n.language === 'kh' ? course.khTitle : course.enTitle;
+    const programOverview = i18n.language === 'kh' ? course.khProgramOverview : course.enProgramOverview;
+    const programOutcome = i18n.language === 'kh' ? course.khProgramOutcome : course.enProgramOutcome;
 
     return (
         <div>

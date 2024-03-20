@@ -9,7 +9,9 @@ import NewsCard from '../components/NewsCard';
 import Hcourse from '../components/Hcourse';
 import Partners from '../components/Partners';
 import Footer from '../components/Footer';
-import { useTranslation } from 'react-i18next'; // Import useTranslation
+import { useTranslation } from 'react-i18next';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const Home = () => {
@@ -25,7 +27,9 @@ const Home = () => {
       const partnersSnapshot = await getDocs(partnersCollection);
       const partnersList = partnersSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
       setPartnerLogos(partnersList);
-      setLoading(false); 
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     };
 
     const fetchNews = async () => {
@@ -34,7 +38,9 @@ const Home = () => {
       const newsSnapshot = await getDocs(q);
       const newsList = newsSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
       setNewsData(newsList);
-      setLoading(false); 
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     };
 
     const fetchCourses = async () => {
@@ -65,7 +71,15 @@ const Home = () => {
   };
   
   if (loading) {
-    return <div>Loading...</div>; // Show a loading indicator
+    return <div>{loading && (
+      <Backdrop
+        sx={{ color: 'black', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={() => {}}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    )}</div>; 
  }
   return (
     <div>
@@ -75,18 +89,15 @@ const Home = () => {
       </div>
       <Slogan />
       <Hnews title="News and Update" limit={4}>
-        {newsData.map((news, index) => {
-          console.log(news);
-          return (
-              <NewsCard
-                key={index}
-                title={i18n.language === 'Khmer' ? news.khTitle : news.enTitle}
-                imgUrl={news.thumbnailImage}
-                description={i18n.language === 'Khmer' ? news.khDescription : news.enDescription}
-                id={news.id}
-              />
-          );
-          })}
+        {newsData.map((news, index) => (
+          <NewsCard
+            key={index}
+            title={i18n.language === 'kh' ? news.khTitle : news.enTitle}
+            imgUrl={news.thumbnailImage}
+            description={i18n.language === 'kh' ? news.khDescription : news.enDescription}
+            id={news.id}
+          />
+        ))}
       </Hnews>
       <Hcourse courses={courses} />
       <Partners images={partnerLogos} />

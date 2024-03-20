@@ -37,7 +37,6 @@ function AdminCourses() {
     const [courseToDelete, setCourseToDelete] = useState(null);
 
 
-
     const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -66,7 +65,8 @@ function AdminCourses() {
     }
    };
    
-   
+
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -93,7 +93,7 @@ function AdminCourses() {
                                 image={course.imageURL}
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
+                                <Typography gutterBottom variant="h5" component="div" sx={{fontSize: '1rem'}}>
                                     {course.enTitle}
                                 </Typography>
                             </CardContent>
