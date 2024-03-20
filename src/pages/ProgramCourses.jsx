@@ -97,10 +97,10 @@ function ProgramCourses() {
                                         image={course.imageURL} // Assuming imageURL is the field name for the image
                                     />
                                     <CardContent>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h5" component="div" sx={{fontSize: '1rem'}}>
                                             {course.enTitle}
                                         </Typography>
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Typography variant="body2" color="text.secondary" sx={{fontSize: '0.7rem'}}>
                                             {course.enDescription}
                                         </Typography>
                                     </CardContent>
@@ -116,7 +116,7 @@ function ProgramCourses() {
                         ))}
                     </Grid>
                     <Button 
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate(`/dashboard/programs`)}
                     sx={{ marginTop: '2rem', marginLeft: '1rem' }}
                     variant="contained"
                     color="primary"

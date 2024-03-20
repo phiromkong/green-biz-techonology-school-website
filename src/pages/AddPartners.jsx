@@ -7,6 +7,7 @@ import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -19,7 +20,9 @@ const AddPartners = () => {
     const [open, setOpen] = React.useState(true);
     const [partnerName, setPartnerName] = useState('');
     const [partnerLogo, setPartnerLogo] = useState('');
-    const [uploading, setUploading] = useState(false); // Add state to track file upload status
+    const [uploading, setUploading] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     const [errors, setErrors] = useState({
         partnerName: '',
@@ -27,6 +30,15 @@ const AddPartners = () => {
 
     const toggleDrawer = () => {
         setOpen(!open);
+    };
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     const handleNameChange = (e) => {
@@ -90,7 +102,10 @@ const AddPartners = () => {
                 };
                 const docRef = await addDoc(collection(db, "partners"), partnerData);
                 console.log("Document written with ID: ", docRef.id);
-                navigate('/dashboard/partners'); // Navigate to /dashboard/partners after adding the partner
+                setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate('/dashboard/partners');
+                }, 1500);
             } catch (error) {
                 console.error("Error adding document: ", error);
                 // Handle error
@@ -171,6 +186,12 @@ const AddPartners = () => {
                     >
                         Cancel
                     </Button>
+                    <Snackbar 
+                    open={snackbarOpen} 
+                    autoHideDuration={6000} 
+                    onClose={handleSnackbarClose}
+                    message="Partner added successfully"
+                    />
                 </Container> 
             </Box>
         </ThemeProvider>

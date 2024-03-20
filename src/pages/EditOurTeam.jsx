@@ -8,6 +8,7 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -18,6 +19,8 @@ const  EditOurTeam = () => {
     const [open, setOpen] = useState(true);
     const [imageURL, setImageURL] = useState('');
     const [uploading, setUploading] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const navigate = useNavigate();
     const { memberId } = useParams(); // Get member ID from URL
     const toggleDrawer = () => {
@@ -48,6 +51,15 @@ const  EditOurTeam = () => {
         khQuote: '',
         sex: '',
     });
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     useEffect(() => {
         const fetchTeamMember = async () => {
@@ -117,7 +129,10 @@ const  EditOurTeam = () => {
                 };
                 await updateDoc(doc(db, "team", memberId), teamMemberData);
                 console.log("Document updated successfully");
-                navigate('/dashboard/our-team');
+                setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate('/dashboard/our-team');
+                }, 1500);
             } catch (error) {
                 console.error("Error updating document: ", error);
             }
@@ -274,6 +289,12 @@ const  EditOurTeam = () => {
                     >
                         Update Member
                     </Button>
+                    <Snackbar 
+                    open={snackbarOpen} 
+                    autoHideDuration={6000} 
+                    onClose={handleSnackbarClose}
+                    message="Team Member updated successfully"
+                    />
                 </Container> 
             </Box>
         </ThemeProvider>

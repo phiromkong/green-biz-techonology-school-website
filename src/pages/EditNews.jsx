@@ -13,6 +13,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Snackbar from '@mui/material/Snackbar';
 import { db } from '../firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { serverTimestamp } from 'firebase/firestore';
@@ -29,7 +30,9 @@ const EditNews = ({ match }) => {
     const [open, setOpen] = useState(true);
     const [thumbnailURL, setThumbnailURL] = useState('');
     const [newsImagesURLs, setNewsImagesURLs] = useState([]);
-    const [uploading, setUploading] = useState(false); // Add state to track file upload status
+    const [uploading, setUploading] = useState(false); 
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const navigate = useNavigate();
 
     const toggleDrawer = () => {
@@ -53,6 +56,15 @@ const EditNews = ({ match }) => {
         khContent: false,
         khDescription: false,
     });
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     useEffect(() => {
         const fetchNewsPost = async () => {
@@ -163,8 +175,11 @@ const EditNews = ({ match }) => {
                 newsImages: newsImagesURLs, // Ensure the news images URLs are updated
                 updatedAt: serverTimestamp(),
             });
-            console.log("News post updated successfully"); // Log success message
-            navigate('/dashboard/news');
+            console.log("News post updated successfully");
+            setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate('/dashboard/news');
+                }, 1500);
         } catch (error) {
             console.error("Error updating document: ", error); // Log error message
         }
@@ -385,6 +400,12 @@ const EditNews = ({ match }) => {
                             </Button>
                         </DialogActions>
                     </Dialog>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                        message="News updated successfully"
+                    />
 
                 </Container> 
             </Box>

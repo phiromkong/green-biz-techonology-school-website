@@ -17,19 +17,25 @@ const Courselist = ({ courses, onCourseSelect, activeProgram }) => {
  useEffect(() => {
   const fetchPrograms = async () => {
      const programIds = [...new Set(courses.map(course => course.programId))];
+     console.log("Program IDs to fetch:", programIds); // Debugging line
      const programPromises = programIds.map(async (programId) => {
-       console.log("Program ID:", programId); // Debugging line
-       const programDocRef = doc(db, "program", programId); // Ensure "program" is the correct collection name
-       const programDocSnap = await getDoc(programDocRef);
-       return programDocSnap.exists() ? { id: programId, ...programDocSnap.data() } : null;
+       const programDocRef = doc(db, "program", programId);
+       try {
+         const programDocSnap = await getDoc(programDocRef);
+         return programDocSnap.exists() ? { id: programId, ...programDocSnap.data() } : null;
+       } catch (error) {
+         console.error("Error fetching program:", error);
+         return null;
+       }
      });
      const programData = await Promise.all(programPromises);
+     console.log("Fetched program data:", programData); // Debugging line
      setPrograms(programData.filter(program => program !== null));
-     console.log("Program data: " + JSON.stringify(programData));
   };
  
   fetchPrograms();
  }, [courses]);
+ 
  
 
  return (
@@ -67,7 +73,7 @@ const Courselist = ({ courses, onCourseSelect, activeProgram }) => {
                 onClick={() => onCourseSelect(program.id)}
               >
                 <Typography fontSize={'20px'} fontWeight={'bold'} level="body-xs" sx={{fontFamily: "Kantumruy Pro"}} mb={2}>
-                {i18n.language === 'Khmer' ? program.khTitle : program.enTitle} 
+                {i18n.language === 'kh' ? program.khTitle : program.enTitle} 
                 </Typography>
               </ListItemButton>
             </ListItem>

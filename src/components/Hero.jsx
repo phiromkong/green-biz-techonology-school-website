@@ -4,6 +4,7 @@ import { db } from '../firebase';
 import { SocialIcon } from 'react-social-icons';
 import "./css/Hero.css";
 import { useTranslation } from 'react-i18next'; // Import useTranslation
+import { data } from 'jquery';
 
 const Hero = () => {
  const [quote, setQuote] = useState('');
@@ -12,13 +13,13 @@ const Hero = () => {
  useEffect(() => {
     const fetchQuote = async () => {  
        const ourTeamRef = collection(db, 'team');
-       const q = query(ourTeamRef, where(i18n.language === 'kh' ? 'khFirstName' : 'enFirstName', '==', 'Kimle')); // Adjust the query based on the current language
+       const q = query(ourTeamRef, where('enFirstName', '==', 'Kimle')); // Adjust the query based on the current language
        const querySnapshot = await getDocs(q);
        if (!querySnapshot.empty) {
          // Assuming you want the first document that matches the query
          const doc = querySnapshot.docs[0];
          const data = doc.data();
-         setQuote(data[i18n.language === 'Khmer' ? 'khQuote' : 'enQuote']); // Adjust the quote based on the current language
+         setQuote(data[i18n.language === 'kh' ? 'khQuote' : 'enQuote']); // Adjust the quote based on the current language
        } else {
          console.log("No documents found!");
        }
@@ -32,7 +33,7 @@ const Hero = () => {
       <div className="flexContainer">
         <div className="contentSection">
           <div className="heading">
-            <h1>{t('meetOurHeadOfSchool')}</h1> {/* Use the t function to translate the heading */}
+            <h1>{t('meetOurHeadOfSchool')}</h1>
           </div>
           <div className="hero-features">
             <p className='hero-feature'>{quote}</p>

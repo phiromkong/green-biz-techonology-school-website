@@ -14,6 +14,7 @@ import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -46,6 +47,8 @@ function EditCourses() {
  const [selectedProgram, setSelectedProgram] = useState('');
  const [open, setOpen] = React.useState(true);
  const [programs, setPrograms] = useState([]);
+ const [snackbarOpen, setSnackbarOpen] = useState(false);
+ const [snackbarMessage, setSnackbarMessage] = useState('');
  const navigate = useNavigate();
 
  const [courses, setCourses] = useState({
@@ -101,6 +104,15 @@ function EditCourses() {
  const toggleDrawer = () => {
     setOpen(!open);
  };
+
+ const handleSnackbarOpen = (message) => {
+  setSnackbarMessage(message);
+  setSnackbarOpen(true);
+};
+
+const handleSnackbarClose = () => {
+  setSnackbarOpen(false);
+};
 
  const handleChange = (event) => {
     const { name, value } = event.target;
@@ -160,7 +172,10 @@ function EditCourses() {
     try {
       const courseDoc = doc(db, "courses", courseId);
       await updateDoc(courseDoc, courseData);
-      navigate('/dashboard/courses');
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/dashboard/courses');
+      }, 1500);
       // Handle success, e.g., navigate to another page or show a success message
     } catch (error) {
       console.error("Error updating document: ", error);
@@ -360,6 +375,12 @@ function EditCourses() {
           >
             Cancel
           </Button>
+          <Snackbar 
+          open={snackbarOpen} 
+          autoHideDuration={6000} 
+          onClose={handleSnackbarClose}
+          message="Course updated successfully"
+          />
         </Container>
       </Box>
     </ThemeProvider>

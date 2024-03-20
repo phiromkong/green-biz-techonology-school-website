@@ -9,6 +9,7 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Snackbar from '@mui/material/Snackbar';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -22,6 +23,8 @@ const AddNews = () => {
     const [newsImagesURLs, setNewsImagesURLs] = useState([]);
     const [uploading, setUploading] = useState(false); // Add state to track file upload status
     const navigate = useNavigate();
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -43,6 +46,15 @@ const AddNews = () => {
         khContent: '',
         khDescription: '',
     });
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -125,7 +137,11 @@ const AddNews = () => {
                 };
                 const docRef = await addDoc(collection(db, "news"), newsData);
                 console.log("Document written with ID: ", docRef.id);
-                navigate('/dashboard/news');
+                setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate('/dashboard/news');
+                }, 1500);
+                
                 // Redirect or show success message
             } catch (error) {
                 console.error("Error adding document: ", error);
@@ -281,6 +297,12 @@ const AddNews = () => {
                     >
                         Cancel
                     </Button>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                        message= "News added successfully"
+                    />
                 </Container> 
             </Box>
 

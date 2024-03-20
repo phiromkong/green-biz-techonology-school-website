@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'; // Import useParams
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import Snackbar from '@mui/material/Snackbar';  
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -23,6 +24,8 @@ function AddImage() {
     const [titles, setTitles] = useState([]);
     const [replacingIndex, setReplacingIndex] = useState(null); 
     const [errors, setErrors] = useState([]);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     const toggleDrawer = () => {
         setOpen(!open);
@@ -30,6 +33,15 @@ function AddImage() {
 
     // Extract programId from the URL
     const { programId } = useParams();
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     const handleFileChange = (event) => {
         const files = Array.from(event.target.files);
@@ -132,7 +144,10 @@ function AddImage() {
             await Promise.all(addImagePromises);
     
             console.log('Images uploaded and metadata stored successfully');
-            navigate(`/dashboard/programs/${programId}`); // Navigate to a success page or dashboard
+            setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate(`/dashboard/programs/${programId}`);
+                }, 1500);
         }
     };
     
@@ -207,6 +222,12 @@ function AddImage() {
                             Cancel
                         </Button>
                     </div>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                        message="Images uploaded successfully"
+                    />
                 </Container>
             </Box>
         </ThemeProvider>

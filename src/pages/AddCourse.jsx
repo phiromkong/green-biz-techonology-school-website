@@ -7,10 +7,12 @@ import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useNavigate, useParams } from 'react-router-dom'; // Import useNavigate and useParams
+import { useNavigate, useParams } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
@@ -28,20 +30,31 @@ const AddCourse = () => {
     const [khProgramOverview, setKhProgramOverview] = useState('');
     const [courseImage, setCourseImage] = useState('');
     const [uploading, setUploading] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     const [errors, setErrors] = useState({
-        enTitle: true,
-        khTitle: true,
-        enDescription: true,
-        khDescription: true,
-        enProgramOutcome: true,
-        khProgramOutcome: true,
-        enProgramOverview: true,
-        khProgramOverview: true,
+        enTitle: '',
+        khTitle: '',
+        enDescription: '',
+        khDescription: '',
+        enProgramOutcome: '',
+        khProgramOutcome: '',
+        enProgramOverview: '',
+        khProgramOverview: '',
     });
 
     const toggleDrawer = () => {
         setOpen(!open);
+    };
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     const handleInputChange = (setter, fieldName, value) => {
@@ -118,7 +131,10 @@ const AddCourse = () => {
                 };
                 const docRef = await addDoc(collection(db, "courses"), courseData);
                 console.log("Document written with ID: ", docRef.id);
-                navigate(`/dashboard/programs/${programId}`);
+                setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate(`/dashboard/programs/${programId}`);
+                }, 1500);
                 // Reset form fields to their initial state
                 setEnTitle('');
                 setKhTitle('');
@@ -276,6 +292,12 @@ const AddCourse = () => {
                     >
                         Cancel
                     </Button>
+                    <Snackbar 
+                    open={snackbarOpen} 
+                    autoHideDuration={6000} 
+                    onClose={handleSnackbarClose}
+                    message="Course added successfully"
+                    />
                 </Container> 
             </Box>
         </ThemeProvider>
