@@ -19,7 +19,6 @@ const AdminDashboard = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      {/* Wrap your components with ThemeProvider */}
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Dashboardnav open={open} toggleDrawer={toggleDrawer} />

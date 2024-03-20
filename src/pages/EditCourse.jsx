@@ -10,6 +10,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
+import Snackbar from '@mui/material/Snackbar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const defaultTheme = createTheme();
@@ -20,9 +21,20 @@ const EditCourse = () => {
     const { programId, courseId } = useParams(); // Assuming courseId is part of the URL
     const [courseData, setCourseData] = useState({});
     const [uploading, setUploading] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     const toggleDrawer = () => {
         setOpen(!open);
+    };
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     useEffect(() => {
@@ -67,7 +79,10 @@ const EditCourse = () => {
         e.preventDefault();
         const courseRef = doc(db, "courses", courseId);
         await updateDoc(courseRef, courseData);
-        navigate(`/dashboard/programs/${programId}`);
+        setSnackbarOpen(true);
+        setTimeout(() => {
+            navigate(`/dashboard/programs/${programId}`);
+        }, 1500);
     };
 
     const handleCancel = () => {
@@ -191,6 +206,12 @@ const EditCourse = () => {
                     >
                         Cancel
                     </Button>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                        message="Course updated successfully"
+                    />
                 </Container>
             </Box>
         </ThemeProvider>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db, auth } from '../firebase';
 import "../components/css/AdminLogin.css";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -49,46 +50,63 @@ const AdminLogin = () => {
     return () => unsubscribe();
    }, [pathname]); // Ensure pathname is a dependency
    
-   
-  const onLogin = (e) => {
+   const onLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-
+   
     if (!email) {
-      setEmailError('Please fill in your email');
-      setLoading(false);
-      return;
+       setEmailError('Please fill in your email');
+       setLoading(false);
+       return;
     }
-
+   
     if (!password) {
-      setPasswordError('Please fill in your password');
-      setLoading(false);
-      return;
+       setPasswordError('Please fill in your password');
+       setLoading(false);
+       return;
     }
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        setEmailError(null);
-        setPasswordError(null);
-        navigate('/dashboard'); // Redirect to dashboard after successful login
-      })
-      .catch((error) => {
-        // Handle login errors
-        if (error.code === 'auth/invalid-credential') {
-          setEmailError('Invalid Credentials');
-          setPasswordError('Invalid Credentials');
-        } else if (error.code === 'auth/invalid-email') {
-          setEmailError('Please enter a valid email address');
-          setPasswordError(null);
-        } else {
-          setEmailError(error.message);
-          setPasswordError(error.message);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+   
+    // Check if the email exists in the admins collection
+    const adminsRef = collection(db, "admins");
+    const q = query(adminsRef, where("email", "==", email));
+   
+    getDocs(q).then((querySnapshot) => {
+       if (querySnapshot.empty) {
+         // No matching documents.
+         setEmailError('Invalid Credentials');
+        setPasswordError('Invalid Credentials');
+         setLoading(false);
+       } else {
+         // Document exists, proceed with sign-in
+         signInWithEmailAndPassword(auth, email, password)
+           .then(() => {
+             setEmailError(null);
+             setPasswordError(null);
+             navigate('/dashboard'); // Redirect to dashboard after successful login
+           })
+           .catch((error) => {
+             // Handle login errors
+             if (error.code === 'auth/invalid-credential') {
+               setEmailError('Invalid Credentials');
+               setPasswordError('Invalid Credentials');
+             } else if (error.code === 'auth/invalid-email') {
+               setEmailError('Please enter a valid email address');
+               setPasswordError(null);
+             } else {
+               setEmailError(error.message);
+               setPasswordError(error.message);
+             }
+           })
+           .finally(() => {
+             setLoading(false);
+           });
+       }
+    }).catch((error) => {
+       console.error("Error querying Firestore:", error);
+       setLoading(false);
+    });
+   };
+   
 
   return (
     <div className="loginWrapper">

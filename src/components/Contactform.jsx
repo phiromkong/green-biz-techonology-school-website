@@ -6,7 +6,7 @@ import './css/Contactform.css';
 import { useTranslation } from 'react-i18next';
 
 const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  
-    const {t} = useTranslation();
+    const { t, i18n } = useTranslation();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -141,8 +141,8 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
 
                         >
                             {cardData.map((course, index) => (
-                                <MenuItem key={index} value={course.title}>
-                                    {course.title}
+                                <MenuItem key={index} value={course.title} sx={{fontFamily: "Kantumruy Pro"}}>
+                                    {i18n.language === 'kh' ? course.khTitle : course.enTitle}
                                 </MenuItem>
                             ))}
                         </Select>

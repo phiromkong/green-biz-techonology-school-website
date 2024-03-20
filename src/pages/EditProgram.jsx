@@ -11,11 +11,14 @@ import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
 
 const defaultTheme = createTheme();
 const EditPrograms = () => {
     const [program, setProgram] = useState({ enTitle: '', khTitle: '', image: '' });
     const [open, setOpen] = React.useState(true);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const navigate = useNavigate();
     const { programId } = useParams();
     const [uploading, setUploading] = useState(false); // New state for tracking upload status
@@ -25,6 +28,15 @@ const EditPrograms = () => {
 
     const handleCancel = () => {
         navigate(`/dashboard/programs/${programId}`);
+    };
+
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     useEffect(() => {
@@ -84,7 +96,10 @@ const EditPrograms = () => {
                 image: program.image,
             });
             console.log("Program updated successfully");
-            navigate('/dashboard/programs');
+            setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate('/dashboard/programs');
+                }, 1500);
         } catch (error) {
             console.error("Error updating document: ", error);
         }
@@ -165,6 +180,12 @@ const EditPrograms = () => {
                     >
                         Cancel
                     </Button>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                        message="Program updated successfully"
+                    />
                 </Container>
             </Box>
         </ThemeProvider>

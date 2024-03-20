@@ -8,6 +8,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Dashboardnav from '../components/Dashboardnav';
+import Snackbar from '@mui/material/Snackbar';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -18,12 +19,23 @@ const defaultTheme = createTheme();
 const EditPartners = () => {
     const [partner, setPartner] = useState({ name: '', image: '' });
     const [open, setOpen] = React.useState(true);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const navigate = useNavigate();
+    const { partnerId } = useParams();
+
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
-    const navigate = useNavigate();
-    const { partnerId } = useParams();
+    const handleSnackbarOpen = (message) => {
+        setSnackbarMessage(message);
+        setSnackbarOpen(true);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
 
     useEffect(() => {
         const fetchPartner = async () => {
@@ -74,7 +86,11 @@ const EditPartners = () => {
                 image: partner.image, // Correct field name
             });
             console.log("Partner updated successfully");
-            navigate('/dashboard/partners');
+            setSnackbarOpen(true);
+                setTimeout(() => {
+                    navigate('/dashboard/partners');
+                }, 1500);
+
         } catch (error) {
             console.error("Error updating document: ", error);
         }
@@ -138,6 +154,12 @@ const EditPartners = () => {
                     >
                         Update Partner
                     </Button>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                        message="Partner updated successfully"
+                    />
                 </Container>
             </Box>
         </ThemeProvider>

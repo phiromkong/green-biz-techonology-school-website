@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import Snackbar from '@mui/material/Snackbar';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,6 +46,8 @@ function AddCourses() {
  const [selectedProgram, setSelectedProgram] = useState('');
  const [open, setOpen] = React.useState(true);
  const [programs, setPrograms] = useState([]);
+ const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
  const navigate = useNavigate();
 
 
@@ -62,17 +65,26 @@ function AddCourses() {
  });
 
  const [errors, setErrors] = useState({
-    enDescription: true,
-    enProgramOutcome: true,
-    enProgramOverview: true,
-    enTitle: true,
-    imageURL: true,
-    khDescription: true,
-    khProgramOutcome: true,
-    khProgramOverview: true,
-    khTitle: true,
-    programId: true,
+    enDescription: '',
+    enProgramOutcome: '',
+    enProgramOverview: '',
+    enTitle: '',
+    imageURL: '',
+    khDescription: '',
+    khProgramOutcome: '',
+    khProgramOverview: '',
+    khTitle: '',
+    programId: '',
  });
+
+ const handleSnackbarOpen = (message) => {
+  setSnackbarMessage(message);
+  setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
  useEffect(() => {
     const fetchPrograms = async () => {
@@ -165,7 +177,10 @@ function AddCourses() {
                 programId: selectedProgram,
             };
             await addDoc(collection(db, "courses"), courseData);
-            navigate('/dashboard/courses');
+            setSnackbarOpen(true);
+                setTimeout(() => {
+                  navigate('/dashboard/courses');
+                }, 1500);
             // Handle success, e.g., navigate to another page or show a success message
         } catch (error) {
             console.error("Error adding document: ", error);
@@ -353,6 +368,12 @@ function AddCourses() {
             >
                 Cancel
             </Button>
+            <Snackbar 
+            open={snackbarOpen} 
+            autoHideDuration={6000} 
+            onClose={handleSnackbarClose}
+            message="Course added successfully"
+            />
         </Container>
       </Box>
     </ThemeProvider>

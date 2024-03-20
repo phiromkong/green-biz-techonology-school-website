@@ -3,6 +3,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import './css/Coursecard.css';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
@@ -12,6 +14,8 @@ import { db } from '../firebase'; // Ensure this path correctly points to your F
 const CourseCard = ({ id }) => {
  const { t, i18n } = useTranslation(); // Use the useTranslation hook
  const [course, setCourse] = useState(null);
+ const [loading, setLoading] = useState(true); // Add a loading state
+
 
  useEffect(() => {
     const fetchCourse = async () => {
@@ -20,16 +24,23 @@ const CourseCard = ({ id }) => {
       if (courseDocSnap.exists()) {
         setCourse(courseDocSnap.data());
       }
+      setLoading(false);
     };
 
     fetchCourse();
  }, [id]);
 
- if (!course) return <div>Loading...</div>;
+ if (loading && !course){ 
+  return (
+    <div>
+
+    </div>
+  );
+  }
 
  // Determine the title and description based on the current language
- const courseTitle = i18n.language === 'Khmer' ? course.khTitle : course.enTitle;
- const courseDescription = i18n.language === 'Khmer' ? course.khDescription : course.enDescription;
+ const courseTitle = i18n.language === 'kh' ? course.khTitle : course.enTitle;
+ const courseDescription = i18n.language === 'kh' ? course.khDescription : course.enDescription;
 
  return (
     <Card sx={{ maxWidth: 500 }} className='course-card'>
