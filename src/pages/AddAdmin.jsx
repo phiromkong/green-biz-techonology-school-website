@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth,  fetchSignInMethodsForEmail  } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase'; // Ensure this points to your Firebase instance
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -98,25 +98,24 @@ const handleSubmit = async (event) => {
   }
 
   const auth = getAuth();
+  const currentUser = auth.currentUser;
   try {
+    await setPersistence(auth, browserSessionPersistence);
     // Attempt to create the user
     const userCredential = await createUserWithEmailAndPassword(auth, formState.email, formState.password);
     const user = userCredential.user;
-
-    // After successful registration, add admin data to Firestore
-    await setDoc(doc(db, "admins", user.uid), {
+    console.log('New user: ', user);
+    console.log('Current user: ', currentUser);
+    localStorage.setItem('newUserData', JSON.stringify({
       uid: user.uid,
       email: formState.email,
       firstName: formState.firstName,
       lastName: formState.lastName,
       profilePicture: profilePicture,
-    });
+    }));
+    await signOut(auth);
+    addNewUserToAdmins();
 
-    // Display success Snackbar and navigate back to /dashboard/account
-    setOpen(true); // Open the Snackbar
-    setTimeout(() => {
-      navigate('/dashboard/account'); // Navigate after a delay
-    }, 2000); // Adjust the delay as needed
   } catch (error) {
     console.error('Error adding admin:', error.code);
     let errorMessage = 'Error adding admin';
@@ -154,6 +153,15 @@ const handleSubmit = async (event) => {
     });
   // Navigate back to the team dashboard
   navigate('/dashboard/account');
+};
+
+const addNewUserToAdmins = async () => {
+  const newUserData = localStorage.getItem('newUserData');
+  if (newUserData) {
+    const userData = JSON.parse(newUserData);
+    await setDoc(doc(db, "admins", userData.uid), userData);
+    localStorage.removeItem('newUserData'); // Clear the local storage
+  }
 };
 
  return (
@@ -224,33 +232,23 @@ const handleSubmit = async (event) => {
                  type="file"
                  id="fileUpload"
                  accept="image/*"
-                 style={{ display: 'none' }}
+                 style={{ display: 'flex',  marginLeft: '1.5rem' }}
                  onChange={handleImageChange}
                 />
               </div>
-              <Button
-                component="label"
-                role={undefined}
-                variant="contained"
-                tabIndex={-1}
-                htmlFor="fileUpload"
-                style={{ marginLeft: '1.5rem'}}
-              >
-                 Upload Profile
-              </Button>
               {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
           </Box>
           <Button 
             onClick={handleSubmit}
             variant="contained"
-            sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+            sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
           >
               Add Admin
           </Button>
           <Button
             onClick={handleCancel}
             variant="contained"
-            sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+            sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: '#bb2124' }}
             >
             Cancel
           </Button>

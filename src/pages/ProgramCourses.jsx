@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, where, deleteDoc, doc } from 'firebase/firestore';
+import { getStorage, ref, deleteObject } from 'firebase/storage';
 import { db } from '../firebase';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -51,10 +52,29 @@ function ProgramCourses() {
     }, [programId]);
 
     const handleDelete = async (courseId) => {
+        // First, find the course to delete in the courses state
+        const courseToDelete = courses.find(course => course.id === courseId);
+        if (courseToDelete && courseToDelete.imageURL) {
+            // Create a reference to the file in Firebase Storage
+            const imageRef = ref(getStorage(), courseToDelete.imageURL);
+    
+            // Delete the file from Firebase Storage
+            await deleteObject(imageRef).then(() => {
+                console.log("Course image deleted from Firebase Storage");
+            }).catch((error) => {
+                console.error("Error deleting course image from Firebase Storage:", error);
+            });
+        }
+    
+        // Delete the course document from Firestore
         await deleteDoc(doc(db, "courses", courseId));
+        console.log("Course document deleted from Firestore");
+    
+        // Update the local state to reflect the deletion
         setCourses(courses.filter(course => course.id !== courseId));
-        setDeleteCourseId(null);
+        setDeleteCourseId(null); // Clear the deleteCourseId state
     };
+    
 
     const handleDeleteConfirm = async () => {
         if (deleteCourseId) {
@@ -76,7 +96,7 @@ function ProgramCourses() {
                 <Dashboardnav open={open} toggleDrawer={toggleDrawer} />
                 <Dashboardsidebar open={open} toggleDrawer={toggleDrawer} />
                 <Container>
-                    <div style={{ marginTop: '80px', marginLeft: '-50px' }}>
+                    <div style={{ marginTop: '80px' }}>
                         <Stack direction="row" spacing={1}>
                             <Button component={Link} to={`/dashboard/programs/${programId}/addCourse`} variant="contained" startIcon={<AddIcon />}>
                                 New Course
@@ -105,8 +125,8 @@ function ProgramCourses() {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small" onClick={() => navigate(`/dashboard/programs/${programId}/edit/${course.id}`)}>Edit</Button>
-                                        <Button size="small" onClick={() => {
+                                        <Button variant="contained" size="small" sx={{backgroundColor: "#198754"}} onClick={() => navigate(`/dashboard/programs/${programId}/edit/${course.id}`)}>Edit</Button>
+                                        <Button variant="contained" size="small" sx={{backgroundColor: '#bb2124'}} onClick={() => {
                                             setDeleteCourseId(course.id);
                                             setDeleteDialogOpen(true);
                                         }}>Delete</Button>

@@ -21,11 +21,11 @@ const Footer = () => {
           </div>
           {/* Social Icons */}
           <div className="social-icons">
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://facebook.com/gbt.school.bmc" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://www.facebook.com/greenbiztechnologyschool?mibextid=ZbWKwL" />
             <SocialIcon style={{ height: 40, width: 40 }} url="https://instagram.com" />
             <SocialIcon style={{ height: 40, width: 40 }} url="https://gmail.com/" />
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://tiktok.com" />
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://telegram.me/Keokimle" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://www.tiktok.com/@gbtschool?_t=8kxhX3t0eyA&_r=1" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://t.me/greenbiztechnologyschool" />
           </div>
         </div>
 

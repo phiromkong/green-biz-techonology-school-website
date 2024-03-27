@@ -62,15 +62,22 @@ const AddTeamMember = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setTeamMember({ ...teamMember, [name]: value });
-
+        setTeamMember(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    
         // Validate fields
         let error = '';
         if (value.trim() === '') {
             error = 'This field is required';
         }
-        setErrors({ ...errors, [name]: error });
+        setErrors(prevErrors => ({
+            ...prevErrors,
+            [name]: error
+        }));
     };
+    
 
     const handleFileUpload = async (files) => {
         if (files.length === 0) {
@@ -206,15 +213,7 @@ const AddTeamMember = () => {
                                 error={Boolean(errors.enPosition)}
                                 helperText={errors.enPosition}
                             />
-                            <TextField
-                                required
-                                onChange={handleChange}
-                                id="enQuote"
-                                name="enQuote"
-                                label="English Quote"
-                                error={Boolean(errors.enQuote)}
-                                helperText={errors.enQuote}
-                            />
+
                             <TextField
                                 required
                                 onChange={handleChange}
@@ -230,8 +229,8 @@ const AddTeamMember = () => {
                                 id="khLastName"
                                 name="khLastName"
                                 label="Khmer Last Name"
-                                error={Boolean(errors.enLastName)}
-                                helperText={errors.enLastName}
+                                error={Boolean(errors.khLastName)}
+                                helperText={errors.khLastName}
                             />
                             <TextField
                                 required
@@ -242,15 +241,29 @@ const AddTeamMember = () => {
                                 error={Boolean(errors.khPosition)}
                                 helperText={errors.khPosition}
                             />
+                            <div>
+                            <TextField
+                                required
+                                multiline
+                                onChange={handleChange}
+                                id="enQuote"
+                                name="enQuote"
+                                label="English Quote"
+                                error={Boolean(errors.enQuote)}
+                                helperText={errors.enQuote}
+                            />
                             <TextField
                                 required
                                 onChange={handleChange}
+                                multiline
                                 id="khQuote"
                                 name="khQuote"
                                 label="Khmer Quote"
                                 error={Boolean(errors.khQuote)}
                                 helperText={errors.khQuote}
                             />
+                            </div>
+
                             <TextField
                                 required
                                 onChange={handleChange}
@@ -264,37 +277,27 @@ const AddTeamMember = () => {
                                 type="file"
                                 id="fileUpload"
                                 accept="image/*"
-                                style={{ display: 'none' }}
+                                style={{ display: ' flex', marginLeft: '1.5rem' }}
                                 onChange={(e) => {
                                     const selectedFiles = Array.from(e.target.files); // Convert FileList to array
                                     handleFileUpload(selectedFiles);
                                 }}
                             />
                         </div>
-                        <Button
-                                component="label"
-                                role={undefined}
-                                variant="contained"
-                                tabIndex={-1}
-                                htmlFor="fileUpload"
-                                style={{ marginLeft: '1.5rem'}}
-                            >
-                                Upload Image
-                        </Button>
                         {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                     </Box>
                     <Button
                         onClick={handleSubmit}
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
                     >
                         Add Team Member
                     </Button>
                     <Button
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1rem', backgroundColor: '#bb2124' }}
                         onClick={handleCancel}
                     >
                         Cancel

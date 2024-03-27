@@ -208,6 +208,8 @@ const AddNews = () => {
                                 id="enDescription"
                                 label="English Description"
                                 name="enDescription" 
+                                multiline
+                                placeholder='English Description'
                                 onChange={handleChange} 
                                 helperText={errors.enDescription ? "Please provide a description in English." : ""}
                             />
@@ -219,6 +221,8 @@ const AddNews = () => {
                                     error={Boolean(errors.khDescription)}
                                     label="Khmer Description"
                                     name="khDescription" 
+                                    multiline
+                                    placeholder='Khmer Description'
                                     onChange={handleChange} 
                                     helperText={errors.khDescription ? "Please provide a description in Khmer." : ""}
                                     
@@ -234,18 +238,6 @@ const AddNews = () => {
                                         handleFileUpload(selectedFiles);
                                     }}
                                 />
-
-                                <Button
-                                    component="label"
-                                    role={undefined}
-                                    variant="contained"
-                                    tabIndex={-1}
-                                    startIcon={<CloudUploadIcon />}
-                                    htmlFor="fileUpload"
-                                    style={{marginLeft: '1.5rem'}}
-                                >
-                                    Upload Images
-                                </Button>
                                 {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                             </div>
                             <Box
@@ -263,7 +255,7 @@ const AddNews = () => {
                                 label="English Content"
                                 name="enContent" 
                                 onChange={handleChange} 
-                                placeholder="Placeholder"
+                                placeholder="English Content"
                                 helperText={errors.enContent ? "Please provide a cotent in English." : ""}
                                 multiline
                             />
@@ -274,7 +266,7 @@ const AddNews = () => {
                                 label="Khmer Content"
                                 name="khContent" 
                                 onChange={handleChange} 
-                                placeholder="Placeholder"
+                                placeholder="Khmer Content"
                                 helperText={errors.khContent ? "Please provide a cotent in Khmer." : ""}
                                 multiline
                             />
@@ -285,14 +277,14 @@ const AddNews = () => {
                         onClick={handleSubmit}
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem',  backgroundColor: "#198754" }}
                     >
                         Create News
                     </Button>
                     <Button
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1rem', backgroundColor: '#bb2124' }}
                         onClick={handleCancel}
                     >
                         Cancel

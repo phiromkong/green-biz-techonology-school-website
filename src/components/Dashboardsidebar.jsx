@@ -35,6 +35,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       whiteSpace: 'nowrap',
       width: drawerWidth,
       height: '100vh',
+      backgroundColor: '#088A5B',
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -65,15 +66,15 @@ const CustomListItem = ({ to, primary, icon }) => {
       component={Link}
       to={to}
       sx={{
-        color: isActive ? 'primary.main' : 'inherit',
+        color: isActive ? '#F0C52D' : 'white',
         fontWeight: isActive ? 'bold' : 'normal',
         '&:hover': {
-          color: 'primary.main',
+          color: '#8a0f08',
           fontWeight: 'bold',
         },
       }}
     >
-      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemIcon sx={{color: 'white'}}>{icon}</ListItemIcon>
       <ListItemText primary={primary} />
     </ListItem>
   );
@@ -99,9 +100,9 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
           }}
         >
           <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon sx={{color: 'white'}} />
           </IconButton>
-        </Toolbar>
+        </Toolbar>  
         <Divider />
         <List
           sx={{
@@ -112,27 +113,27 @@ const Dashboardsidebar = ({ open, toggleDrawer }) => {
           <CustomListItem to="/dashboard/account" primary="Admin Management" icon={<ManageAccountsIcon />} />
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-              <GroupsIcon />
+              <GroupsIcon sx={{color: 'white'}}/>
             </ListItemIcon>
-            <ListItemText primary="About Us" />
-            {openList ? <ExpandLess /> : <ExpandMore />}
+            <ListItemText primary="About Us" sx={{color: 'white'}} />
+            {openList ? <ExpandLess sx={{color: 'white'}} /> : <ExpandMore sx={{color: 'white'}} />}
           </ListItemButton>
           <Collapse in={openList} timeout="auto" unmountOnExit>
             <List disablePadding>
               <CustomListItem
                 to="/dashboard/news"
                 primary="News"
-                icon={<ArticleIcon />}
+                icon={<ArticleIcon sx={{color: 'white'}} />}
               />
               <CustomListItem
                 to="/dashboard/our-team"
                 primary="Our Team"
-                icon={<GroupIcon />}
+                icon={<GroupIcon sx={{color: 'white'}} />}
               />
               <CustomListItem
                 to="/dashboard/gallery"
                 primary="Gallery"
-                icon={<CollectionsIcon />}
+                icon={<CollectionsIcon sx={{color: 'white'}} />}
               />
             </List>
           </Collapse>

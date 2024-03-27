@@ -25,7 +25,7 @@ const MenuProps = {
  PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 350,
     },
  },
 };
@@ -340,30 +340,21 @@ function AddCourses() {
                     handleFileUpload(selectedFiles);
                 }}
             />
-            <Button
-                component="label"
-                role={undefined}
-                variant="contained"
-                tabIndex={-1}
-                htmlFor="fileUpload"
-                style={{marginLeft: '1.5rem'}}
-            >
-                Upload Image
-            </Button>
+
             {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
           </Box>
           <Button 
                 onClick={handleSubmit} 
                 variant="contained" 
                 color="primary" 
-                sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
             >
               Add Course
             </Button>
             <Button
                 variant="contained"
                 color="primary"
-                sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                sx={{ marginTop: '2rem', marginLeft: '1rem', backgroundColor: '#bb2124' }}
                 onClick={handleCancel}
             >
                 Cancel

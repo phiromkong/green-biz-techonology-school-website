@@ -37,6 +37,9 @@ import AddImage from './pages/AddImage';
 import AdminCourses from './pages/AdminCourses';
 import AddCourses from './pages/AddCourses';
 import EditCourses from './pages/EditCourses';
+import EditGallery from './pages/EditGallery';
+import AddImagesToGallery from './pages/AddImagesToGallery';
+import AdminSlider from './pages/AdminSlider';
 
 
 
@@ -86,6 +89,9 @@ function App() {
               <Route path='/dashboard/courses/add' element={<AddCourses />} />
               <Route path='/dashboard/courses/edit/:courseId' element={<EditCourses />} />
               <Route path='/dashboard/gallery' element={<AdminGallery />} />
+              <Route path='/dashboard/gallery/slider' element={<AdminSlider />} />
+              <Route path='/dashboard/gallery/add' element={<AddImagesToGallery />} />
+              <Route path='/dashboard/gallery/edit/:imageId' element={<EditGallery />} />
         </Route>       
         <Route path="/" element={<Home />} />
         <Route path='*' element={<NotFound />} />

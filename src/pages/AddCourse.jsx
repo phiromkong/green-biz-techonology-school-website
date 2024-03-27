@@ -8,7 +8,6 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
-
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -208,6 +207,7 @@ const AddCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 id="enDescription"
                                 name="enDescription"
                                 label="English Description"
@@ -218,6 +218,7 @@ const AddCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 onChange={(e) => handleInputChange(setKhDescription, 'khDescription', e.target.value)}
                                 error={Boolean(errors.khDescription)}
                                 helperText={errors.khDescription}
@@ -228,6 +229,7 @@ const AddCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 onChange={(e) => handleInputChange(setEnProgramOutcome, 'enProgramOutcome', e.target.value)}
                                 error={Boolean(errors.enProgramOutcome)}
                                 helperText={errors.enProgramOutcome}
@@ -238,6 +240,7 @@ const AddCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 onChange={(e) => handleInputChange(setKhProgramOutcome, 'khProgramOutcome', e.target.value)}
                                 error={Boolean(errors.khProgramOutcome)}
                                 helperText={errors.khProgramOutcome}
@@ -248,6 +251,7 @@ const AddCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 onChange={(e) => handleInputChange(setEnProgramOverview, 'enProgramOverview', e.target.value)}
                                 error={Boolean(errors.enProgramOverview)}
                                 helperText={errors.enProgramOverview}
@@ -258,6 +262,7 @@ const AddCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 onChange={(e) => handleInputChange(setKhProgramOverview, 'khProgramOverview', e.target.value)}
                                 error={Boolean(errors.khProgramOverview)}
                                 helperText={errors.khProgramOverview}
@@ -280,14 +285,14 @@ const AddCourse = () => {
                         onClick={handleSubmit}
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
                     >
                         Add Course
                     </Button>
                     <Button
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1rem', backgroundColor: '#bb2124' }}
                         onClick={handleCancel}
                     >
                         Cancel

@@ -139,6 +139,26 @@ const  EditOurTeam = () => {
         }
     };
 
+    const handleCancel = () => {
+        // Reset form fields to their initial state
+        setTeamMember({
+            enFirstName: '',
+            enLastName: '',
+            enPosition: '',
+            enQuote: '',
+            image: '',
+            khFirstName: '',
+            khLastName: '',
+            khPosition: '',
+            khQuote: '',
+            sex: '',
+        });
+        setImageURL(''); // Reset the image URL
+        // Optionally, navigate back to the previous page or a specific dashboard page
+        navigate('/dashboard/our-team');
+    };
+    
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -189,17 +209,7 @@ const  EditOurTeam = () => {
                                 error={Boolean(errors.enPosition)}
                                 helperText={errors.enPosition}
                             />
-                            <TextField
-                                required
-                                onChange={handleChange}
-                                id="enQuote"
-                                name="enQuote"
-                                label="English Quote"
-                                type="text"
-                                value={teamMember.enQuote}
-                                error={Boolean(errors.enQuote)}
-                                helperText={errors.enQuote}
-                            />
+
                             <TextField
                                 required
                                 onChange={handleChange}
@@ -218,9 +228,9 @@ const  EditOurTeam = () => {
                                 name="khLastName"
                                 label="Khmer Last Name"
                                 type="text"
-                                value={teamMember.enLastName}
-                                error={Boolean(errors.enLastName)}
-                                helperText={errors.enLastName}
+                                value={teamMember.khLastName}
+                                error={Boolean(errors.khLastName)}
+                                helperText={errors.khLastName}
                             />
                             <TextField
                                 required
@@ -233,9 +243,23 @@ const  EditOurTeam = () => {
                                 error={Boolean(errors.khPosition)}
                                 helperText={errors.khPosition}
                             />
+                            <div>
                             <TextField
                                 required
                                 onChange={handleChange}
+                                multiline
+                                id="enQuote"
+                                name="enQuote"
+                                label="English Quote"
+                                type="text"
+                                value={teamMember.enQuote}
+                                error={Boolean(errors.enQuote)}
+                                helperText={errors.enQuote}
+                            />
+                            <TextField
+                                required
+                                onChange={handleChange}
+                                multiline
                                 id="khQuote"
                                 name="khQuote"
                                 label="Khmer Quote"
@@ -244,6 +268,7 @@ const  EditOurTeam = () => {
                                 error={Boolean(errors.khQuote)}
                                 helperText={errors.khQuote}
                             />
+                            </div>
                             <TextField
                                 required
                                 onChange={handleChange}
@@ -288,6 +313,14 @@ const  EditOurTeam = () => {
                         sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
                     >
                         Update Member
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        onClick={handleCancel}
+                    >
+                        Cancel
                     </Button>
                     <Snackbar 
                     open={snackbarOpen} 
