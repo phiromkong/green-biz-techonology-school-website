@@ -33,7 +33,13 @@ const CourseCard = ({ id }) => {
  if (loading && !course){ 
   return (
     <div>
-
+      <Backdrop
+        sx={{ color: 'white', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={() => {}}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
   }
@@ -43,7 +49,7 @@ const CourseCard = ({ id }) => {
  const courseDescription = i18n.language === 'kh' ? course.khDescription : course.enDescription;
 
  return (
-    <Card sx={{ maxWidth: 500 }} className='course-card'>
+    <Card sx={{ maxWidth: 400 }} className='course-card'>
       <CardActionArea component="a" href={`/courses/${id}`} className="card-action-area">
         <CardMedia component="img" height="400px" image={course.imageURL || `${process.env.PUBLIC_URL}/placeholder.jpg`} alt={courseTitle} className="card-media-img"/>
         <CardContent>

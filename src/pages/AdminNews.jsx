@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom'; // Import useHistory
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,9 +20,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase'; // Make sure this path is correct
+import { getStorage, ref, deleteObject } from 'firebase/storage';
+import { db } from '../firebase';
 import '../components/css/AdminNews.css';
+
 
 const options = ['Edit', 'Delete']; // Adjusted options for "Edit" and "Delete"
 const ITEM_HEIGHT = 48;
@@ -36,12 +41,21 @@ const AdminNews = () => {
     const [posts, setPosts] = useState([]); // Initialize posts as an empty array
     const openMore = Boolean(anchorEl);
     const navigate = useNavigate(); // Use the useHistory hook
+    const [searchTerm, setSearchTerm] = useState("");
+
 
 
     useEffect(() => {
         const fetchPosts = async () => {
             const querySnapshot = await getDocs(collection(db, "news"));
-            const newPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+            let newPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    
+            // If there's a search term, filter posts by title
+            if (searchTerm) {
+                newPosts = newPosts.filter(post =>
+                    post.enTitle.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
     
             // Sort the posts array by date in descending order
             newPosts.sort((a, b) => {
@@ -52,8 +66,8 @@ const AdminNews = () => {
         };
     
         fetchPosts();
-    }, []);
-     // This hook will run once when the component mounts
+    }, [searchTerm]); // Add searchTerm to the dependency array
+    
 
     const handleClick = (event, postId) => {
         setAnchorEl(event.currentTarget);
@@ -71,6 +85,20 @@ const AdminNews = () => {
     // Function to delete a post by its ID
     const deletePost = async (postId) => { 
         try {
+            // Find the post to delete in the posts state
+            const postToDelete = posts.find(post => post.id === postId);
+            if (postToDelete && postToDelete.thumbnailImage) {
+                // Create a reference to the file in Firebase Storage
+                const imageRef = ref(getStorage(), postToDelete.thumbnailImage);
+    
+                // Delete the file from Firebase Storage
+                await deleteObject(imageRef).then(() => {
+                    console.log("News post image deleted from Firebase Storage");
+                }).catch((error) => {
+                    console.error("Error deleting news post image from Firebase Storage:", error);
+                });
+            }
+    
             // Delete the document from Firestore
             await deleteDoc(doc(db, "news", postId));
             console.log('Deleted post with ID:', postId);
@@ -84,7 +112,8 @@ const AdminNews = () => {
             console.error("Error deleting document: ", error);
             // Handle error
         }
-    };    
+    };
+        
     
     const handleDeleteConfirm = async () => {
         if (deletePostId) {
@@ -113,6 +142,21 @@ const AdminNews = () => {
                                 <Button component={Link} to="/dashboard/news/add" variant="contained" startIcon={<AddIcon />}>
                                     New Post
                                 </Button>
+                                <Paper
+                                    component="form"
+                                    sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+                                >
+                                    <InputBase
+                                         sx={{ ml: 1, flex: 1 }}
+                                        placeholder="Search News Posts"
+                                        inputProps={{ "aria-label": "search news posts" }}
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
+                                    <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                                        <SearchIcon />
+                                    </IconButton>
+                                </Paper>
                             </Stack>
                             <div className="post-container">
                                 <div className="page-title mb-5"></div>

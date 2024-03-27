@@ -8,8 +8,10 @@ import lgZoom from 'lightgallery/plugins/zoom'; // Import lightgallery zoom plug
 import CourseList from './Courselist'; // import the CourseList component
 import Grid from '@mui/material/Grid';
 import './css/Galleryimage.css';
+import { useTranslation } from 'react-i18next';
 
 const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
+    const { i18n } = useTranslation(); 
     const handleCourseSelect = (programId) => {
         setSelectedProgram(programId);
     }   
@@ -40,7 +42,7 @@ const Galleryimage = ({ itemData, setSelectedProgram, selectedProgram }) => {
                     <LightGallery plugins={[lgThumbnail, lgZoom]} onAfterOpen={() => handleLightGalleryEvents('onAfterOpen')} onBeforeClose={() => handleLightGalleryEvents('onBeforeClose')}>
                         {filteredCourses.map((item) => (
                             <a href={item.image} key={item.id}>
-                                <img className="gallery-image" alt= {item.enTitle}  src={item.image} /> 
+                                <img className="gallery-image" alt= {i18n.language === 'kh' ? item.khTitle : item.enTitle}  src={item.image} /> 
                             </a>
                         ))}
                     </LightGallery>

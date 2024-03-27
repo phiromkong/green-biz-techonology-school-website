@@ -238,6 +238,7 @@ const EditNews = ({ match }) => {
                                 label="English Description"
                                 name="enDescription" 
                                 value={newsPost.enDescription}
+                                multiline
                                 placeholder="English Description"
                                 type= "text"
                                 onChange={handleChange} 
@@ -250,6 +251,7 @@ const EditNews = ({ match }) => {
                                 label="Khmer Description"
                                 name="khDescription" 
                                 value={newsPost.khDescription}
+                                multiline
                                 placeholder="Khmer Description"
                                 type= "text"
                                 onChange={handleChange} 
@@ -342,6 +344,7 @@ const EditNews = ({ match }) => {
                                     name="enContent"
                                     value={newsPost.enContent}
                                     placeholder="English Content"
+                                    multiline
                                     type= "text"
                                     onChange={handleChange} 
                                     helperText={errors.enContent ? "Please provide content in English." : ""}
@@ -354,6 +357,7 @@ const EditNews = ({ match }) => {
                                     name="khContent"
                                     value={newsPost.khContent}
                                     placeholder="Khmer Content"
+                                    multiline
                                     type= "text"
                                     onChange={handleChange} 
                                     helperText={errors.khContent ? "Please provide content in Khmer." : ""}

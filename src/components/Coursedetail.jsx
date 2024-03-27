@@ -12,7 +12,7 @@ const CoursesDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [course, setCourse] = useState(null);
-    const { i18n } = useTranslation(); // Use the useTranslation hook
+    const { t, i18n } = useTranslation(); // Use the useTranslation hook
 
     useEffect(() => {
         const fetchCourse = async () => {
@@ -56,16 +56,16 @@ const CoursesDetail = () => {
                 <div className='course-title'>{courseTitle}</div>
                 <img src={course.imageURL} alt={courseTitle} style={{ width: '100%' }} />
                 <div className='section'>
-                    <h2>Program Overview</h2>
+                    <h2>{t('programOverview')}</h2>
                     <p>{programOverview}</p>
                 </div>
                 <div className='section'>
-                    <h2>Program Outcome</h2>
+                    <h2>{t('programOutcome')}</h2>
                     <p>{programOutcome}</p>
                 </div>
-                <button onClick={handleContactClick}>Contact Us to Register</button>
+                <button onClick={handleContactClick} style={{fontFamily: "Kantumruy Pro"}}>{t('enrollNow')}</button>
                 <div>
-                    <Button className='back-btn' style={{textTransform: 'none', width: '15%', boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px', borderRadius: '10px', padding: '10px 20px'}} onClick={handleBackClick}>Back</Button>
+                    <Button className='back-btn' style={{textTransform: 'none', width: '15%', boxShadow: 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px', borderRadius: '10px', padding: '10px 20px', fontFamily: "Kantumruy Pro"}} onClick={handleBackClick}>​​{t('back')}</Button>
                 </div>
             </div>
             <Footer />
