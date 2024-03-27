@@ -4,7 +4,6 @@ import { db } from '../firebase';
 import { SocialIcon } from 'react-social-icons';
 import "./css/Hero.css";
 import { useTranslation } from 'react-i18next'; // Import useTranslation
-import { data } from 'jquery';
 
 const Hero = () => {
  const [quote, setQuote] = useState('');

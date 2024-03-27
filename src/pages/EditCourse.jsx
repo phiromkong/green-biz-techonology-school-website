@@ -124,6 +124,7 @@ const EditCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 id="enDescription"
                                 name="enDescription"
                                 label="English Description"
@@ -132,6 +133,7 @@ const EditCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 id="khDescription"
                                 name="khDescription"
                                 label="Khmer Description"
@@ -140,6 +142,7 @@ const EditCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 id="enProgramOutcome"
                                 name="enProgramOutcome"
                                 label="English Program Outcome"
@@ -148,6 +151,7 @@ const EditCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 id="khProgramOutcome"
                                 name="khProgramOutcome"
                                 label="Khmer Program Outcome"
@@ -156,6 +160,7 @@ const EditCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 id="enProgramOverview"
                                 name="enProgramOverview"
                                 label="English Program Overview"
@@ -164,6 +169,7 @@ const EditCourse = () => {
                             />
                             <TextField
                                 required
+                                multiline
                                 id="khProgramOverview"
                                 name="khProgramOverview"
                                 label="Khmer Program Overview"

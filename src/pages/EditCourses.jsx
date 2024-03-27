@@ -41,7 +41,7 @@ function getStyles(name, programName, theme) {
 
 const defaultTheme = createTheme();
 function EditCourses() {
-    const { courseId } = useParams();
+  const { courseId } = useParams();
  const theme = useTheme();
  const [uploading, setUploading] = useState(false);
  const [selectedProgram, setSelectedProgram] = useState('');
@@ -80,7 +80,7 @@ function EditCourses() {
  useEffect(() => {
     const fetchPrograms = async () => {
         const programsCollection = collection(db, "program");
-        const programsSnapshot = await getDocs(programsCollection); // Use getDocs instead of getDoc
+        const programsSnapshot = await getDocs(programsCollection);
         const programsList = programsSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
         setPrograms(programsList);
        };

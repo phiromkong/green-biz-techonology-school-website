@@ -95,6 +95,14 @@ const EditPartners = () => {
             console.error("Error updating document: ", error);
         }
     };
+
+    const handleCancel = () => {
+        // Reset form fields to their initial state
+        setPartner({ name: '', image: '' });
+        // Optionally, navigate back to the previous page or a specific dashboard page
+        navigate('/dashboard/partners');
+    };
+    
     
 
     return (
@@ -153,6 +161,14 @@ const EditPartners = () => {
                         sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
                     >
                         Update Partner
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        onClick={handleCancel}
+                    >
+                        Cancel
                     </Button>
                     <Snackbar
                         open={snackbarOpen}

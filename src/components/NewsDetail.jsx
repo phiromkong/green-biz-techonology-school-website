@@ -77,10 +77,12 @@ const NewsDetail = () => {
  const language = i18n.language;
  const titleKey = language === 'en' ? 'enTitle' : 'khTitle';
  const contentKey = language === 'en' ? 'enContent' : 'khContent';
+ console.log(contentKey);
+ console.log(post[contentKey]);
 
  return (
     <div>
-      <Navbar />
+      <Navbar />  
       <div className='news-article'>
         <div className='news-title'>{post[titleKey]}</div>
         <p>Published on {post.date ? post.date.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''}</p>

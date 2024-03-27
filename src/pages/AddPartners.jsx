@@ -152,21 +152,11 @@ const AddPartners = () => {
                                 type="file"
                                 id="fileUpload"
                                 accept="image/*"
-                                style={{ display: 'none' }}
+                                style={{ display: 'flex', marginLeft: '1.5rem' }}
                                 onChange={handleLogoChange}
                             />
                             {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                         </div>
-                        <Button
-                                component="label"
-                                role={undefined}
-                                variant="contained"
-                                tabIndex={-1}
-                                htmlFor="fileUpload"
-                                style={{ marginLeft: '1.5rem'}}
-                            >
-                                Upload Image
-                        </Button>
                         {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
                     </Box>
                     <Button
@@ -174,14 +164,14 @@ const AddPartners = () => {
                         type="submit"
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
                     >
                         Add Partner
                     </Button>
                     <Button
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1rem', backgroundColor: '#bb2124' }}
                         onClick={handleCancel}
                     >
                         Cancel

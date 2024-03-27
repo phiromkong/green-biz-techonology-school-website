@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { collection, doc, getDocs, deleteDoc } from 'firebase/firestore';
+import { getStorage, ref, deleteObject } from 'firebase/storage';
 import { db } from '../firebase';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -10,9 +11,9 @@ import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { getAuth, onAuthStateChanged, deleteUser, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, onAuthStateChanged, sendPasswordResetEmail } from "firebase/auth";
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -22,6 +23,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+
 
 const defaultTheme = createTheme();
 const options = ['Reset Password', 'Delete'];
@@ -34,7 +36,7 @@ function AdminAccount() {
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [deleteAdminId, setDeleteAdminId] = useState(null);
-    const navigate = useNavigate();
+    const [currentUserId, setCurrentUserId] = useState(null); 
 
     const toggleDrawer = () => {
         setOpen(!open);
@@ -57,24 +59,30 @@ function AdminAccount() {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log("User is signed in:", user);
+                setCurrentUserId(user.uid); // Set the current user's ID
             } else {
                 console.log("User is signed out");
+                setCurrentUserId(null); // Clear the current user's ID
             }
         });
 
         return () => unsubscribe();
     }, []);
 
+    
+    
     useEffect(() => {
         const fetchAdmins = async () => {
             const adminsRef = collection(db, "admins");
             const snapshot = await getDocs(adminsRef);
             const adminsData = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-            setAdmins(adminsData);
+            // Filter out the current user's ID from the list of admins
+            const filteredAdmins = adminsData.filter(admin => admin.id !== currentUserId);
+            setAdmins(filteredAdmins);
         };
 
         fetchAdmins();
-    }, []);
+    }, [currentUserId]); 
 
     const handleDelete = (adminId) => {
         setDeleteAdminId(adminId); // Set the admin ID to be deleted
@@ -84,11 +92,27 @@ function AdminAccount() {
     const handleDeleteConfirmation = async () => {
         console.log("handleDeleteConfirmation called");
         setDeleteDialogOpen(false);
-
+    
         console.log("Attempting to delete document with ID:", deleteAdminId);
         try {
+            // Find the admin to delete in the admins state
+            const adminToDelete = admins.find(admin => admin.id === deleteAdminId);
+            if (adminToDelete && adminToDelete.profilePicture) {
+                // Create a reference to the file in Firebase Storage
+                const profilePictureRef = ref(getStorage(), adminToDelete.profilePicture);
+    
+                // Delete the file from Firebase Storage
+                await deleteObject(profilePictureRef).then(() => {
+                    console.log("Profile picture deleted from Firebase Storage");
+                }).catch((error) => {
+                    console.error("Error deleting profile picture from Firebase Storage:", error);
+                });
+            }
+    
+            // Delete the document from Firestore
             await deleteDoc(doc(db, "admins", deleteAdminId));
             console.log("User document deleted from Firestore");
+    
             // Remove the deleted admin from the admins state
             setAdmins(admins.filter(admin => admin.id !== deleteAdminId));
             // Clear the deleteAdminId state
@@ -96,9 +120,8 @@ function AdminAccount() {
         } catch (error) {
             console.error("Error deleting user document from Firestore:", error);
         }
-        window.location.reload();
     };
-
+    
     
     
     
@@ -126,7 +149,7 @@ function AdminAccount() {
             headerName: 'Actions',
             width: 150,
             align: 'right', // Aligns the cell content to the right
-            headerAlign: 'right', // Aligns the header content to the right
+            headerAlign: 'left', // Aligns the header content to the right
             renderCell: (params) => (
                 <IconButton
                     aria-label="more"
@@ -150,14 +173,14 @@ function AdminAccount() {
                 <Dashboardnav open={open} toggleDrawer={toggleDrawer} />
                 <Dashboardsidebar open={open} toggleDrawer={toggleDrawer} />
                 <Container>
-                    <div style={{ marginTop: '80px', marginLeft: '-50px' }}>
+                    <div style={{ marginTop: '80px'}}>
                         <Stack direction="row" spacing={1}>
                             <Button component={Link} to="/dashboard/account/add" variant="contained" startIcon={<AddIcon />}>
                                 New Admin
                             </Button>
                         </Stack>
                     </div>
-                    <div style={{ height: 800, width: '100%', marginTop: '3rem' }}>
+                    <div style={{ height: 600, width: '100%', marginTop: '3rem' }}>
                         <DataGrid
                             rows={admins}
                             columns={columns}
