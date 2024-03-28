@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Snackbar from '@mui/material/Snackbar';  
+import Alert from '@mui/material/Alert';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -229,16 +230,25 @@ function AddImage() {
                         <Button variant="contained"  sx={{ marginTop: '3rem', marginBottom: '3rem', backgroundColor: "#198754" }} onClick={handleSubmit}>
                             Upload Images
                         </Button>
-                        <Button variant="contained"  sx={{ marginTop: '3rem', marginBottom: '3rem', marginLeft: '3rem', backgroundColor: '#bb2124' }} onClick={handleCancel}>
+                        <Button variant="contained" sx={{ marginTop: '3rem', marginBottom: '3rem', marginLeft: '3rem', backgroundColor: '#bb2124' }} onClick={handleCancel}>
                             Cancel
                         </Button>
                     </div>
                     <Snackbar
                         open={snackbarOpen}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                         autoHideDuration={6000}
                         onClose={handleSnackbarClose}
-                        message={snackbarMessage}
-                    />
+                    >
+                        <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                            {snackbarMessage}
+                        </Alert>
+                    </Snackbar>
                 </Container>
             </Box>
         </ThemeProvider>

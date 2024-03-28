@@ -91,7 +91,6 @@
     font-size: 1.5rem;
     cursor: pointer;
   }
-  
   .nav__cta {
     background-color: #088A5B;;
     color: white;
@@ -265,8 +264,8 @@
         font-family: "Kantumruy Pro", sans-serif; 
         font-weight: 700;
         font-size: 15px;
-        border: 2px solid #fff !important;
-        color: #fff;
+        border: 2px solid black !important;
+        color: black;
         display: flex;
         align-items: center; 
         justify-content: center;
@@ -290,13 +289,7 @@
         padding: 0.2rem;
     }
 
-    .btn_lang_position {
-        position: absolute;
-        right: 145px;
-        /* left: 50%; */
-        top: -3%;
 
-    }
 
     .lang_box i {
         transition: transform  0.3s ease;
@@ -330,7 +323,7 @@
     }
 
     .logo {
-        width: 30%; 
+        width: 60%; 
         height: auto;
     }
 

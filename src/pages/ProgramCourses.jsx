@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, query, where, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, query, where, deleteDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, deleteObject } from 'firebase/storage';
 import { db } from '../firebase';
 import { useParams } from 'react-router-dom';
@@ -11,19 +11,15 @@ import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import Grid from '@mui/material/Grid';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
+import { DataGrid } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Paper from "@mui/material/Paper";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
 
 const defaultTheme = createTheme();
 
@@ -32,138 +28,126 @@ function ProgramCourses() {
     const { programId } = useParams();
     const [courses, setCourses] = useState([]);
     const [open, setOpen] = React.useState(true);
-    const [deleteCourseId, setDeleteCourseId] = useState(null); // State for course ID to be deleted
-    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false); // State to control dialog visibility
-
-    const toggleDrawer = () => {
-        setOpen(!open);
-    };
+    const [searchTerm, setSearchTerm] = useState("");
+    const [deleteCourseId, setDeleteCourseId] = useState(null);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
     useEffect(() => {
         const fetchCourses = async () => {
             const coursesCollection = collection(db, "courses");
             const q = query(coursesCollection, where("programId", "==", programId));
             const querySnapshot = await getDocs(q);
-            const coursesList = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-            setCourses(coursesList);
+            let fetchedCourses = await Promise.all(querySnapshot.docs.map(async (courseDoc) => {
+                const courseData = courseDoc.data();
+                const programDocRef = doc(db, "program", programId);
+                const programDocSnap = await getDoc(programDocRef);
+                if (programDocSnap.exists()) {
+                    const programDetails = programDocSnap.data();
+                    return { ...courseData, id: courseDoc.id, programEnTitle: programDetails.enTitle };
+                } else {
+                    console.log(`No program found for programId: ${programId}`);
+                    return { ...courseData, id: courseDoc.id, programEnTitle: "No program found" };
+                }
+            }));
+
+            // Filter courses based on search term
+            if (searchTerm) {
+                fetchedCourses = fetchedCourses.filter(course =>
+                    course.enTitle.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+
+            setCourses(fetchedCourses);
         };
 
         fetchCourses();
-    }, [programId]);
-
-    const handleDelete = async (courseId) => {
-        // First, find the course to delete in the courses state
-        const courseToDelete = courses.find(course => course.id === courseId);
-        if (courseToDelete && courseToDelete.imageURL) {
-            // Create a reference to the file in Firebase Storage
-            const imageRef = ref(getStorage(), courseToDelete.imageURL);
-    
-            // Delete the file from Firebase Storage
-            await deleteObject(imageRef).then(() => {
-                console.log("Course image deleted from Firebase Storage");
-            }).catch((error) => {
-                console.error("Error deleting course image from Firebase Storage:", error);
-            });
-        }
-    
-        // Delete the course document from Firestore
-        await deleteDoc(doc(db, "courses", courseId));
-        console.log("Course document deleted from Firestore");
-    
-        // Update the local state to reflect the deletion
-        setCourses(courses.filter(course => course.id !== courseId));
-        setDeleteCourseId(null); // Clear the deleteCourseId state
-    };
+    }, [programId, searchTerm]);
     
 
-    const handleDeleteConfirm = async () => {
-        if (deleteCourseId) {
-            await handleDelete(deleteCourseId);
-            setDeleteCourseId(null);
-            setDeleteDialogOpen(false);
-        }
-    };
-
-    const handleDeleteCancel = () => {
-        setDeleteCourseId(null);
-        setDeleteDialogOpen(false);
-    };
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 150 },
+        { field: 'enTitle', headerName: 'English Title', width: 200 },
+        { field: 'khTitle', headerName: 'Khmer Title', width: 200 },
+        { field: 'programEnTitle', headerName: 'Program', width: 200 },
+        { field: 'enDescription', headerName: 'English Description', width: 300 },
+        { field: 'khDescription', headerName: 'Khmer Description', width: 300 },
+        { field: 'enProgramOverview', headerName: 'English Overview', width: 300 },
+        { field: 'khProgramOverview', headerName: 'Khmer Overview', width: 300 },
+        { field: 'enProgramOutcome', headerName: 'English Outcome', width: 300 },
+        { field: 'khProgramOutcome', headerName: 'Khmer Outcome', width: 300 },
+        {
+            field: 'image',
+            headerName: 'Image',
+            width: 150,
+            renderCell: (params) => (
+                <img src={params.row.imageURL} alt={params.row.enTitle} style={{ width: '100%', height: 'auto' }} />
+            ),
+        },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 150,
+            renderCell: (params) => (
+                <div>
+                    <IconButton onClick={() => navigate(`/dashboard/programs/${programId}/edit/${params.row.id}`)}>
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => {
+                        setDeleteCourseId(params.row.id);
+                        setDeleteDialogOpen(true);
+                        
+                    }}>
+                        <DeleteIcon />
+                    </IconButton>
+                </div>
+            ),
+        },
+    ];
 
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
-                <Dashboardnav open={open} toggleDrawer={toggleDrawer} />
-                <Dashboardsidebar open={open} toggleDrawer={toggleDrawer} />
+                <Dashboardnav open={open} toggleDrawer={() => setOpen(!open)} />
+                <Dashboardsidebar open={open} toggleDrawer={() => setOpen(!open)} />
                 <Container>
                     <div style={{ marginTop: '80px' }}>
                         <Stack direction="row" spacing={1}>
                             <Button component={Link} to={`/dashboard/programs/${programId}/addCourse`} variant="contained" startIcon={<AddIcon />}>
                                 New Course
                             </Button>
-                            <Button component={Link} to={`/dashboard/programs/${programId}/addImage`} variant="contained" startIcon={<AddIcon />}>
-                                New Gallery Image
-                            </Button>
+                            <Paper
+                                component="form"
+                                sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+                            >
+                                <InputBase
+                                    sx={{ ml: 1, flex: 1 }}
+                                    placeholder="Search Courses"
+                                    inputProps={{ "aria-label": "search courses" }}
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                                <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                                    <SearchIcon />
+                                </IconButton>
+                            </Paper>
                         </Stack>
                     </div>
-                    <Grid container spacing={2} sx={{ marginTop: '5rem' }}>
-                        {courses.map(course => (
-                            <Grid item xs={12} sm={6} md={4} key={course.id}>
-                                <Card sx={{ margin: 2 }}>
-                                    <CardMedia
-                                        component="img"
-                                        alt={course.enTitle}
-                                        height="400px"
-                                        image={course.imageURL} // Assuming imageURL is the field name for the image
-                                    />
-                                    <CardContent>
-                                        <Typography variant="h5" component="div" sx={{fontSize: '1rem'}}>
-                                            {course.enTitle}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary" sx={{fontSize: '0.7rem'}}>
-                                            {course.enDescription}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button variant="contained" size="small" sx={{backgroundColor: "#198754"}} onClick={() => navigate(`/dashboard/programs/${programId}/edit/${course.id}`)}>Edit</Button>
-                                        <Button variant="contained" size="small" sx={{backgroundColor: '#bb2124'}} onClick={() => {
-                                            setDeleteCourseId(course.id);
-                                            setDeleteDialogOpen(true);
-                                        }}>Delete</Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                    <Button 
-                    onClick={() => navigate(`/dashboard/programs`)}
-                    sx={{ marginTop: '2rem', marginLeft: '1rem' }}
-                    variant="contained"
-                    color="primary"
-                    >
-                        Back
-                    </Button>
-                    <Dialog
-                        open={deleteDialogOpen}
-                        onClose={handleDeleteCancel}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                                Are you sure you want to delete this course?
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleDeleteCancel} color="primary">
-                                Cancel
-                            </Button>
-                            <Button onClick={handleDeleteConfirm} color="primary" autoFocus>
-                                Delete
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+                    <div style={{ height: 600, width: '100%', marginTop: '2rem' }}>
+                        <DataGrid
+                            rows={courses}
+                            columns={columns}
+                            pageSize={5}
+                            getRowHeight={() => 'auto'}
+                            rowsPerPageOptions={[5]}
+                            checkboxSelection
+                        />
+                    </div>
+                    <Stack direction="row" spacing={1} sx={{marginTop: '2rem'}}>
+                        <Button component={Link} to={`/dashboard/programs/`} variant="contained" sx={{ backgroundColor:'#088A5B'}}>
+                            Back
+                        </Button>
+                </Stack>
                 </Container>
             </Box>
         </ThemeProvider>

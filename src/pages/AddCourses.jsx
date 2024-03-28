@@ -18,6 +18,8 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -359,12 +361,21 @@ function AddCourses() {
             >
                 Cancel
             </Button>
-            <Snackbar 
-            open={snackbarOpen} 
-            autoHideDuration={6000} 
-            onClose={handleSnackbarClose}
-            message="Course added successfully"
-            />
+            <Snackbar
+                        open={snackbarOpen}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                    >
+                        <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                            Course Added successfully
+                        </Alert>
+                    </Snackbar>
         </Container>
       </Box>
     </ThemeProvider>

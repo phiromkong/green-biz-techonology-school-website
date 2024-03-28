@@ -5,6 +5,7 @@ import Team from '../components/Team';
 import Footer from '../components/Footer';
 import { db } from '../firebase'; // Import your Firebase configuration
 import { collection, getDocs } from 'firebase/firestore';
+import MetaHeader from '../components/MetaHeader'; // Import the MetaHeader component
 
 const Faculty = () => {
     const [teamMembers, setTeamMembers] = useState([]);
@@ -28,6 +29,15 @@ const Faculty = () => {
     
     return (
         <div>
+            <MetaHeader
+                title="GBT School Faculty - Meet Our Team"
+                description="Discover the dedicated team behind GBT School. Our faculty is passionate about education and committed to providing the best learning experience for our students."
+                keywords="faculty, team, GBT School, education, passion, learning"
+                ogTitle="GBT School Faculty - Meet Our Team"
+                ogDescription="Discover the dedicated team behind GBT School. Our faculty is passionate about education and committed to providing the best learning experience for our students."
+                ogImage="https://www.gbtschool.com/logo.png"
+                ogUrl="https://www.gbtschool.org/faculty"
+            />
             <Navbar />
             <section className="background-grey bg_green pt-50 pb-50">
                 <div className="container">
