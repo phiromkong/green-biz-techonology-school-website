@@ -56,7 +56,12 @@ const CourseCard = ({ id }) => {
           <Typography variant="h5" component="div" style={{fontFamily: 'Kantumruy Pro', fontWeight: 'bold'}}>
             {courseTitle}
           </Typography>
-          <Typography variant="body2" color="text.secondary" style={{color: 'black', fontFamily: 'Kantumruy Pro', overflow: 'hidden', fontWeight: '450', paddingTop: '15px'}}>
+          <Typography sx={{
+        display: '-webkit-box',
+        overflow: 'hidden',
+        WebkitBoxOrient: 'vertical',
+        WebkitLineClamp: 3,
+    }} variant="body2" color="text.secondary" style={{color: 'black', fontFamily: 'Kantumruy Pro', overflow: 'hidden', fontWeight: '450', paddingTop: '15px'}}>
             {courseDescription}
           </Typography>
         </CardContent>

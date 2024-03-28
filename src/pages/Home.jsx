@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
 import { db } from '../firebase'; // Ensure you have this configured correctly
 import Navbar from '../components/Navbar';
 import Slider from '../components/Slider';
@@ -19,6 +20,7 @@ const Home = () => {
   const [newsData, setNewsData] = useState([]);
   const [courses, setCourses] = useState([]); // State for courses
   const [loading, setLoading] = useState(true); // Add a loading state
+  const [sliderImages, setSliderImages] = useState([]);
   const { i18n } = useTranslation(); // Use the useTranslation hook
 
   useEffect(() => {
@@ -51,19 +53,24 @@ const Home = () => {
       setCourses(coursesList);
     };
 
+    const fetchSliderImages = async () => {
+      const storage = getStorage();
+      const imagesRef = ref(storage, 'gallery/slider');
+      const listResult = await listAll(imagesRef);
+      const imagesListPromises = listResult.items.map(async (item) => {
+        const imageURL = await getDownloadURL(item);
+        return { url: imageURL, title: "NA" }; // Assuming you don't have titles for these images
+      });
+      const imagesList = await Promise.all(imagesListPromises);
+      setSliderImages(imagesList);
+   };
+
     fetchPartners();
     fetchNews();
     fetchCourses();
+    fetchSliderImages();
  }, []);
   
-
-  const slides = [
-    { url: "./Img1.jpg", title: "NA" },
-    { url: "./Img2.jpg", title: "NA" },
-    { url: "./Img3.jpg", title: "NA" },
-    { url: "./Img4.jpg", title: "NA" },
-    { url: "./Img5.jpg", title: "NA" },
-  ];
 
   const containerStyles = {
     height: "960px",
@@ -85,7 +92,7 @@ const Home = () => {
     <div>
       <Navbar />
       <div style={containerStyles}>
-        <Slider slides={slides} />
+      <Slider slides={sliderImages} />
       </div>
       <Slogan />
       <Hnews title="News and Update" limit={4}>

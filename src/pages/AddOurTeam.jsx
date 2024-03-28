@@ -9,6 +9,7 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -304,10 +305,19 @@ const AddTeamMember = () => {
                     </Button>
                     <Snackbar
                         open={snackbarOpen}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                         autoHideDuration={6000}
                         onClose={handleSnackbarClose}
-                        message= "Team member added successfully!"
-                    />
+                    >
+                        <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                            Team Member Added successfully
+                        </Alert>
+                    </Snackbar>
                 </Container> 
             </Box>
         </ThemeProvider>

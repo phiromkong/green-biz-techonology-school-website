@@ -8,7 +8,7 @@ import Dashboardnav from '../components/Dashboardnav';
 import Button from '@mui/material/Button';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
-import { TextField, MenuItem, Grid, Snackbar, FormControl, InputLabel, Select, OutlinedInput } from '@mui/material';
+import { TextField, MenuItem, Grid, Snackbar, FormControl, InputLabel, Select, OutlinedInput, Alert } from '@mui/material';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -245,10 +245,19 @@ function AddImagesToGallery() {
                     </div>
                     <Snackbar
                         open={snackbarOpen}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                         autoHideDuration={6000}
                         onClose={handleSnackbarClose}
-                        message={snackbarMessage}
-                    />
+                    >
+                        <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                            {snackbarMessage}
+                        </Alert>
+                    </Snackbar>
                 </Container>
             </Box>
         </ThemeProvider>

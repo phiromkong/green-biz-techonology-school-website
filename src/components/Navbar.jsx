@@ -120,14 +120,7 @@ const Navbar = () => {
             {t('enrollNow')}
           </Link>
         </li>
-      </ul>
-    );
-  };
-
-  return (
-    <div className={`parent-div ${scrolling ? 'scrolling' : ''}`}>
-      <div className="login-rectangle">
-        <NavLink to="/contact" className="top_header_text">{t('apply')}</NavLink>
+        <li>
         <div className="blog_lang">
           <div className="btn_lang_position">
             <ul className="lang-dropdown" style={{ listStyle: "none" }}>
@@ -149,7 +142,13 @@ const Navbar = () => {
             </ul>
           </div>  
         </div>
-      </div>
+        </li>
+      </ul>
+    );
+  };
+
+  return (
+    <div className={`parent-div ${scrolling ? 'scrolling' : ''}`}>  
 
       <nav>
         <div>

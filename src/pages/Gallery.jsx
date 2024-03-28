@@ -7,6 +7,7 @@ import Galleryimg from '../components/Galleryimage';
 import Footer from '../components/Footer';
 import "../components/css/Gallery.css";
 import Pagination from '../components/Pagination';
+import MetaHeader from '../components/MetaHeader';
 
 const Gallery = () => {
     const [galleryItems, setGalleryItems] = useState([]);
@@ -43,6 +44,15 @@ const Gallery = () => {
 
     return (
         <div>
+            <MetaHeader
+                title="GBT School Gallery - Explore Our Achievements"
+                description="Discover the latest achievements and projects from GBT School. Explore our gallery to see the impact of our courses and partnerships."
+                keywords="gallery, achievements, projects, GBT School, education, courses, partnerships"
+                ogTitle="GBT School Gallery - Explore Our Achievements"
+                ogDescription="Discover the latest achievements and projects from GBT School. Explore our gallery to see the impact of our courses and partnerships."
+                ogImage="https://www.gbtschool.com/logo.png"
+                ogUrl="https://www.gbtschool.org/gallery"
+            />
             <Navbar />
             <div className="gallery-container">
                 <div className='gallery-title' onClick={resetFilter}>

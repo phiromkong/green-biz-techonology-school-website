@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import Dashboardnav from '../components/Dashboardnav';
 import Dashboardsidebar from '../components/Dashboardsidebar';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const defaultTheme = createTheme();
@@ -188,7 +189,7 @@ const EditCourse = () => {
                             />
                             <div style={{ marginTop: '-1.5rem', marginLeft: '2.0rem' }}>
                                 <label htmlFor="fileUpload">
-                                    <Button component="span" variant="contained" style={{marginLeft: '-0.5rem'}}>
+                                    <Button component="span" variant="contained" style={{marginLeft: '-0.5rem', backgroundColor: '#F0C52D', color:'black'}}>
                                         Replace
                                     </Button>
                                 </label>
@@ -200,24 +201,33 @@ const EditCourse = () => {
                         onClick={handleSubmit}
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
                     >
                         Update Course
                     </Button>
                     <Button
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1rem', backgroundColor: '#bb2124' }}
                         onClick={handleCancel}
                     >
                         Cancel
                     </Button>
                     <Snackbar
                         open={snackbarOpen}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                         autoHideDuration={6000}
                         onClose={handleSnackbarClose}
-                        message="Course updated successfully"
-                    />
+                    >
+                        <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                            Course updated successfully
+                        </Alert>
+                    </Snackbar>
                 </Container>
             </Box>
         </ThemeProvider>

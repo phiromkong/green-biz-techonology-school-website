@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 
 const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  
     const { t, i18n } = useTranslation();
+    const [selectedCourse, setSelectedCourse] = useState(defaultCourse || '');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         phoneNumber: '',
         message: '',
-        course: defaultCourse || '',  
     });
 
     const [errors, setErrors] = useState({
@@ -24,44 +24,49 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
-    
+
         let error = false;
-        if (value.trim() === '' && name !== 'message') {
-            error = true;
-        } else if (name === 'phoneNumber' && !/^0\d{8,10}$/.test(value)) {
-            error = true;
-        }else if (name === 'message' && value.trim() === '') {
+        if (name === 'phoneNumber' && !/^0\d{8,10}$/.test(value)) {
             error = true;
         }
         setErrors({ ...errors, [name]: error });
     };
+
+    const handleCourseChange = (event, child) => {
+        const course = child ? child.props.value : event.target.value;
+        console.log('Course selected: ', course);
+        setSelectedCourse(course); // Update the selected course when the user selects from the dropdown
+    };
+    
+    
+    
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
-        if (form.checkValidity() === false || Object.values(errors).some(error => error) || formData.course === '' || formData.message === '') {
-            // Check if a course is selected
-            setErrors({ ...errors, message: formData.message === '' });
-            setErrors({ ...errors, course: formData.course === '' });
+        if (form.checkValidity() === false || Object.values(errors).some(error => error)) {
             event.stopPropagation();
         } else {
-            // Call onSubmit function passed from parent component with form data
-            onSubmit(formData);
-            // Reset form data after submission
+            // Include selectedCourse in formData before submitting
+            const updatedFormData = {
+                ...formData,
+                course: selectedCourse, // Add this line to include selectedCourse
+            };
+            onSubmit(updatedFormData);
             setFormData({
                 firstName: '',
                 lastName: '',
-                course: '',
                 phoneNumber: '',
                 message: '',
             });
-            // Reset errors state
             setErrors({
                 firstName: false,
-                course: false,
                 phoneNumber: false,
+                course: false,
             });
+            setSelectedCourse(defaultCourse || '');
         }
     };
+    
 
 
     return (
@@ -122,32 +127,25 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                     />
                     
                     <FormControl 
-                        error={errors.course} 
-                        required 
-                        sx={{ width: {
-                            xs: '90%', 
-                            sm: '90%',  
-                            md: '20%'    
-                        },  
-                        marginLeft: '16px', 
-                        marginTop: '16px' }}>
-                        <InputLabel id="course-label" style={{fontFamily: "Kantumruy Pro"}}>{t('courses')}</InputLabel>
-                        <Select
-                            labelId="course-label"
-                            value={formData.course}
-                            onChange={handleChange}
-                            label='Courses'
-                            name='course'
-
-                        >
-                            {cardData.map((course, index) => (
-                                <MenuItem key={index} value={course.title} sx={{fontFamily: "Kantumruy Pro"}}>
-                                    {i18n.language === 'kh' ? course.khTitle : course.enTitle}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        {errors.course && <FormHelperText>Please select a course.</FormHelperText>}
-                    </FormControl>
+                    error={errors.course} 
+                    sx={{ width: '20%', marginLeft: '16px', marginTop: '16px'}}>
+                    <InputLabel id="course-label" sx={{fontFamily: "Kantumruy Pro"}}>{t('courses')}</InputLabel>
+                    <Select
+                        labelId="course-label"
+                        value={selectedCourse} // Use the selected course from state here
+                        onChange={handleCourseChange} // Handle course selection
+                        label={t('courses')}
+                        name='course'
+                        sx={{fontFamily: "Kantumruy Pro"}}
+                        
+                    >
+                        {cardData.map((course) => (
+                            <MenuItem key={course.id} value={course.enTitle} sx={{fontFamily: "Kantumruy Pro"}}>
+                                {i18n.language === 'kh' ? course.khTitle : course.enTitle}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
                 </Box>
                 <Box
                 component="form"
@@ -163,7 +161,6 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                         id="validationTooltip05"
                         name="message"
                         label={t('message')}
-                        required
                         multiline
                         rows={10}
                         value={formData.message}
@@ -172,7 +169,6 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                         helperText={errors.message ? "Please provide a message." : ""}
                     />
                 </Box>
-                {/* Add other TextField components here */}
                 <Button style={{fontFamily: "Kantumruy Pro",  marginBottom: '40px', backgroundColor: '#006C44', color: 'white', marginLeft: '18px', borderRadius: '10px', padding: '10px 60px'}} type="submit">
                     {t('submit')}
                 </Button>
