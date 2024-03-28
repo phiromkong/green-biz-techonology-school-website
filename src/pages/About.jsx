@@ -9,6 +9,7 @@ import MVission from '../components/MVission';
 import Backdrop from '@mui/material/Backdrop';
 import { Slide } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import MetaHeader from '../components/MetaHeader'; // Import the MetaHeader component
 
 const About = () => {
     const [partnerLogos, setPartnerLogos] = useState([]);
@@ -39,6 +40,15 @@ const About = () => {
      }
     return (
         <div>
+            <MetaHeader
+                title="GBT School About - Learn More About Us"
+                description="Discover the mission, vision, and partnerships of GBT School. Learn about our commitment to education and how we support our students and community."
+                keywords="about, GBT School, mission, vision, partnerships, education"
+                ogTitle="GBT School About - Learn More About Us"
+                ogDescription="Discover the mission, vision, and partnerships of GBT School. Learn about our commitment to education and how we support our students and community."
+                ogImage="https://www.gbtschool.com/logo.png"
+                ogUrl="https://www.gbtschool.org/about"
+            />
             <Navbar />
             <Hero />
             <MVission />

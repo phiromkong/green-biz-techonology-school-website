@@ -21,6 +21,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import Paper from "@mui/material/Paper";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+
 
 const defaultTheme = createTheme();
 const options = ['Edit', 'Delete'];
@@ -31,14 +35,15 @@ function AdminCourses() {
     const [courses, setCourses] = useState([]);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [courseToDelete, setCourseToDelete] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+
 
     useEffect(() => {
         const fetchCourses = async () => {
             const coursesCollection = collection(db, "courses");
             const snapshot = await getDocs(coursesCollection);
-            const fetchedCourses = await Promise.all(snapshot.docs.map(async (courseDoc) => {
+            let fetchedCourses = await Promise.all(snapshot.docs.map(async (courseDoc) => {
                 const courseData = courseDoc.data();
-                // Create a reference to the program document using doc()
                 const programDocRef = doc(db, "program", courseData.programId);
                 const programDocSnap = await getDoc(programDocRef);
                 if (programDocSnap.exists()) {
@@ -49,12 +54,21 @@ function AdminCourses() {
                     return { ...courseData, id: courseDoc.id, programEnTitle: "No program found" };
                 }
             }));
+    
+            // Filter courses based on search term
+            if (searchTerm) {
+                fetchedCourses = fetchedCourses.filter(course =>
+                    course.enTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    course.programEnTitle.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+    
             setCourses(fetchedCourses);
         };
-        
     
         fetchCourses();
-    }, []);
+    }, [searchTerm]); // Add searchTerm to the dependency array
+    
 
     const handleDelete = (course) => {
         setCourseToDelete(course); 
@@ -95,15 +109,19 @@ function AdminCourses() {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 150 },
-        { field: 'enTitle', headerName: 'Title', width: 200 },
+        { field: 'enTitle', headerName: 'English Title', width: 200 },
+        { field: 'khTitle', headerName: 'Khmer Title', width: 200 },
         { field: 'programEnTitle', headerName: 'Program', width: 200 },
-        { field: 'enDescription', headerName: 'Description', width: 300 },
-        { field: 'enProgramOverview', headerName: 'Overview', width: 300 },
-        { field: 'enProgramOutcome', headerName: 'Outcome', width: 300 },
+        { field: 'enDescription', headerName: 'English Description', width: 300 },
+        { field: 'khDescription', headerName: 'Khmer Description', width: 300 },
+        { field: 'enProgramOverview', headerName: 'English Overview', width: 300 },
+        { field: 'khProgramOverview', headerName: 'Khmer Overview', width: 300 },
+        { field: 'enProgramOutcome', headerName: 'English Outcome', width: 300 },
+        { field: 'khProgramOutcome', headerName: 'Khmer Outcome', width: 300 },
         {
             field: 'image',
             headerName: 'Image',
-            width: 80,
+            width: 150,
             renderCell: (params) => (
                 <img src={params.row.imageURL} alt={params.row.enTitle} style={{ width: '100%', height: 'auto' }} />
             ),
@@ -137,11 +155,27 @@ function AdminCourses() {
                         <Button component={Link} to="/dashboard/courses/add" variant="contained" startIcon={<AddIcon />}>
                             New Courses
                         </Button>
+                        <Paper
+                            component="form"
+                            sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
+                            >
+                            <InputBase
+                                sx={{ ml: 1, flex: 1 }}
+                                placeholder="Search Courses"
+                                inputProps={{ "aria-label": "search courses" }}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                                <SearchIcon />
+                            </IconButton>
+                        </Paper>
                     </Stack>
                     <div style={{ height: 600, width: '100%' }}>
                         <DataGrid
                             rows={courses}
                             columns={columns}
+                            getRowHeight={() => 'auto'}
                             pageSize={5}
                             rowsPerPageOptions={[10]}
                             checkboxSelection

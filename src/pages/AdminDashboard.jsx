@@ -14,9 +14,16 @@ import Stack from '@mui/material/Stack';
 import { Link } from "react-router-dom";
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { collection, getDocs, getDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, query, where } from 'firebase/firestore';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { db } from '../firebase'; // Assuming db is initialized elsewhere
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ArticleIcon from '@mui/icons-material/Article';
+import GroupIcon from '@mui/icons-material/Group';
+import CollectionsIcon from '@mui/icons-material/Collections';
+import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import SchoolIcon from '@mui/icons-material/School';
 
 // Create a default theme
 const defaultTheme = createTheme();
@@ -32,6 +39,8 @@ const AdminDashboard = () => {
  const [programCount, setProgramCount] = useState(0);
  const [courseCount, setCourseCount] = useState(0);
  const [partnerCount, setPartnerCount] = useState(0);
+ const [femaleCount, setFemaleCount] = useState(0);
+ const [maleCount, setMaleCount] = useState(0);
  
  useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -77,6 +86,20 @@ const AdminDashboard = () => {
     const snapshot = await getDocs(teamCollectionRef);
     setTeamCount(snapshot.size); // Update the state with the count of admins
   };
+  const fetchFemaleCount = async () => {
+    const femaleTeamCollectionRef = collection(db, "team");
+    const femaleQuery = query(femaleTeamCollectionRef, where("sex", "==", "Female"));
+    const snapshot = await getDocs(femaleQuery);
+    setFemaleCount(snapshot.size); // Assuming you have a state variable for female count
+   };
+   
+   const fetchMaleCount = async () => {
+    const maleTeamCollectionRef = collection(db, "team");
+    const maleQuery = query(maleTeamCollectionRef, where("sex", "==", "Male"));
+    const snapshot = await getDocs(maleQuery);
+    setMaleCount(snapshot.size); // Assuming you have a state variable for male count
+   };
+   
   const fetchGalleryCount = async () => {
     const galleryCollectionRef = collection(db, "gallery");
     const snapshot = await getDocs(galleryCollectionRef);
@@ -102,6 +125,8 @@ const AdminDashboard = () => {
   fetchAdminsCount();
   fetchNewsCount();
   fetchTeamsCount();
+  fetchMaleCount();
+  fetchFemaleCount();
   fetchGalleryCount();
   fetchProgramsCount();
   fetchCoursesCount();
@@ -139,98 +164,111 @@ const AdminDashboard = () => {
             }}
            >
             
-            <Card sx={{ maxWidth: 400 }}>
-              <Link to="/dashboard/account">
-                <CardActionArea sx={{ color: '#088A5B'}}>
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" sx={{color:'black'}}>
-                      Admin Account
-                    </Typography>
-                    <Typography gutterBottom variant="h6" component="div" sx={{color:'red'}}>
-                    {adminsCount}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Link>
-            </Card>
-            <Card sx={{ maxWidth: 400 }}>
+            <Card sx={{ maxWidth: 400, position: 'relative' }}>
+            <ManageAccountsIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
+            <Link to="/dashboard/news">
+            <CardActionArea sx={{ color: '#088A5B' }}>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div" sx={{ color: 'black' }}>
+                  Admin Account
+                </Typography>
+                <Typography gutterBottom variant="h4" component="div" sx={{ color: 'red' }}>
+                  {adminsCount}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            </Link>
+          </Card>
+            <Card sx={{ maxWidth: 400, position: 'relative' }}>
+            <ArticleIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
               <Link to="/dashboard/news">
                 <CardActionArea sx={{ color: '#088A5B'}}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{color:'black'}}>
                       News 
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div" sx={{color:'red'}}>
+                    <Typography gutterBottom variant="h4" component="div" sx={{color:'red'}}>
                     {newsCount}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </Link>
             </Card>
-            <Card sx={{ maxWidth: 400 }}>
+            <Card sx={{ maxWidth: 400, position: 'relative' }}>
+            <GroupIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
               <Link to="/dashboard/our-team">
                 <CardActionArea sx={{ color: '#088A5B'}}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{color:'black'}}>
                       Our Team
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div" sx={{color:'red'}}>
+                    <Typography gutterBottom variant="h4" component="div" sx={{color:'red'}}>
                     {teamCount}
+                    <Typography variant="h5" component="div" sx={{color:'red'}}>
+                    Females: {femaleCount}
+                    </Typography>
+                    <Typography variant="h5" component="div" sx={{color:'red'}}>
+                    Males: {maleCount}
+                    </Typography>
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </Link>
             </Card>
-            <Card sx={{ maxWidth: 400 }}>
+            <Card sx={{ maxWidth: 400, position: 'relative' }}>
+            <CollectionsIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
               <Link to="/dashboard/gallery">
                 <CardActionArea sx={{ color: '#088A5B'}}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{color:'black'}}>
                       Gallery
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div" sx={{color:'red'}}>
+                    <Typography gutterBottom variant="h4" component="div" sx={{color:'red'}}>
                     {galleryCount}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </Link>
             </Card>
-            <Card sx={{ maxWidth: 400 }}>
+            <Card sx={{ maxWidth: 400, position: 'relative' }}>
+            <SchoolIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
               <Link to="/dashboard/programs">
                 <CardActionArea sx={{ color: '#088A5B'}}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{color:'black'}}>
                       Program
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div" sx={{color:'red'}}>
+                    <Typography gutterBottom variant="h4" component="div" sx={{color:'red'}}>
                     {programCount}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </Link>
             </Card>
-            <Card sx={{ maxWidth: 400 }}>
+            <Card sx={{ maxWidth: 400, position: 'relative' }}>
+            <SlowMotionVideoIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
               <Link to="/dashboard/courses">
                 <CardActionArea sx={{ color: '#088A5B'}}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{color:'black'}}>
                       Courses
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div" sx={{color:'red'}}>
+                    <Typography gutterBottom variant="h4" component="div" sx={{color:'red'}}>
                     {courseCount}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </Link>
             </Card>
-            <Card sx={{ maxWidth: 400}}>
+            <Card sx={{ maxWidth: 400, position: 'relative'}}>
+            <HandshakeIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
               <Link to="/dashboard/partners">
                 <CardActionArea sx={{ color: '#088A5B'}}>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{color:'black'}}>
                       Partners
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div" sx={{color:'red'}}>
+                    <Typography gutterBottom variant="h4" component="div" sx={{color:'red'}}>
                     {partnerCount}
                     </Typography>
                   </CardContent>

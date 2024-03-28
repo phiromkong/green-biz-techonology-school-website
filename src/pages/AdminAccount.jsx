@@ -148,8 +148,6 @@ function AdminAccount() {
             field: 'actions',
             headerName: 'Actions',
             width: 150,
-            align: 'right', // Aligns the cell content to the right
-            headerAlign: 'left', // Aligns the header content to the right
             renderCell: (params) => (
                 <IconButton
                     aria-label="more"

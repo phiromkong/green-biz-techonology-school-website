@@ -14,6 +14,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { db } from '../firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { serverTimestamp } from 'firebase/firestore';
@@ -274,10 +275,11 @@ const EditNews = ({ match }) => {
 
                                 <Button
                                     component="label"
+                                    variant='contained'
                                     role={undefined}
                                     tabIndex={-1}
                                     htmlFor="fileUpload"
-                                    style={{marginLeft: '1rem'}}
+                                    style={{marginLeft: '1rem', marginTop: '1rem', marginBottom: '1rem', backgroundColor: '#F0C52D', color:'black'}}
                                 >
                                     Replace
                                 </Button>
@@ -292,7 +294,8 @@ const EditNews = ({ match }) => {
                                                     style={{ width: '100%', height: 'auto', marginLeft: '1.5rem' }} 
                                                 />
                                                 <div style={{ marginTop: '0.5rem', marginLeft: '3.5rem' }}>
-                                                <Button onClick={() => {
+                                                <Button variant="contained" sx={{backgroundColor: '#ff0200'}} onClick={() => {
+                                                    
                                                     handleDeleteNewsImage(url); // Specify true to indicate thumbnail image
                                                     setDeleteConfirmationOpen(true)
                                                 }}>
@@ -313,10 +316,11 @@ const EditNews = ({ match }) => {
 
                                                     <Button
                                                         component="label"
+                                                        variant="contained"
                                                         role={undefined}
                                                         tabIndex={-1}
                                                         htmlFor={`fileUpload${index}`} // Match the unique id attribute
-                                                        style={{marginLeft: '1rem'}}
+                                                        style={{marginLeft: '1rem', backgroundColor: '#F0C52D', color:'black'}}
                                                     >
                                                         Replace
                                                     </Button>
@@ -371,7 +375,7 @@ const EditNews = ({ match }) => {
                         onClick={handleSubmit}
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
                     >
                         Update News
                     </Button>
@@ -379,9 +383,9 @@ const EditNews = ({ match }) => {
                         onClick={handleCancel}
                         variant="contained"
                         color="primary"
-                        sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+                        sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: '#bb2124' }}
                     >
-                        Cancle
+                        Cancel
                     </Button>
                     <Dialog
                         open={deleteConfirmationOpen}
@@ -406,11 +410,19 @@ const EditNews = ({ match }) => {
                     </Dialog>
                     <Snackbar
                         open={snackbarOpen}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                         autoHideDuration={6000}
                         onClose={handleSnackbarClose}
-                        message="News updated successfully"
-                    />
-
+                    >
+                        <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                            News updated successfully
+                        </Alert>
+                    </Snackbar>
                 </Container> 
             </Box>
         </ThemeProvider>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, deleteDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, deleteObject } from 'firebase/storage';
 import { db } from '../firebase';
 import Box from '@mui/material/Box';
@@ -36,14 +36,25 @@ function AdminGallery() {
         const fetchGalleryData = async () => {
             const galleryCollection = collection(db, "gallery");
             const snapshot = await getDocs(galleryCollection);
-            const galleryList = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+            let galleryList = await Promise.all(snapshot.docs.map(async (galleryDoc) => {
+                const data = galleryDoc.data();
+                const programDocRef = doc(db, "program", data.programId);
+                const programDocSnap = await getDoc(programDocRef);
+                if (programDocSnap.exists()) {
+                    const programDetails = programDocSnap.data();
+                    // Assuming the program name is stored in a field named "name"
+                    return { ...data, id: galleryDoc.id, programName: programDetails.enTitle };
+                } else {
+                    return { ...data, id: galleryDoc.id, programName: "No program found" };
+                }
+            }));
+    
             setGalleryData(galleryList);
         };
-
-        fetchGalleryData();
-    }, []);
-
     
+        fetchGalleryData();
+    }, []); // Add any dependencies if needed
+     
 
     const handleEdit = (id) => {
         navigate(`/dashboard/gallery/edit/${id}`);
@@ -86,10 +97,10 @@ function AdminGallery() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100, },
-    { field: 'image', headerName: 'Image URL', width: 220, height: 400 },
+    { field: 'image', headerName: 'Image URL', width: 220 },
     { field: 'enTitle', headerName: 'English Title', width: 200 },
     { field: 'khTitle', headerName: 'Khmer Title', width: 200 },
-    { field: 'programId', headerName: 'Program ID', width: 220 },
+    { field: 'programName', headerName: 'Program', width: 220 },
     {
         field: 'actions',
         headerName: 'Actions',

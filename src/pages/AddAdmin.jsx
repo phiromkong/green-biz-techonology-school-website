@@ -12,6 +12,7 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
@@ -256,11 +257,20 @@ const addNewUserToAdmins = async () => {
         </Container>
       </Box>
       <Snackbar
-        open={open}
-        autoHideDuration={5000}
-        onClose={() => setOpen(false)}
-        message="Admin added successfully"
-      />
+      open={open} // Corrected from 'openpen' to 'open'
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      autoHideDuration={6000}
+      onClose={() => setOpen(false)} // Corrected the syntax here
+      >
+      <Alert
+          onClose={() => setOpen(false)} // Also ensure this is corrected if needed
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+      >
+          Admin Added successfully
+      </Alert>
+      </Snackbar>
     </ThemeProvider>
  );
 }

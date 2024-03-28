@@ -27,6 +27,10 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import { DataGrid } from '@mui/x-data-grid';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AdsClickIcon from '@mui/icons-material/AdsClick';
 
 const defaultTheme = createTheme();
 
@@ -98,6 +102,33 @@ function AdminProgram() {
         setDeleteDialogOpen(false);
     };
 
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 250 },
+        { field: 'enTitle', headerName: 'English Title', width: 350 },
+        { field: 'khTitle', headerName: 'Khmer Title', width: 350 },
+        {
+            field: 'actions',
+            headerName: 'Actions',
+            width: 150,
+            renderCell: (params) => (
+                <div>
+                    <IconButton onClick={() => navigate(`/dashboard/programs/${params.row.id}`)}>
+                        <AdsClickIcon />
+                    </IconButton>
+                    <IconButton onClick={() => navigate(`/dashboard/programs/edit/${params.row.id}`)}>
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => {
+                        setDeleteProgramId(params.row.id);
+                        setDeleteDialogOpen(true);
+                    }}>
+                        <DeleteIcon />
+                    </IconButton>
+                </div>
+            ),
+        },
+    ];
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -127,33 +158,15 @@ function AdminProgram() {
                             </Paper>
                         </Stack>
                     </div>
-                    <Grid container spacing={2} sx={{ marginTop: '5rem' }}>
-                        {programs.map(program => (
-                            <Grid item xs={12} sm={6} md={4} key={program.id}>
-                                <Card sx={{ maxWidth: 500 }}>
-                                    <CardMedia
-                                        onClick={() => navigate(`/dashboard/programs/${program.id}`)}
-                                        component="img"
-                                        alt={program.enTitle}
-                                        height="400px"
-                                        image={program.image}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div" sx={{fontSize: '1rem'}}>
-                                            {program.enTitle}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button variant="contained" size="small" sx={{backgroundColor: "#198754"}} onClick={() => navigate(`/dashboard/programs/edit/${program.id}`)}>Edit</Button>
-                                        <Button variant="contained" size="small" sx={{backgroundColor: '#bb2124'}} onClick={() => {
-                                            setDeleteProgramId(program.id);
-                                            setDeleteDialogOpen(true);
-                                        }}>Delete</Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
+                    <div style={{ height: 600, width: '100%', marginTop: '2rem' }}>
+                        <DataGrid
+                            rows={programs}
+                            columns={columns}
+                            pageSize={5}
+                            rowsPerPageOptions={[5]}
+                            checkboxSelection
+                        />
+                    </div>
                 </Container>
                 <Dialog
                     open={deleteDialogOpen}

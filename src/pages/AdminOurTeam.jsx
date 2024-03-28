@@ -27,6 +27,9 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import { DataGrid } from '@mui/x-data-grid';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const defaultTheme = createTheme();
 
@@ -108,6 +111,40 @@ useEffect(() => {
     setDeleteDialogOpen(false);
  };
 
+ const columns = [
+  { field: 'id', headerName: 'ID', width: 150 },
+  { field: 'enFirstName', headerName: 'First Name', width: 150 },
+  { field: 'enLastName', headerName: 'Last Name', width: 150 },
+  { field: 'enPosition', headerName: 'Position', width: 150 },
+  { field: 'sex', headerName: 'Sex', width: 80 },
+  {
+      field: 'image',
+      headerName: 'Image',
+      width: 150,
+      renderCell: (params) => (
+          <img src={params.row.image} alt={params.row.enFirstName} style={{ width: '100%', height: 'auto' }} />
+      ),
+  },
+  {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 150,
+      renderCell: (params) => (
+          <div>
+              <IconButton onClick={() => navigate(`/dashboard/our-team/edit/${params.row.id}`)}>
+                  <EditIcon />
+              </IconButton>
+              <IconButton onClick={() => {
+                  setDeleteMemberId(params.row.id);
+                  setDeleteDialogOpen(true);
+              }}>
+                  <DeleteIcon />
+              </IconButton>
+          </div>
+      ),
+  },
+];
+
  return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -135,35 +172,16 @@ useEffect(() => {
               </IconButton>
             </Paper>
           </Stack>
-          <Grid container spacing={2} sx={{ marginTop: '5rem' }}>
-            {!loading && teamMembers.map(member => (
-              <Grid item xs={12} sm={6} md={4} key={member.id}>
-                <Card sx={{ margin: 2 }}>
-                 <CardMedia
-                    component="img"
-                    alt={member.name}
-                    height="400px"
-                    image={member.image} // Assuming imageURL is the field name for the image
-                 />
-                 <CardContent>
-                    <Typography variant="h5" component="div" sx={{fontSize: '1rem'}}>
-                      {`${member.enFirstName} ${member.enLastName}`}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{fontSize: '0.7rem'}}>
-                      {member.enPosition}
-                    </Typography>
-                 </CardContent>
-                 <CardActions>
-                    <Button variant="contained" size="small" sx={{backgroundColor: "#198754"}} onClick={() => navigate(`/dashboard/our-team/edit/${member.id}`)}>Edit</Button>
-                    <Button variant="contained" size="small" sx={{backgroundColor: '#bb2124'}} onClick={() => {
-                      setDeleteMemberId(member.id);
-                      setDeleteDialogOpen(true);
-                    }}>Delete</Button>
-                 </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+          <div style={{ height: 600, width: '100%', marginTop: '2rem' }}>
+            <DataGrid
+                rows={teamMembers}
+                columns={columns}
+                getRowHeight={() => 'auto'}
+                pageSize={5}
+                rowsPerPageOptions={[5]}
+                checkboxSelection
+            />
+          </div>
           <Dialog
             open={deleteDialogOpen}
             onClose={handleDeleteCancel}

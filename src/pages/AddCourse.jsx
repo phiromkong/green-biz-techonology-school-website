@@ -8,6 +8,7 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -297,12 +298,21 @@ const AddCourse = () => {
                     >
                         Cancel
                     </Button>
-                    <Snackbar 
-                    open={snackbarOpen} 
-                    autoHideDuration={6000} 
-                    onClose={handleSnackbarClose}
-                    message="Course added successfully"
-                    />
+                    <Snackbar
+                        open={snackbarOpen}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                        autoHideDuration={6000}
+                        onClose={handleSnackbarClose}
+                    >
+                        <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                        >
+                            Course Added successfully
+                        </Alert>
+                    </Snackbar>
                 </Container> 
             </Box>
         </ThemeProvider>

@@ -42,7 +42,6 @@ import AddImagesToGallery from './pages/AddImagesToGallery';
 import AdminSlider from './pages/AdminSlider';
 
 
-
 function App() {
   const [setIsI18nInitialized] = useState(false);
   useEffect(() => {

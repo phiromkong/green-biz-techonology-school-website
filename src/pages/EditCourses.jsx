@@ -15,6 +15,7 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -352,7 +353,7 @@ const handleSnackbarClose = () => {
                             />
                             <div style={{ marginTop: '-1.5rem', marginLeft: '2.0rem' }}>
                                 <label htmlFor="fileUpload">
-                                    <Button component="span" variant="contained" style={{marginLeft: '-0.5rem'}}>
+                                    <Button component="span" variant="contained" style={{marginLeft: '-0.5rem', backgroundColor: '#F0C52D', color:'black'}}>
                                         Replace
                                     </Button>
                                 </label>
@@ -363,24 +364,33 @@ const handleSnackbarClose = () => {
             onClick={handleSubmit}
             variant="contained"
             color="primary"
-            sx={{ marginTop: '2rem', marginLeft: '1.5rem' }}
+            sx={{ marginTop: '2rem', marginLeft: '1.5rem', backgroundColor: "#198754" }}
           >
             Update Course
           </Button>
           <Button
             variant="contained"
             color="primary"
-            sx={{ marginTop: '2rem', marginLeft: '1rem' }}
+            sx={{ marginTop: '2rem', marginLeft: '1rem', backgroundColor: '#bb2124' }}
             onClick={handleCancel}
           >
             Cancel
           </Button>
-          <Snackbar 
-          open={snackbarOpen} 
-          autoHideDuration={6000} 
-          onClose={handleSnackbarClose}
-          message="Course updated successfully"
-          />
+          <Snackbar
+            open={snackbarOpen}
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+        >
+            <Alert
+            onClose={handleSnackbarClose}
+            severity="success"
+            variant="filled"
+            sx={{ width: '100%' }}
+            >
+                Course updated successfully
+            </Alert>
+        </Snackbar>
         </Container>
       </Box>
     </ThemeProvider>

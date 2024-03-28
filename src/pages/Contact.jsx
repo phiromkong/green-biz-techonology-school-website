@@ -6,14 +6,14 @@ import Footer from '../components/Footer';
 import { useLocation } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
-
+import MetaHeader from '../components/MetaHeader'; // Import the MetaHeader component
 
 const Contact = () => {
-  const location = useLocation();
-  const courseTitle = location.state?.courseTitle;
-  const [courses, setCourses] = useState([]);
+ const location = useLocation();
+ const courseTitle = location.state?.courseTitle;
+ const [courses, setCourses] = useState([]);
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchCourses = async () => {
       const coursesCollection = collection(db, "courses"); // Adjust the collection name as needed
       const coursesSnapshot = await getDocs(coursesCollection);
@@ -24,7 +24,7 @@ const Contact = () => {
     fetchCourses();
  }, []);
 
-  const handleFormSubmit = (formData) => {
+ const handleFormSubmit = (formData) => {
     // Send formData to Telegram bot using an HTTP request
     fetch(`https://api.telegram.org/bot6254588965:AAH4nb5FOeZcLNpeKWi4UpaHQD7lxcTjABY/sendMessage`, {
       method: 'POST',
@@ -48,9 +48,18 @@ const Contact = () => {
       // Handle error
       console.error('Error sending message to Telegram bot:', error);
     });
-  };
+ };
     return (
         <div>
+            <MetaHeader
+                title="GBT School Contact - Get in Touch"
+                description="Connect with GBT School. Reach out to us for inquiries, feedback, or to learn more about our courses and services."
+                keywords="contact, GBT School, education, inquiries, feedback, courses"
+                ogTitle="GBT School Contact - Get in Touch"
+                ogDescription="Connect with GBT School. Reach out to us for inquiries, feedback, or to learn more about our courses and services."
+                ogImage="https://www.gbtschool.com/logo.png"
+                ogUrl="https://www.gbtschool.org/contact"
+            />
             <Navbar />
             <div className="containerWrapper">
                 <ContactHeader />
@@ -62,4 +71,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
