@@ -42,16 +42,7 @@
   .dropdown-menu a:not(.active):hover {
     color: #088A5B; 
   }
-  .login-rectangle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #088A5B;
-    height: 52px;
-    width: auto;
-    top: 0;
-    padding: 0.5rem;
-  }
+
   .dropdown-link {
     display: block;
     height: 100%;
@@ -230,32 +221,12 @@
   }
     nav .title {
         font-size: 0.5rem;
-        margin: 1rem;
         font-weight: bold;
         text-decoration: none;
         color: black;
         display: flex;
         align-items: center;
         padding-left: 50px;
-    }
-    .login-rectangle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #088A5B;
-        height: 52px;
-        width: auto;
-        top: 0;
-        padding: 0.5rem;
-    }
-
-    .top_header_text {
-        color: #ffffff;
-        font-family: "Kantumruy Pro", sans-serif; 
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .lang_box {
@@ -333,7 +304,6 @@
         width: auto;
     }
     nav ul {
-
         margin-right: 8rem;
     }
 
@@ -435,6 +405,7 @@
 
     .logo {
         width: 40%; /* Adjust the width for larger screens */
+        margin-left: -2.5rem;
     }
 
     .lang_drop_down {

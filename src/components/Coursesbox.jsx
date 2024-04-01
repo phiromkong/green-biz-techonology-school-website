@@ -4,23 +4,44 @@ import CourseList from './Courselist'; // import the CourseList component
 import './css/Coursesbox.css';
 import './css/Coursecard.css'
 import Grid from '@mui/material/Grid';
+import { useTranslation } from 'react-i18next';
+import { Paper, InputBase, IconButton, Stack } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Coursesbox = ({ courses }) => {
  const [selectedProgramId, setSelectedProgramId] = useState(null);
+ const [searchTerm, setSearchTerm] = useState('');
+ const {i18n, t} = useTranslation();
 
  const handleCourseSelect = (programId) => {
     setSelectedProgramId(programId);
  };
 
- const filteredCourses = selectedProgramId ? courses.filter((course) => course.programId === selectedProgramId) : courses;
-
+ const filteredCoursesByProgram = selectedProgramId ? courses.filter((course) => course.programId === selectedProgramId) : courses;
+const filteredCourses = filteredCoursesByProgram.filter(course =>
+        course[i18n.language === 'en' ? 'enTitle' : 'khTitle'].toLowerCase().includes(searchTerm.toLowerCase())
+    );
  return (
     <div>
-      <div className="header-image">
-        <img src={`${process.env.PUBLIC_URL}/Img2.jpg`} alt="Header" />
-      </div>
       <div className='courses-box-title' onClick={() => { setSelectedProgramId(null) }}>
-        <h1>Our Program</h1>
+      <Stack direction="row" spacing={1} justifyContent="space-between">
+        <h1>{t('courses')}</h1>
+        <Paper
+          component="form"
+          sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400, height: 50}}
+        >
+          <InputBase
+              sx={{ ml: 1, flex: 1, fontFamily: "Kantumruy Pro" }}
+              placeholder={t('courseSearch')}
+              inputProps={{ "aria-label": "search courses" }}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <SearchIcon />
+          </IconButton>
+      </Paper>
+      </Stack>
       </div>
       <div className="courses-container">
       <Grid container spacing={5}>

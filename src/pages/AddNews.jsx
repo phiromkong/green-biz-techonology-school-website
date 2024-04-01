@@ -15,6 +15,8 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Timestamp } from 'firebase/firestore';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const defaultTheme = createTheme();
 
@@ -67,7 +69,21 @@ const AddNews = () => {
         }
         setErrors({ ...errors, [name]: error });
     };
+    
 
+    const handleQuillChange = (value, name) => {
+        setNewsPost({ ...newsPost, [name]: value });
+    
+        let error = '';
+        if (value.trim() === '') { // Check if value is empty
+            error = `This field is required.`;
+        }
+        setErrors(prevErrors => ({
+            ...prevErrors,
+            [name]: error
+        }));
+    };
+    
     const handleFileUpload = async (files) => {
         if (files.length === 0) {
             console.error("No files selected for upload.");
@@ -103,8 +119,8 @@ const AddNews = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("clicked");
-
-        // Manually trigger validation for all fields
+    
+        // Perform validation based on the current state
         const newErrors = {
             enTitle: newsPost.enTitle.trim() === '' ? 'This field is required' : '',
             enContent: newsPost.enContent.trim() === '' ? 'This field is required' : '',
@@ -113,10 +129,10 @@ const AddNews = () => {
             khContent: newsPost.khContent.trim() === '' ? 'This field is required' : '',
             khDescription: newsPost.khDescription.trim() === '' ? 'This field is required' : '',
         };
-
+    
         // Update the errors state with the new validation results
         setErrors(newErrors);
-
+    
         // Check if there are any errors in the form
         const hasErrors = Object.values(newErrors).some(error => error !== '');
         if (hasErrors) {
@@ -124,7 +140,7 @@ const AddNews = () => {
             // Optionally, show an error message to the user
             return;
         }
-
+    
         if (uploading) {
             console.log("Uploading in progress");
             return;
@@ -149,7 +165,7 @@ const AddNews = () => {
                 // Handle error
             }
         }
-    };
+    };    
 
     const handleCancel = () => {
         // Reset form fields to their initial state
@@ -248,28 +264,40 @@ const AddNews = () => {
                                 }}
                                 noValidate
                                 autoComplete="off"
-                                >
-                            <TextField
-                                required
-                                error={errors.enContent}
-                                id="enContent"
-                                label="English Content"
-                                name="enContent" 
-                                onChange={handleChange} 
+                            >
+                            <ReactQuill
+                                value={newsPost.enContent}
+                                onChange={(value) => handleQuillChange(value, 'enContent')}
                                 placeholder="English Content"
-                                helperText={errors.enContent ? "Please provide a cotent in English." : ""}
-                                multiline
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, 
+                                        {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
                             />
-                            <TextField
-                                required
-                                id="khContent"
-                                error={errors.khContent}
-                                label="Khmer Content"
-                                name="khContent" 
-                                onChange={handleChange} 
+                            <ReactQuill
+                                value={newsPost.khContent}
+                                onChange={(value) =>handleQuillChange(value, 'khContent')}
                                 placeholder="Khmer Content"
-                                helperText={errors.khContent ? "Please provide a cotent in Khmer." : ""}
-                                multiline
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, 
+                                        {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
                             />
                             </Box>
                         </div>

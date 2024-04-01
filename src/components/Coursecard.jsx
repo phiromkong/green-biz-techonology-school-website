@@ -53,15 +53,23 @@ const CourseCard = ({ id }) => {
       <CardActionArea component="a" href={`/courses/${id}`} className="card-action-area">
         <CardMedia component="img" height="400px" image={course.imageURL || `${process.env.PUBLIC_URL}/placeholder.jpg`} alt={courseTitle} className="card-media-img"/>
         <CardContent>
-          <Typography variant="h5" component="div" style={{fontFamily: 'Kantumruy Pro', fontWeight: 'bold'}}>
+          <Typography variant="h5" component="div" style={{fontFamily: 'Kantumruy Pro', fontWeight: 'bold', fontSize: '1.1rem' }}sx={{
+            display: '-webkit-box',
+            overflow: 'hidden',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 1,
+          }}>
             {courseTitle}
           </Typography>
-          <Typography sx={{
-        display: '-webkit-box',
-        overflow: 'hidden',
-        WebkitBoxOrient: 'vertical',
-        WebkitLineClamp: 3,
-    }} variant="body2" color="text.secondary" style={{color: 'black', fontFamily: 'Kantumruy Pro', overflow: 'hidden', fontWeight: '450', paddingTop: '15px'}}>
+          <Typography 
+          sx={{
+            display: '-webkit-box',
+            overflow: 'hidden',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 2,
+          }} 
+          variant="body2" color="text.secondary" style={{color: 'black', fontFamily: 'Kantumruy Pro', overflow: 'hidden', fontWeight: '450', paddingTop: '15px'}}
+          >
             {courseDescription}
           </Typography>
         </CardContent>

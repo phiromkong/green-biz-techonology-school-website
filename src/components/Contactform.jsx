@@ -128,7 +128,8 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                     
                     <FormControl 
                     error={errors.course} 
-                    sx={{ width: '20%', marginLeft: '16px', marginTop: '16px'}}>
+                    sx={{ width: '20%', marginLeft: '16px', marginTop: '16px'}}
+                >
                     <InputLabel id="course-label" sx={{fontFamily: "Kantumruy Pro"}}>{t('courses')}</InputLabel>
                     <Select
                         labelId="course-label"
@@ -137,8 +138,8 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                         label={t('courses')}
                         name='course'
                         sx={{fontFamily: "Kantumruy Pro"}}
-                        
                     >
+                        <MenuItem value="">None</MenuItem> {/* Add option to deselect */}
                         {cardData.map((course) => (
                             <MenuItem key={course.id} value={course.enTitle} sx={{fontFamily: "Kantumruy Pro"}}>
                                 {i18n.language === 'kh' ? course.khTitle : course.enTitle}

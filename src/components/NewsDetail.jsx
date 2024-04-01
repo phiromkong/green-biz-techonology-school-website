@@ -10,27 +10,32 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Button from '@mui/material/Button';
 import { useTranslation } from 'react-i18next';
+import NotFound from './NotFound';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const NewsDetail = () => {
  const { id } = useParams();
  const navigate = useNavigate();
  const [post, setPost] = useState(null);
  const { i18n } = useTranslation();
+ const [loading, setLoading] = useState(true);
 
  useEffect(() => {
- const fetchPost = async () => {
-    const postRef = doc(db, "news", id);
-    const postDoc = await getDoc(postRef);
+  const fetchPost = async () => {
+      const postRef = doc(db, "news", id);
+      const postDoc = await getDoc(postRef);
 
-    if (postDoc.exists()) {
-      const postData = postDoc.data();
-      setPost({ ...postData, id: postDoc.id, newsImages: postData.newsImages || [] });
-    } else {
-      console.log("No such document!");
-    }
- };
+      if (postDoc.exists()) {
+          const postData = postDoc.data();
+          setPost({ ...postData, id: postDoc.id, newsImages: postData.newsImages || [] });
+      } else {
+          console.log("No such document!");
+      }
+      setLoading(false);
+  };
 
- fetchPost();
+  fetchPost();
 }, [id]);
 
  useEffect(() => {
@@ -66,8 +71,19 @@ const NewsDetail = () => {
     },
  };
 
+ if (loading) {
+  return (
+      <Backdrop
+          sx={{ color: 'black', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+          onClick={() => {}}
+      >
+          <CircularProgress color="inherit" />
+      </Backdrop>
+  );
+}
  if (!post) {
-    return <p>Post not found</p>;
+  return <NotFound />;
  }
 
  const handleBackClick = () => {
@@ -87,7 +103,7 @@ const NewsDetail = () => {
         <div className='news-title'>{post[titleKey]}</div>
         <p>Published on {post.date ? post.date.toDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''}</p>
         <img src={post.thumbnailImage} alt={post[titleKey]} />
-        <p>{post[contentKey]}</p>
+        <p dangerouslySetInnerHTML={{ __html: post[contentKey] }} />
         <OwlCarousel className="owl-theme" {...owlOptions}>
           {post.newsImages.map((image, index) => (
               <div key={index} className="item image-wrapper">

@@ -15,8 +15,9 @@ const TeamMemberCard = ({ member }) => {
  const { i18n } = useTranslation(); // Use the useTranslation hook
 
  return (
-    <Card sx={{ display: 'flex', marginBottom: "90px" }}>
-      <Box sx={{  display: 'flex', flexDirection: 'column', flex: '1 0 auto' }}>
+    <Card sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, marginBottom: "90px" }}>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto' }}>
         <CardContent sx={{ flex: '1 0 auto', maxWidth: '400px' }}>
           <Typography component="div" variant="h5" sx={{fontFamily: 'Kantumruy Pro'}}>
             {i18n.language === 'kh' ? member.khFirstName : member.enFirstName} {i18n.language === 'kh' ? member.khLastName : member.enLastName}
@@ -28,11 +29,10 @@ const TeamMemberCard = ({ member }) => {
             {i18n.language === 'kh' ? member.khQuote : member.enQuote}
           </Typography>
         </CardContent>
-        
       </Box>
       <CardMedia
         component="img"
-        sx={{ maxWidth: "30%" }}
+        sx={{ maxWidth: { xs: '100%', sm: "30%" }, flex: { xs: 'auto', sm: "0 0 auto" } }}
         image={member.image}
         alt={`${member.enFirstName} ${member.enLastName}`}
       />
@@ -54,7 +54,6 @@ const Team = ({ teamMembers }) => {
 
  return (
     <section>
-     
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
           <OwlCarousel
             className="owl-theme"
@@ -66,7 +65,6 @@ const Team = ({ teamMembers }) => {
             ))}
           </OwlCarousel>
         </div>
-     
     </section>
  );
 };
