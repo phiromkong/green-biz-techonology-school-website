@@ -97,7 +97,7 @@ const Home = () => {
         keywords="education, courses, partnerships, GBT School, Green Biz Technology, computer, BMC, Banteay Meanchey"
         ogTitle="Green Biz Technology School, or GBT School - Your Education Partner"
         ogDescription="GBT School offers a wide range of courses and partnerships to enhance your learning experience."
-        ogImage="https://www.gbtschool.org/logo.png"
+        ogImage="https://www.gbtschool.org/gbt_logo.png"
         ogUrl="https://www.gbtschool.org"
       />
       <Navbar />

@@ -46,7 +46,7 @@ const About = () => {
                 keywords="about, GBT School, mission, vision, partnerships, education"
                 ogTitle="GBT School About - Learn More About Us"
                 ogDescription="Discover the mission, vision, and partnerships of GBT School. Learn about our commitment to education and how we support our students and community."
-                ogImage="https://www.gbtschool.org/logo.png"
+                ogImage="https://www.gbtschool.org/gbt_logo.png"
                 ogUrl="https://www.gbtschool.org/about"
             />
             <Navbar />
