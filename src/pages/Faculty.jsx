@@ -36,7 +36,7 @@ const Faculty = () => {
                 keywords="faculty, team, GBT School, education, passion, learning"
                 ogTitle="GBT School Faculty - Meet Our Team"
                 ogDescription="Discover the dedicated team behind GBT School. Our faculty is passionate about education and committed to providing the best learning experience for our students."
-                ogImage="https://www.gbtschool.com/logo.png"
+                ogImage="https://www.gbtschool.org/logo.png"
                 ogUrl="https://www.gbtschool.org/faculty"
             />
             <Navbar />
