@@ -29,7 +29,7 @@ const Courses = () => {
         keywords="courses, education, GBT School, learning, career, development, web development, python, programming, web desing, graphic design, chinese, video editing, computer fundamental"
         ogTitle="GBT School Courses - Explore Our Offerings"
         ogDescription="Discover a wide range of courses at GBT School. Explore our offerings to find the perfect course for your learning needs and career goals."
-        ogImage="https://www.gbtschool.com/logo.png"
+        ogImage="https://www.gbtschool.org/logo.png"
         ogUrl="https://www.gbtschool.org/courses"
       />
       <Navbar />

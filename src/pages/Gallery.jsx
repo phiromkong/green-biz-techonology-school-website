@@ -50,7 +50,7 @@ const Gallery = () => {
                 keywords="gallery, achievements, projects, GBT School, education, courses, partnerships"
                 ogTitle="GBT School Gallery - Explore Our Achievements"
                 ogDescription="Discover the latest achievements and projects from GBT School. Explore our gallery to see the impact of our courses and partnerships."
-                ogImage="https://www.gbtschool.com/logo.png"
+                ogImage="https://www.gbtschool.org/logo.png"
                 ogUrl="https://www.gbtschool.org/gallery"
             />
             <Navbar />
