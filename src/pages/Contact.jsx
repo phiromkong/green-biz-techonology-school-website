@@ -66,7 +66,7 @@ const Contact = () => {
                 keywords="contact, GBT School, education, inquiries, feedback, courses"
                 ogTitle="GBT School Contact - Get in Touch"
                 ogDescription="Connect with GBT School. Reach out to us for inquiries, feedback, or to learn more about our courses and services."
-                ogImage="https://www.gbtschool.org/logo.png"
+                ogImage="https://www.gbtschool.org/gbt_logo.png"
                 ogUrl="https://www.gbtschool.org/contact"
             />
             <Navbar />
