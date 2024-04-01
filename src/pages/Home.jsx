@@ -13,6 +13,7 @@ import Footer from '../components/Footer';
 import { useTranslation } from 'react-i18next';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import MetaHeader from '../components/MetaHeader';
 
 
 const Home = () => {
@@ -90,6 +91,15 @@ const Home = () => {
  }
   return (
     <div>
+      <MetaHeader
+        title="Green Biz Technology School - Your Education Partner"
+        description="Green Biz Technology School, or GBT School, offers a wide range of courses and partnerships to enhance your learning experience."
+        keywords="education, courses, partnerships, GBT School, Green Biz Technology, computer, BMC, Banteay Meanchey"
+        ogTitle="Green Biz Technology School, or GBT School - Your Education Partner"
+        ogDescription="GBT School offers a wide range of courses and partnerships to enhance your learning experience."
+        ogImage="https://www.gbtschool.com/logo.png"
+        ogUrl="https://www.gbtschool.org"
+      />
       <Navbar />
       <div style={containerStyles}>
       <Slider slides={sliderImages} />

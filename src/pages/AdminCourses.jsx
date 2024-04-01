@@ -112,12 +112,41 @@ function AdminCourses() {
         { field: 'enTitle', headerName: 'English Title', width: 200 },
         { field: 'khTitle', headerName: 'Khmer Title', width: 200 },
         { field: 'programEnTitle', headerName: 'Program', width: 200 },
-        { field: 'enDescription', headerName: 'English Description', width: 300 },
+        { field: 'enDescription', headerName: 'English Description', width: 200,
+        },
         { field: 'khDescription', headerName: 'Khmer Description', width: 300 },
-        { field: 'enProgramOverview', headerName: 'English Overview', width: 300 },
-        { field: 'khProgramOverview', headerName: 'Khmer Overview', width: 300 },
-        { field: 'enProgramOutcome', headerName: 'English Outcome', width: 300 },
-        { field: 'khProgramOutcome', headerName: 'Khmer Outcome', width: 300 },
+        { 
+            field: 'enProgramOverview', 
+            headerName: 'English Overview', 
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            )
+        },
+        { 
+            field: 'khProgramOverview', 
+            headerName: 'Khmer Overview', 
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            )
+        },
+        { 
+            field: 'enProgramOutcome', 
+            headerName: 'English Outcome', 
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            )
+        },
+        { 
+            field: 'khProgramOutcome', 
+            headerName: 'Khmer Outcome', 
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            ) 
+        },
         {
             field: 'image',
             headerName: 'Image',

@@ -25,30 +25,39 @@ const Contact = () => {
  }, []);
 
  const handleFormSubmit = (formData) => {
-    // Send formData to Telegram bot using an HTTP request
-    fetch(`https://api.telegram.org/bot6254588965:AAH4nb5FOeZcLNpeKWi4UpaHQD7lxcTjABY/sendMessage`, {
+  const messageText = `
+      📩 New message received from GBT School website! 📩\n
+      Name: ${formData.firstName} ${formData.lastName}\n
+      Course: ${formData.course || 'Not specified'}\n
+      Phone Number: ${formData.phoneNumber}\n
+      Message: ${formData.message}\n
+  `;
+
+  // Send formData to Telegram bot using an HTTP request
+  fetch(`https://api.telegram.org/bot6254588965:AAH4nb5FOeZcLNpeKWi4UpaHQD7lxcTjABY/sendMessage`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        chat_id: '5053535829',
-        text: `New message from ${formData.firstName} ${formData.lastName}, Course: ${formData.course}, Phone: ${formData.phoneNumber}, Message: ${formData.message}`,
+          chat_id: '5053535829',
+          text: messageText,
       }),
-    })
-    .then(response => {
+  })
+  .then(response => {
       if (!response.ok) {
-        throw new Error('Failed to send message to Telegram bot');
+          throw new Error('Failed to send message to Telegram bot');
       }
       // Handle success
       console.log('Message sent successfully');
       console.log('Form submitted:', formData);
-    })
-    .catch(error => {
+  })
+  .catch(error => {
       // Handle error
       console.error('Error sending message to Telegram bot:', error);
-    });
- };
+  });
+};
+
     return (
         <div>
             <MetaHeader

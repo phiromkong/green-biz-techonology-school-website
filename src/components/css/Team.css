@@ -1,0 +1,45 @@
+.team-owl-carousel .team-owl-stage {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    justify-content: center; /* Center the .team-item horizontally */
+}
+
+.team-row {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: flex-start; /* Align items to the start of the container */
+    height: 25rem;
+    width: 80%;
+    margin: 0 auto; /* Center the .team-row within its parent */
+}
+
+.team-team_img img {
+    width: 50%; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+.team-col-md-9, .team-col-md-12, .team-col-sm-12 {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the start of the container */
+}
+
+.team-owl-carousel .owl-item img {
+    max-width: 30%; /* Adjusted to ensure the image does not exceed the container's width */
+    max-height: 100%; /* Adjusted to ensure the image does not exceed the container's height */
+}
+
+/* Example CSS for responsive design */
+@media (max-width: 600px) {
+    .team-owl-carousel .owl-item img {
+       max-width: 50%; /* Adjust the width for smaller screens */
+    }
+    .team-col-md-9, .team-col-md-12, .team-col-sm-12 {
+       width: 100%; /* Adjust the width to fit the screen */
+    }
+   }
+   
