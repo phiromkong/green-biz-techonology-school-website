@@ -68,7 +68,7 @@ const NewsPage = () => {
                 keywords="news, updates, GBT School, education, courses, partnerships"
                 ogTitle="GBT School News - Stay Updated"
                 ogDescription="Discover the latest news and updates from GBT School. Stay informed about our courses, partnerships, and community events."
-                ogImage="https://www.gbtschool.org/logo.png"
+                ogImage="https://www.gbtschool.org/gbt_logo.png"
                 ogUrl="https://www.gbtschool.org/news"
             />
             <Navbar />
