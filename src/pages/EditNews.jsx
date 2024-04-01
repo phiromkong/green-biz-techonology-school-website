@@ -20,7 +20,8 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { serverTimestamp } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Grid from '@mui/material/Grid';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const defaultTheme = createTheme();
 
@@ -86,6 +87,8 @@ const EditNews = ({ match }) => {
         const { name, value } = e.target;
         setNewsPost({ ...newsPost, [name]: value });
     };
+    
+    
 
     const handleFileUpload = async (files, index, isThumbnail = false) => {
         if (files.length === 0) {
@@ -189,6 +192,13 @@ const EditNews = ({ match }) => {
     const handleCancel = () => {
         navigate('/dashboard/news'); // Adjust the path as needed
     };
+    const handleChangeQuill = (value, field) => {
+        setNewsPost(prevState => ({
+            ...prevState,
+            [field]: value
+        }));
+    };
+    
     
     
     return (
@@ -293,7 +303,7 @@ const EditNews = ({ match }) => {
                                                     alt={`News ${index + 1}`} 
                                                     style={{ width: '100%', height: 'auto', marginLeft: '1.5rem' }} 
                                                 />
-                                                <div style={{ marginTop: '0.5rem', marginLeft: '3.5rem' }}>
+                                                <div style={{ marginTop: '0.5rem', marginLeft: '3.5rem', marginBottom: '1rem' }}>
                                                 <Button variant="contained" sx={{backgroundColor: '#ff0200'}} onClick={() => {
                                                     
                                                     handleDeleteNewsImage(url); // Specify true to indicate thumbnail image
@@ -340,32 +350,39 @@ const EditNews = ({ match }) => {
                                 noValidate
                                 autoComplete="off"
                                 >
-                                <TextField
-                                    required
-                                    error={errors.enContent}
-                                    id="enContent"
-                                    label="English Content"
-                                    name="enContent"
-                                    value={newsPost.enContent}
-                                    placeholder="English Content"
-                                    multiline
-                                    type= "text"
-                                    onChange={handleChange} 
-                                    helperText={errors.enContent ? "Please provide content in English." : ""}
-                                />
-                                <TextField
-                                    required
-                                    error={errors.khContent}
-                                    id="khContent"
-                                    label="Khmer Content"
-                                    name="khContent"
-                                    value={newsPost.khContent}
-                                    placeholder="Khmer Content"
-                                    multiline
-                                    type= "text"
-                                    onChange={handleChange} 
-                                    helperText={errors.khContent ? "Please provide content in Khmer." : ""}
-                                />
+                                <ReactQuill
+                                value={newsPost.enContent}
+                                onChange={(value) => handleChangeQuill(value, 'enContent')}
+                                placeholder="English Content"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
+                            />
+                            <ReactQuill
+                                value={newsPost.khContent}
+                                onChange={(value) => handleChangeQuill(value, 'khContent')}
+                                placeholder="Khmer Content"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
+                            />
+
                                 </Box>
                             </div>
                             

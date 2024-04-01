@@ -13,6 +13,9 @@ import Dashboardsidebar from '../components/Dashboardsidebar';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
+
 
 const defaultTheme = createTheme();
 
@@ -90,6 +93,14 @@ const EditCourse = () => {
         navigate(`/dashboard/programs/${programId}`);
     };
 
+    const handleQuillChange = (value, field) => {
+        setCourseData(prevState => ({
+            ...prevState,
+            [field]: value
+        }));
+    };
+    
+
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -141,42 +152,71 @@ const EditCourse = () => {
                                 value={courseData.khDescription || ''}
                                 onChange={handleInputChange}
                             />
-                            <TextField
-                                required
-                                multiline
-                                id="enProgramOutcome"
-                                name="enProgramOutcome"
-                                label="English Program Outcome"
-                                value={courseData.enProgramOutcome || ''}
-                                onChange={handleInputChange}
+                            <ReactQuill
+                                value={courseData.enProgramOutcome}
+                                onChange={(value) => handleQuillChange(value, 'enProgramOutcome')}
+                                placeholder="English Program Outcome"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
                             />
-                            <TextField
-                                required
-                                multiline
-                                id="khProgramOutcome"
-                                name="khProgramOutcome"
-                                label="Khmer Program Outcome"
-                                value={courseData.khProgramOutcome || ''}
-                                onChange={handleInputChange}
+                            <ReactQuill
+                                value={courseData.khProgramOutcome}
+                                onChange={(value) => handleQuillChange(value, 'khProgramOutcome')}
+                                placeholder="Khmer Program Outcome"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
                             />
-                            <TextField
-                                required
-                                multiline
-                                id="enProgramOverview"
-                                name="enProgramOverview"
-                                label="English Program Overview"
-                                value={courseData.enProgramOverview || ''}
-                                onChange={handleInputChange}
+                            <ReactQuill
+                                value={courseData.enProgramOverview}
+                                onChange={(value) => handleQuillChange(value, 'enProgramOverview')}
+                                placeholder="English Program Overview"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
                             />
-                            <TextField
-                                required
-                                multiline
-                                id="khProgramOverview"
-                                name="khProgramOverview"
-                                label="Khmer Program Overview"
-                                value={courseData.khProgramOverview || ''}
-                                onChange={handleInputChange}
+                            <ReactQuill
+                                value={courseData.khProgramOverview}
+                                onChange={(value) => handleQuillChange(value, 'khProgramOverview')}
+                                placeholder="Khmer Program Overview"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                                theme="snow"
                             />
+
                             <div style={{marginLeft: '1.5rem', marginBottom: '2rem'}}>
                                 <img src={courseData.imageURL} alt="Course Logo" style={{ width: '20%', height: 'auto',}} />
                             </div>

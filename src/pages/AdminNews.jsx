@@ -147,7 +147,7 @@ const AdminNews = () => {
                                     sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
                                 >
                                     <InputBase
-                                         sx={{ ml: 1, flex: 1 }}
+                                         sx={{ ml: 3, flex: 1 }}
                                         placeholder="Search News Posts"
                                         inputProps={{ "aria-label": "search news posts" }}
                                         value={searchTerm}

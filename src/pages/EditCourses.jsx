@@ -19,6 +19,9 @@ import Alert from '@mui/material/Alert';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -189,6 +192,13 @@ const handleSnackbarClose = () => {
     navigate('/dashboard/courses');
  };
 
+ const handleChangeQuill = (value, field) => {
+  setCourses(prevState => ({
+      ...prevState,
+      [field]: value
+  }));
+};
+
  return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -261,66 +271,71 @@ const handleSnackbarClose = () => {
                 error={!!errors.khDescription} 
                 helperText={errors.khDescription} 
             />
-            <TextField
-                variant="outlined"
-                margin="normal"
-                multiline
-                placeholder="English Program Overview"
-                fullWidth
-                id="enProgramOverview"
-                label="English Program Overview"
-                name="enProgramOverview"
-                autoComplete="off"
-                value={courses.enProgramOverview} 
-                onChange={handleChange}
-                error={!!errors.enProgramOverview} 
-                helperText={errors.enProgramOverview} 
+            <ReactQuill
+              value={courses.enProgramOverview}
+              onChange={(value) => handleChangeQuill(value, 'enProgramOverview')}
+              placeholder="English Program Overview"
+              style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+              modules={{
+                  toolbar: [
+                      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                      ['clean']
+                  ]
+              }}
+              formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+              theme="snow"
             />
-            <TextField
-                variant="outlined"
-                margin="normal"
-                multiline
+            <ReactQuill
+                value={courses.khProgramOverview}
+                onChange={(value) => handleChangeQuill(value, 'khProgramOverview')}
                 placeholder="Khmer Program Overview"
-                fullWidth
-                id="khProgramOverview"
-                label="Khmer Program Overview"
-                name="khProgramOverview"
-                autoComplete="off"
-                value={courses.khProgramOverview} 
-                onChange={handleChange}
-                error={!!errors.khProgramOverview} 
-                helperText={errors.khProgramOverview} 
+                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                modules={{
+                    toolbar: [
+                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                        ['clean']
+                    ]
+                }}
+                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                theme="snow"
             />
-            <TextField
-                variant="outlined"
-                margin="normal"
-                multiline
+            <ReactQuill
+                value={courses.enProgramOutcome}
+                onChange={(value) => handleChangeQuill(value, 'enProgramOutcome')}
                 placeholder="English Program Outcome"
-                fullWidth
-                id="enProgramOutcome"
-                label="English Program Outcome"
-                name="enProgramOutcome"
-                autoComplete="off"
-                value={courses.enProgramOutcome} 
-                onChange={handleChange}
-                error={!!errors.enProgramOutcome} 
-                helperText={errors.enProgramOutcome} 
+                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                modules={{
+                    toolbar: [
+                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                        ['clean']
+                    ]
+                }}
+                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                theme="snow"
             />
-            <TextField
-                variant="outlined"
-                margin="normal"
-                multiline
+            <ReactQuill
+                value={courses.khProgramOutcome}
+                onChange={(value) => handleChangeQuill(value, 'khProgramOutcome')}
                 placeholder="Khmer Program Outcome"
-                fullWidth
-                id="khProgramOutcome"
-                label="Khmer Program Outcome"
-                name="khProgramOutcome"
-                autoComplete="off"
-                value={courses.khProgramOutcome} 
-                onChange={handleChange}
-                error={!!errors.khProgramOutcome} 
-                helperText={errors.khProgramOutcome} 
+                style={{ marginTop: '2rem', marginLeft: '1.5rem', marginBottom: '1rem'}}
+                modules={{
+                    toolbar: [
+                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                        [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                        ['clean']
+                    ]
+                }}
+                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                theme="snow"
             />
+
             <FormControl sx={{ m: 3, width: 300 }}>
             <InputLabel id="program-label">Program</InputLabel>
             <Select
