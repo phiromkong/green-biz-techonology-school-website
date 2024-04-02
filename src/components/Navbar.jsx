@@ -5,6 +5,8 @@ import { useMediaQuery } from "react-responsive";
 import { IoClose, IoMenu } from "react-icons/io5";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useTranslation } from 'react-i18next';
+import Divider from '@mui/material/Divider';
+
 
 const Navbar = () => {
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);

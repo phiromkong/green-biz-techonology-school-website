@@ -54,6 +54,7 @@
 .partner-carousel-image {
   max-height: 300px; /* Adjust the value according to your design */
   max-width: 100%; /* Ensures the image doesn't overflow its container */
+  object-fit: contain;
 }
 
  
@@ -76,4 +77,6 @@
     }
 
   }
+
+  
   

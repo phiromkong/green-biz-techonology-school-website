@@ -283,6 +283,10 @@
         list-style: none; /* This removes the bullet points */
     }
 
+    .p-dropdown-content li:hover {
+      color: white; /* Example text color on hover */
+     }
+
     .p-dropdown .p-dropdown-content,
     .p-dropdown ul.p-dropdown-content {
         box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -294,7 +298,7 @@
     }
 
     .logo {
-        width: 60%; 
+        width: 70%; 
         height: auto;
     }
 
@@ -394,11 +398,6 @@
         z-index: 10000;
     }
 
-    .parent-div.scrolling nav {
-        padding: 0.01rem; 
-        transition: 0.3s; 
-    }
-
 
 
 @media (max-width: 1200px) {
@@ -414,4 +413,11 @@
     }
  
 }
+
+@media (min-width: 2560px) {
+  .logo {
+      width: 25%;
+  }
+}
+
 
