@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import { FormControl, InputLabel, FormHelperText } from '@mui/material';
 import { Select, MenuItem } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 import './css/Contactform.css';
 import { useTranslation } from 'react-i18next';
 
-const Contactform = ({ onSubmit, cardData, defaultCourse }) => {  
+const Contactform = ({ onSubmit, cardData}) => {  
+    const location = useLocation();
+    const defaultCourse = location.state?.courseTitle || '';
     const { t, i18n } = useTranslation();
     const [selectedCourse, setSelectedCourse] = useState(defaultCourse || '');
     const [formData, setFormData] = useState({
@@ -57,13 +60,14 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                 lastName: '',
                 phoneNumber: '',
                 message: '',
+                course: '',
             });
             setErrors({
                 firstName: false,
                 phoneNumber: false,
                 course: false,
             });
-            setSelectedCourse(defaultCourse || '');
+            setSelectedCourse('');
         }
     };
     
@@ -126,27 +130,24 @@ const Contactform = ({ onSubmit, cardData, defaultCourse }) => {
                         
                     />
                     
-                    <FormControl 
-                    error={errors.course} 
-                    sx={{ width: '20%', marginLeft: '16px', marginTop: '16px'}}
-                >
-                    <InputLabel id="course-label" sx={{fontFamily: "Kantumruy Pro"}}>{t('courses')}</InputLabel>
-                    <Select
-                        labelId="course-label"
-                        value={selectedCourse} // Use the selected course from state here
-                        onChange={handleCourseChange} // Handle course selection
-                        label={t('courses')}
-                        name='course'
-                        sx={{fontFamily: "Kantumruy Pro"}}
-                    >
-                        <MenuItem value="">None</MenuItem> {/* Add option to deselect */}
-                        {cardData.map((course) => (
-                            <MenuItem key={course.id} value={course.enTitle} sx={{fontFamily: "Kantumruy Pro"}}>
-                                {i18n.language === 'kh' ? course.khTitle : course.enTitle}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                    <FormControl error={errors.course} sx={{ width: '20%', marginLeft: '16px', marginTop: '16px'}}>
+                        <InputLabel id="course-label" sx={{fontFamily: "Kantumruy Pro"}}>{t('courses')}</InputLabel>
+                        <Select
+                            labelId="course-label"
+                            value={selectedCourse } // Use the selected course from state or defaultCourse
+                            onChange={handleCourseChange}
+                            label={t('courses')}
+                            name='course'
+                            sx={{fontFamily: "Kantumruy Pro"}}
+                        >
+                            <MenuItem value="">None</MenuItem>
+                            {cardData.map((course) => (
+                                <MenuItem key={course.id} value={course.enTitle} sx={{fontFamily: "Kantumruy Pro"}}>
+                                    {i18n.language === 'kh' ? course.khTitle : course.enTitle}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 </Box>
                 <Box
                 component="form"

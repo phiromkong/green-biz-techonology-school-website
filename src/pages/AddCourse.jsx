@@ -13,7 +13,8 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const defaultTheme = createTheme();
 
 const AddCourse = () => {
@@ -63,6 +64,10 @@ const AddCourse = () => {
         } else {
             setErrors(prevErrors => ({ ...prevErrors, [fieldName]: false }));
         }
+        setter(value);
+    };
+
+    const handleQuillChange = (value, setter) => {
         setter(value);
     };
 
@@ -228,55 +233,79 @@ const AddCourse = () => {
                                 label="Khmer Description"
                                 value={khDescription}
                             />
-                            <TextField
-                                required
-                                multiline
-                                onChange={(e) => handleInputChange(setEnProgramOutcome, 'enProgramOutcome', e.target.value)}
-                                error={Boolean(errors.enProgramOutcome)}
-                                helperText={errors.enProgramOutcome}
-                                id="enProgramOutcome"
-                                name="enProgramOutcome"
-                                label="English Program Outcome"
-                                value={enProgramOutcome}
-                            />
-                            <TextField
-                                required
-                                multiline
-                                onChange={(e) => handleInputChange(setKhProgramOutcome, 'khProgramOutcome', e.target.value)}
-                                error={Boolean(errors.khProgramOutcome)}
-                                helperText={errors.khProgramOutcome}
-                                id="khProgramOutcome"
-                                name="khProgramOutcome"
-                                label="Khmer Program Outcome"
-                                value={khProgramOutcome}
-                            />
-                            <TextField
-                                required
-                                multiline
-                                onChange={(e) => handleInputChange(setEnProgramOverview, 'enProgramOverview', e.target.value)}
-                                error={Boolean(errors.enProgramOverview)}
-                                helperText={errors.enProgramOverview}
-                                id="enProgramOverview"
-                                name="enProgramOverview"
-                                label="English Program Overview"
+                            <ReactQuill
+                                theme="snow"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem'}}
                                 value={enProgramOverview}
+                                onChange={(value) => handleQuillChange(value, setEnProgramOverview)}
+                                placeholder="English Program Overview"
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, 
+                                        {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
                             />
-                            <TextField
-                                required
-                                multiline
-                                onChange={(e) => handleInputChange(setKhProgramOverview, 'khProgramOverview', e.target.value)}
-                                error={Boolean(errors.khProgramOverview)}
-                                helperText={errors.khProgramOverview}
-                                id="khProgramOverview"
-                                name="khProgramOverview"
-                                label="Khmer Program Overview"
+                            <ReactQuill
+                                theme="snow"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem'}}
                                 value={khProgramOverview}
+                                onChange={(value) => handleQuillChange(value, setKhProgramOverview)}
+                                placeholder="Khmer Program Overview"
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, 
+                                        {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                            />
+                            <ReactQuill
+                                theme="snow"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem'}}
+                                value={enProgramOutcome}
+                                onChange={(value) => handleQuillChange(value, setEnProgramOutcome)}
+                                placeholder="English Program Outcome"
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, 
+                                        {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
+                            />
+                            <ReactQuill
+                                theme="snow"
+                                style={{ marginTop: '2rem', marginLeft: '1.5rem'}}
+                                value={khProgramOutcome}
+                                onChange={(value) => handleQuillChange(value, setKhProgramOutcome)}
+                                placeholder="Khmer Program Outcome"
+                                modules={{
+                                    toolbar: [
+                                        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+                                        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                        [{'list': 'ordered'}, {'list': 'bullet'}, 
+                                        {'indent': '-1'}, {'indent': '+1'}],
+                                        ['clean']
+                                    ]
+                                }}
+                                formats={['header', 'font', 'size', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'list', 'bullet', 'indent']}
                             />
                             <input
                                 type="file"
                                 id="fileUpload"
                                 accept="image/*"
-                                style={{ display: 'flex', marginLeft: '1.5rem' }}
+                                style={{ display: 'flex', marginLeft: '1.5rem', marginTop: '1rem' }}
                                 onChange={handleImageChange}
                             />
                             {uploading && <div style={{marginLeft: '1.5rem'}}>Uploading...</div>}
