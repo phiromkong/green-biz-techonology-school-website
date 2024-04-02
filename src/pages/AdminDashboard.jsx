@@ -24,6 +24,9 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import SchoolIcon from '@mui/icons-material/School';
+import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from '@mui/material/Backdrop';
+
 
 // Create a default theme
 const defaultTheme = createTheme();
@@ -41,6 +44,7 @@ const AdminDashboard = () => {
  const [partnerCount, setPartnerCount] = useState(0);
  const [femaleCount, setFemaleCount] = useState(0);
  const [maleCount, setMaleCount] = useState(0);
+ const [loading, setLoading] = useState(true);
  
  useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -70,67 +74,60 @@ const AdminDashboard = () => {
     }
   });
 
-  // Define fetchAdminsCount function inside useEffect
-  const fetchAdminsCount = async () => {
-    const adminsCollectionRef = collection(db, "admins");
-    const snapshot = await getDocs(adminsCollectionRef);
-    setAdminsCount(snapshot.size); // Update the state with the count of admins
-  };
-  const fetchNewsCount = async () => {
-    const newsCollectionRef = collection(db, "news");
-    const snapshot = await getDocs(newsCollectionRef);
-    setNewsCount(snapshot.size); // Update the state with the count of admins
-  };
-  const fetchTeamsCount = async () => {
-    const teamCollectionRef = collection(db, "team");
-    const snapshot = await getDocs(teamCollectionRef);
-    setTeamCount(snapshot.size); // Update the state with the count of admins
-  };
-  const fetchFemaleCount = async () => {
-    const femaleTeamCollectionRef = collection(db, "team");
-    const femaleQuery = query(femaleTeamCollectionRef, where("sex", "==", "Female"));
-    const snapshot = await getDocs(femaleQuery);
-    setFemaleCount(snapshot.size); // Assuming you have a state variable for female count
-   };
-   
-   const fetchMaleCount = async () => {
-    const maleTeamCollectionRef = collection(db, "team");
-    const maleQuery = query(maleTeamCollectionRef, where("sex", "==", "Male"));
-    const snapshot = await getDocs(maleQuery);
-    setMaleCount(snapshot.size); // Assuming you have a state variable for male count
-   };
-   
-  const fetchGalleryCount = async () => {
-    const galleryCollectionRef = collection(db, "gallery");
-    const snapshot = await getDocs(galleryCollectionRef);
-    setGalleryCount(snapshot.size); // Update the state with the count of admins
-  };
-  const fetchProgramsCount = async () => {
-    const programsCollectionRef = collection(db, "program");
-    const snapshot = await getDocs(programsCollectionRef);
-    setProgramCount(snapshot.size); // Update the state with the count of admins
-  };
-  const fetchCoursesCount = async () => {
-    const coursesCollectionRef = collection(db, "courses");
-    const snapshot = await getDocs(coursesCollectionRef);
-    setCourseCount(snapshot.size); // Update the state with the count of admins
-  };
-  const fetchPartnersCount = async () => {
-    const partnersCollectionRef = collection(db, "partners");
-    const snapshot = await getDocs(partnersCollectionRef);
-    setPartnerCount(snapshot.size); // Update the state with the count of admins
+  const fetchData = async () => {
+    try {
+      const adminsCollectionRef = collection(db, "admins");
+      const newsCollectionRef = collection(db, "news");
+      const teamCollectionRef = collection(db, "team");
+      const galleryCollectionRef = collection(db, "gallery");
+      const programsCollectionRef = collection(db, "program");
+      const coursesCollectionRef = collection(db, "courses");
+      const partnersCollectionRef = collection(db, "partners");
+
+      const [
+        adminsSnapshot,
+        newsSnapshot,
+        teamSnapshot,
+        gallerySnapshot,
+        programsSnapshot,
+        coursesSnapshot,
+        partnersSnapshot
+      ] = await Promise.all([
+        getDocs(adminsCollectionRef),
+        getDocs(newsCollectionRef),
+        getDocs(teamCollectionRef),
+        getDocs(galleryCollectionRef),
+        getDocs(programsCollectionRef),
+        getDocs(coursesCollectionRef),
+        getDocs(partnersCollectionRef)
+      ]);
+
+      setAdminsCount(adminsSnapshot.size);
+      setNewsCount(newsSnapshot.size);
+      setTeamCount(teamSnapshot.size);
+      setGalleryCount(gallerySnapshot.size);
+      setProgramCount(programsSnapshot.size);
+      setCourseCount(coursesSnapshot.size);
+      setPartnerCount(partnersSnapshot.size);
+
+      const femaleQuery = query(teamCollectionRef, where("sex", "==", "Female"));
+      const maleQuery = query(teamCollectionRef, where("sex", "==", "Male"));
+      const [femaleSnapshot, maleSnapshot] = await Promise.all([
+        getDocs(femaleQuery),
+        getDocs(maleQuery)
+      ]);
+
+      setFemaleCount(femaleSnapshot.size);
+      setMaleCount(maleSnapshot.size);
+
+      setLoading(false); // Set loading to false after fetching data
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false); // Set loading to false in case of error
+    }
   };
 
-  // Call fetchAdminsCount function
-  fetchAdminsCount();
-  fetchNewsCount();
-  fetchTeamsCount();
-  fetchMaleCount();
-  fetchFemaleCount();
-  fetchGalleryCount();
-  fetchProgramsCount();
-  fetchCoursesCount();
-  fetchPartnersCount();
+  fetchData();
 
   // Cleanup subscription on component unmount
   return () => unsubscribe();
@@ -139,6 +136,20 @@ const AdminDashboard = () => {
  const toggleDrawer = () => {
     setOpen(!open);
  };
+
+ if (loading) {
+  return (
+    <div>
+      <Backdrop
+        sx={{ color: 'black', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={() => {}}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </div>
+  );
+}
 
  return (
     <ThemeProvider theme={defaultTheme}>
