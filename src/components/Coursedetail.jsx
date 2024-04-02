@@ -58,8 +58,8 @@ const CoursesDetail = () => {
     };
 
     const handleContactClick = () => {
-        navigate('/contact', { state: { courseTitle: course.title } });
-    };
+        navigate('/contact', { state: { courseTitle: courseTitle } });
+    };    
 
     // Determine the title based on the current language
     const courseTitle = i18n.language === 'kh' ? course.khTitle : course.enTitle;

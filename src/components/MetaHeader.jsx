@@ -15,15 +15,15 @@ const MetaHeader = ({
  return (
     <Helmet>
       <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      <meta name="description" content={description} data-rh="true" />
+      <meta name="keywords" content={keywords} data-rh="true" />
       {/* Open Graph meta tags for Facebook */}
-      <meta property="og:title" content={ogTitle || title} />
-      <meta property="og:description" content={ogDescription || description} />
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:url" content={ogUrl} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:locale" content={ogLocale} />
+      <meta property="og:title" content={ogTitle || title} data-rh="true" />
+      <meta property="og:description" content={ogDescription || description} data-rh="true" />
+      <meta property="og:image" content={ogImage} data-rh="true" />
+      <meta property="og:url" content={ogUrl} data-rh="true" />
+      <meta property="og:type" content={ogType} data-rh="true" />
+      <meta property="og:locale" content={ogLocale} data-rh="true" />
     </Helmet>
  );
 };
