@@ -21,7 +21,7 @@ root.render(
         <meta property="og:url" content="https://gbtschool.org" />
         <meta property="og:site_name" content="Green Biz Technology School" />
         <meta property="og:type" content="website" />
-        <link rel="icon" type="image/png" href="../gbt_logo.png" />
+        <link rel="icon" type="image/png" href="../public/gbt_logo.png" />
       </Helmet>
     <App />
     </HelmetProvider>
