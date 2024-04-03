@@ -143,8 +143,14 @@ function AdminAccount() {
         { field: 'email', headerName: 'Email', width: 200 },
         { field: 'firstName', headerName: 'First Name', width: 150 },
         { field: 'lastName', headerName: 'Last Name', width: 150 },
-        { field: 'profilePicture', headerName: 'Profile Picture', width: 230 },
-        {
+        { 
+            field: 'profilePicture', 
+            headerName: 'Profile Picture', 
+            width: 230,
+            renderCell: (params) => (
+                params.value ? <img src={params.value} alt="Profile" style={{ width: '100%', height: '100%' }} /> : null
+            ),
+        },        {
             field: 'actions',
             headerName: 'Actions',
             width: 150,
@@ -182,6 +188,7 @@ function AdminAccount() {
                         <DataGrid
                             rows={admins}
                             columns={columns}
+                            getRowHeight={() => 'auto'}
                             pageSize={5}
                             rowsPerPageOptions={[5, 10]}
                             checkboxSelection
