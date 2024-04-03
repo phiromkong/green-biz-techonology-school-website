@@ -15,13 +15,13 @@ root.render(
         <title>Green Biz Technology School- Journey Towards Modern Technology</title>
         <meta
           name="description"
-          content="Welcome to Green Biz Technology School.Green Biz Technology School, or GBT School, offers a wide range of courses and partnerships to enhance your learning experience."
+          content="Welcome to Green Biz Technology School. Green Biz Technology School, or GBT School, offers a wide range of courses and partnerships to enhance your learning experience."
         />;
         <meta property="og:image" content="https://gbtschool.org/gbt_logo" />
         <meta property="og:url" content="https://gbtschool.org" />
-        <meta property="og:site_name" content="gbtschool" />
+        <meta property="og:site_name" content="Green Biz Technology School" />
         <meta property="og:type" content="website" />
-        <link rel="icon" type="image/svg+xml" href="../gbt_logo" />
+        <link rel="icon" type="image/png" href="../gbt_logo.png" />
       </Helmet>
     <App />
     </HelmetProvider>
