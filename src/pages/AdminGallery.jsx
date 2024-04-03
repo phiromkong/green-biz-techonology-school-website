@@ -49,7 +49,7 @@ function AdminGallery() {
                 }
             }));
     
-            setGalleryData(galleryList);
+            setGalleryData(galleryList);    
         };
     
         fetchGalleryData();
@@ -96,8 +96,15 @@ function AdminGallery() {
      
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 100, },
-    { field: 'image', headerName: 'Image URL', width: 220 },
+    { field: 'id', headerName: 'ID', width: 150, },
+    { 
+        field: 'image', 
+        headerName: 'Image', 
+        width: 220,
+        renderCell: (params) => (
+            params.value ? <img src={params.value} alt="Image" style={{ width: '100%', height: 'auto' }} /> : null
+        ),
+    },
     { field: 'enTitle', headerName: 'English Title', width: 200 },
     { field: 'khTitle', headerName: 'Khmer Title', width: 200 },
     { field: 'programName', headerName: 'Program', width: 220 },
@@ -143,6 +150,7 @@ function AdminGallery() {
                     <div style={{ height: 800, width: '100%', marginTop: '2rem' }}>
                         <DataGrid
                             rows={galleryData}
+                            getRowHeight={() => 'auto'}
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5, 10]}
