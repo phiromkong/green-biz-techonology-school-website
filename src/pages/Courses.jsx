@@ -24,10 +24,10 @@ const Courses = () => {
  return (
     <div>
       <MetaHeader
-        title="GBT School Courses - Explore Our Offerings"
+        title="GBT School Courses - Explore Our Courses"
         description="Discover a wide range of courses at GBT School. Explore our offerings to find the perfect course for your learning needs and career goals."
         keywords="courses, education, GBT School, learning, career, development, web development, python, programming, web desing, graphic design, chinese, video editing, computer fundamental"
-        ogTitle="GBT School Courses - Explore Our Offerings"
+        ogTitle="GBT School Courses - Explore Our Courses"
         ogDescription="Discover a wide range of courses at GBT School. Explore our offerings to find the perfect course for your learning needs and career goals."
         ogImage="https://www.gbtschool.org/gbt_logo.png"
         ogUrl="https://www.gbtschool.org/courses"

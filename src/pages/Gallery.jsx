@@ -45,10 +45,10 @@ const Gallery = () => {
     return (
         <div>
             <MetaHeader
-                title="GBT School Gallery - Explore Our Achievements"
+                title="GBT School Gallery - Explore Our Gallery"
                 description="Discover the latest achievements and projects from GBT School. Explore our gallery to see the impact of our courses and partnerships."
                 keywords="gallery, achievements, projects, GBT School, education, courses, partnerships"
-                ogTitle="GBT School Gallery - Explore Our Achievements"
+                ogTitle="GBT School Gallery - Explore Our Gallery"
                 ogDescription="Discover the latest achievements and projects from GBT School. Explore our gallery to see the impact of our courses and partnerships."
                 ogImage="https://www.gbtschool.org/gbt_logo.png"
                 ogUrl="https://www.gbtschool.org/gallery"
