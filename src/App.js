@@ -41,6 +41,7 @@ import EditGallery from './pages/EditGallery';
 import AddImagesToGallery from './pages/AddImagesToGallery';
 import AdminSlider from './pages/AdminSlider';
 import MetaHeader from './components/MetaHeader';
+import MessengerChat from './components/MessengerChat';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
         ogImage="https://www.gbtschool.org/gbt_logo.png"
         ogUrl="https://www.gbtschool.org"
       />
+      <MessengerChat />
       <Router>
       <Routes>
         <Route path="/about" element={<About />} />
