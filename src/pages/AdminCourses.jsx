@@ -228,7 +228,7 @@ function AdminCourses() {
                             Cancel
                         </Button>
                         <Button onClick={handleDeleteCourse} color="primary" autoFocus>
-                            Confirm
+                            Delete
                         </Button>
                     </DialogActions>
                 </Dialog>

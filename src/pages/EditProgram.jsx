@@ -28,7 +28,7 @@ const EditPrograms = () => {
     };
 
     const handleCancel = () => {
-        navigate(`/dashboard/programs/${programId}`);
+        navigate(`/dashboard/programs/`);
     };
 
     const handleSnackbarOpen = (message) => {

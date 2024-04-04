@@ -9,7 +9,7 @@ import { db } from '../firebase'; // Import your Firestore instance
 import MetaHeader from '../components/MetaHeader'; // Import the MetaHeader component
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Paper, InputBase, IconButton, Stack } from '@mui/material';
+import { Paper, InputBase, IconButton, Stack, useMediaQuery } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 const NewsPage = () => {
@@ -19,6 +19,7 @@ const NewsPage = () => {
     const [posts, setPosts] = useState([]); // Initialize posts as an empty array
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const isMobile = useMediaQuery('(max-width:600px)');
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -78,24 +79,31 @@ const NewsPage = () => {
                         <div className="content col-lg-10 blog_header">
                             <div className="post-container">
                                 <div className="page-title mb-5">
-                                    <Stack direction="row" spacing={1} justifyContent="space-between">
-                                        <h2 className="home_title" style={{ color: 'black' }}>{t('recentPost')}</h2>
-                                        <Paper
-                                            component="form"
-                                            sx={{ p: "2px 4px", display: "flex", alignItems: "center", justifyContent: 'flex-end', width: 400, height: 50 }}
-                                        >
-                                            <InputBase
-                                                sx={{ ml: 1, flex: 1, fontFamily: "Kantumruy Pro" }}
-                                                placeholder={t('newSearch')}
-                                                inputProps={{ "aria-label": "search news posts" }}
-                                                value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
-                                            />
-                                            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                                                <SearchIcon />
-                                            </IconButton>
-                                        </Paper>
-                                    </Stack>
+                                    <h2 className="home_title" style={{ color: 'black', marginBottom: isMobile ? '1rem' : 0 }}>{t('recentPost')}</h2>
+                                    <Paper
+                                        component="form"
+                                        sx={{
+                                            p: "2px 4px",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: isMobile ? 'center' : 'flex-end',
+                                            width: isMobile ? '100%' : 400, // Adjust the width based on screen size
+                                            height: 50,
+                                            marginTop: '1rem',
+                                            marginBottom: '1rem'
+                                        }}
+                                    >
+                                        <InputBase
+                                            sx={{ ml: 1, flex: 1, fontFamily: "Kantumruy Pro" }}
+                                            placeholder={t('newSearch')}
+                                            inputProps={{ "aria-label": "search news posts" }}
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        />
+                                        <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                                            <SearchIcon />
+                                        </IconButton>
+                                    </Paper>
                                 </div>
                                 {filteredPosts.length === 0 ? (
                                     <div className="no-results">No news found.</div>
