@@ -65,30 +65,41 @@ function AdminProgram() {
     }, [searchTerm]); 
 
     const handleDelete = async (programId) => {
-        // Find the program to delete in the programs state
-        const programToDelete = programs.find(program => program.id === programId);
-        if (programToDelete && programToDelete.image) {
-            // Create a reference to the file in Firebase Storage
-            const imageRef = ref(getStorage(),  programToDelete.image);
+        try {
+            // Find the program to delete in the programs state
+            const programToDelete = programs.find(program => program.id === programId);
     
-            // Delete the file from Firebase Storage
-            await deleteObject(imageRef).then(() => {
-                console.log("Program's picture deleted from Firebase Storage");
-            }).catch((error) => {
-                console.error("Error deleting program's picture from Firebase Storage:", error);
-            });
+            // Check if the program to delete exists
+            if (!programToDelete) {
+                console.error("Program not found");
+                return;
+            }
+    
+            // Retrieve courses associated with the program
+            const coursesSnapshot = await getDocs(query(collection(db, "courses"), where("programId", "==", programId)));
+            const coursesToDelete = coursesSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+    
+            // Delete each associated course
+            await Promise.all(coursesToDelete.map(async course => {
+                // Delete the document from Firestore
+                await deleteDoc(doc(db, "courses", course.id));
+                console.log(`Course document ${course.id} deleted from Firestore`);
+            }));
+    
+            // Delete the program document itself
+            await deleteDoc(doc(db, "program", programId));
+            console.log("Program document deleted from Firestore");
+    
+            // Update the local state to reflect the deletion
+            setPrograms(programs.filter(program => program.id !== programId));
+            setDeleteProgramId(null); // Clear the deleteProgramId state
+        } catch (error) {
+            console.error("Error deleting program and associated courses:", error);
         }
-    
-        // Delete the document from Firestore
-        await deleteDoc(doc(db, "program", programId));
-        console.log("Program document deleted from Firestore");
-    
-        // Update the local state to reflect the deletion
-        setPrograms(programs.filter(program => program.id !== programId));
-        setDeleteProgramId(null); // Clear the deleteProgramId state
     };
     
-
+    
+    
     const handleDeleteConfirm = async () => {
         if (deleteProgramId) {
             await handleDelete(deleteProgramId);

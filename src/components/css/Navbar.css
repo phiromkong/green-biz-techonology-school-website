@@ -298,7 +298,7 @@
     }
 
     .logo {
-        width: 70%; 
+        width: 60%; 
         height: auto;
     }
 
@@ -397,7 +397,6 @@
         background-color: transparent;
         z-index: 10000;
     }
-
 
 
 @media (max-width: 1200px) {
