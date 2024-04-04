@@ -40,7 +40,7 @@ const Contact = () => {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          chat_id: '5053535829',
+          chat_id: '-1002037900041',
           text: messageText,
       }),
   })
