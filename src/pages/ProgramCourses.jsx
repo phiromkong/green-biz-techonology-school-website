@@ -20,6 +20,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Paper from "@mui/material/Paper";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
 
 const defaultTheme = createTheme();
 
@@ -29,8 +34,8 @@ function ProgramCourses() {
     const [courses, setCourses] = useState([]);
     const [open, setOpen] = React.useState(true);
     const [searchTerm, setSearchTerm] = useState("");
-    const [deleteCourseId, setDeleteCourseId] = useState(null);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [courseToDelete, setCourseToDelete] = useState(null);
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -71,10 +76,38 @@ function ProgramCourses() {
         { field: 'programEnTitle', headerName: 'Program', width: 200 },
         { field: 'enDescription', headerName: 'English Description', width: 300 },
         { field: 'khDescription', headerName: 'Khmer Description', width: 300 },
-        { field: 'enProgramOverview', headerName: 'English Overview', width: 300 },
-        { field: 'khProgramOverview', headerName: 'Khmer Overview', width: 300 },
-        { field: 'enProgramOutcome', headerName: 'English Outcome', width: 300 },
-        { field: 'khProgramOutcome', headerName: 'Khmer Outcome', width: 300 },
+        { 
+            field: 'enProgramOverview', 
+            headerName: 'English Overview', 
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            )
+        },
+        { 
+            field: 'khProgramOverview', 
+            headerName: 'Khmer Overview', 
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            )
+        },
+        { 
+            field: 'enProgramOutcome', 
+            headerName: 'English Outcome', 
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            )
+        },
+        { 
+            field: 'khProgramOutcome', 
+            headerName: 'Khmer Outcome',          
+            width: 300,
+            renderCell: (params) => (
+                <div dangerouslySetInnerHTML={{ __html: params.value }} />
+            )
+        },
         {
             field: 'image',
             headerName: 'Image',
@@ -92,17 +125,44 @@ function ProgramCourses() {
                     <IconButton onClick={() => navigate(`/dashboard/programs/${programId}/edit/${params.row.id}`)}>
                         <EditIcon />
                     </IconButton>
-                    <IconButton onClick={() => {
-                        setDeleteCourseId(params.row.id);
-                        setDeleteDialogOpen(true);
-                        
-                    }}>
+                    <IconButton onClick={() => handleDelete(params.row)}>
                         <DeleteIcon />
                     </IconButton>
+
                 </div>
             ),
         },
     ];
+    
+    const handleDelete = (course) => {
+        setCourseToDelete(course);
+        setDeleteDialogOpen(true);
+    };
+
+    const handleDeleteCourse = async () => {
+        setDeleteDialogOpen(false);
+        if (courseToDelete && courseToDelete.id) {
+            try {
+                // Delete the course document from Firestore only if it belongs to the specified program
+                await deleteDoc(doc(db, "courses", courseToDelete.id));
+                console.log("Course document deleted from Firestore");
+    
+                // Delete the course image from Firebase Storage if it exists
+                if (courseToDelete.imageURL) {
+                    const imageRef = ref(getStorage(), courseToDelete.imageURL);
+                    await deleteObject(imageRef);
+                    console.log("Course image deleted from Firebase Storage");
+                }
+    
+                // Remove the deleted course from the courses state
+                setCourses(courses.filter(course => course.id !== courseToDelete.id));
+            } catch (error) {
+                console.error("Error deleting course:", error);
+            }
+        } else {
+            console.error("courseToDelete or courseToDelete.id is undefined");
+        }
+    };
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -149,6 +209,27 @@ function ProgramCourses() {
                         </Button>
                 </Stack>
                 </Container>
+                <Dialog
+                    open={deleteDialogOpen}
+                    onClose={() => setDeleteDialogOpen(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">Confirm Deletion</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Are you sure you want to delete this course?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setDeleteDialogOpen(false)} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={handleDeleteCourse} color="primary" autoFocus>
+                            Delete
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Box>
         </ThemeProvider>
     );
