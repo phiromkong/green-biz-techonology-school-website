@@ -27,7 +27,7 @@ import InputBase from "@mui/material/InputBase";
 
 
 const defaultTheme = createTheme();
-const options = ['Edit', 'Delete'];
+
 
 function AdminCourses() {
     const [open, setOpen] = React.useState(true);
