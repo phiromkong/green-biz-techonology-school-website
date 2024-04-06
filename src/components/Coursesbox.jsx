@@ -40,10 +40,9 @@ const Coursesbox = ({ courses }) => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: isMobile ? 'center' : 'flex-end',
-                  width: isMobile ? '100%' : 345,
+                  width: isMobile ? '100%' : 300,
                   marginTop: '1rem',
                   marginBottom: '1rem',
-
                   height: 50
               }}
             >

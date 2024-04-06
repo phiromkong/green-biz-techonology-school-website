@@ -4,7 +4,6 @@ import { SocialIcon } from 'react-social-icons'
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-
 const Footer = () => {
   const {t} = useTranslation();
   return (
@@ -21,11 +20,11 @@ const Footer = () => {
           </div>
           {/* Social Icons */}
           <div className="social-icons">
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://www.facebook.com/greenbiztechnologyschool?mibextid=ZbWKwL" />
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://instagram.com" />
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://gmail.com/" />
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://www.tiktok.com/@gbtschool?_t=8kxhX3t0eyA&_r=1" />
-            <SocialIcon style={{ height: 40, width: 40 }} url="https://t.me/greenbiztechnologyschool" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://www.facebook.com/greenbiztechnologyschool?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://instagram.com" target="_blank" rel="noopener noreferrer" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://gmail.com/" target="_blank" rel="noopener noreferrer" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://www.tiktok.com/@gbtschool?_t=8kxhX3t0eyA&_r=1" target="_blank" rel="noopener noreferrer" />
+            <SocialIcon style={{ height: 40, width: 40 }} url="https://t.me/greenbiztechnologyschool" target="_blank" rel="noopener noreferrer" />
           </div>
         </div>
 
@@ -42,7 +41,7 @@ const Footer = () => {
             </div>
                 {/* "View on the Map" Button */}
                 <button className='view-map-button'>
-                  <Link style={{color: 'white'}} to={"https://www.google.com/maps?ll=13.593064,102.973053&z=14&t=m&hl=en&gl=US&mapclient=embed&cid=10804990733860351961"}> VIEW ON MAP</Link>
+                  <Link style={{color: 'white'}} to={"https://www.google.com/maps?ll=13.593064,102.973053&z=14&t=m&hl=en&gl=US&mapclient=embed&cid=10804990733860351961"} target="_blank" rel="noopener noreferrer"> VIEW ON MAP</Link>
                 </button>
             </div>
         </div>
