@@ -407,8 +407,8 @@
     }
 
     .lang_drop_down {
-        min-width: 5rem; /* Adjust minimum width */
-        display: none;
+        min-width: 10rem; /* Adjust minimum width */
+        margin-left: -2.5rem;
     }
  
 }
