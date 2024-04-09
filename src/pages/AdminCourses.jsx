@@ -118,7 +118,7 @@ function AdminCourses() {
         { 
             field: 'enProgramOverview', 
             headerName: 'English Overview', 
-            width: 300,
+            width: 700,
             renderCell: (params) => (
                 <div dangerouslySetInnerHTML={{ __html: params.value }} />
             )
@@ -126,7 +126,7 @@ function AdminCourses() {
         { 
             field: 'khProgramOverview', 
             headerName: 'Khmer Overview', 
-            width: 300,
+            width: 700,
             renderCell: (params) => (
                 <div dangerouslySetInnerHTML={{ __html: params.value }} />
             )
@@ -200,7 +200,7 @@ function AdminCourses() {
                             </IconButton>
                         </Paper>
                     </Stack>
-                    <div style={{ height: 600, width: '100%' }}>
+                    <div style={{ height: 800, width: '100%' }}>
                         <DataGrid
                             rows={courses}
                             columns={columns}
