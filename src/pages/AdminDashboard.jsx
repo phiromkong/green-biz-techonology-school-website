@@ -177,7 +177,7 @@ const AdminDashboard = () => {
             
             <Card sx={{ maxWidth: 400, position: 'relative' }}>
             <ManageAccountsIcon sx={{ position: 'absolute', top: 0, left: 180, width: '30%', height: 'auto' }} />
-            <Link to="/dashboard/news">
+            <Link to="/dashboard/account">
             <CardActionArea sx={{ color: '#088A5B' }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div" sx={{ color: 'black' }}>

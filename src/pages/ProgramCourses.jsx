@@ -79,7 +79,7 @@ function ProgramCourses() {
         { 
             field: 'enProgramOverview', 
             headerName: 'English Overview', 
-            width: 300,
+            width: 700,
             renderCell: (params) => (
                 <div dangerouslySetInnerHTML={{ __html: params.value }} />
             )
@@ -87,7 +87,7 @@ function ProgramCourses() {
         { 
             field: 'khProgramOverview', 
             headerName: 'Khmer Overview', 
-            width: 300,
+            width: 700,
             renderCell: (params) => (
                 <div dangerouslySetInnerHTML={{ __html: params.value }} />
             )
@@ -193,7 +193,7 @@ function ProgramCourses() {
                             </Paper>
                         </Stack>
                     </div>
-                    <div style={{ height: 600, width: '100%', marginTop: '2rem' }}>
+                    <div style={{ height: 800, width: '100%', marginTop: '2rem' }}>
                         <DataGrid
                             rows={courses}
                             columns={columns}
