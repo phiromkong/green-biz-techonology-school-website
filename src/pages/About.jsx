@@ -26,7 +26,6 @@ const About = () => {
         };
         fetchPartners();
     }, []);
-
     if (loading) {
         return <div>{loading && (
           <Backdrop

@@ -57,9 +57,7 @@
   object-fit: contain;
 }
 
- 
 
-  
   @media (max-width: 768px) {
     .partner-owl-carousel .item {
       margin-top: 10px;
