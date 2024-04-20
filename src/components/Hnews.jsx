@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import "./css/Hnews.css";
 import { useTranslation } from 'react-i18next';
 
-function Hnews({ children, limit = 4 }) {
+function Hnews({ children, limit = 2 }) {
   const limitedChildren = React.Children.toArray(children).slice(0, limit);
   const {t} = useTranslation();
 
