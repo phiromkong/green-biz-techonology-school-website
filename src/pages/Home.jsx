@@ -60,7 +60,7 @@ const Home = () => {
       const listResult = await listAll(imagesRef);
       const imagesListPromises = listResult.items.map(async (item) => {
         const imageURL = await getDownloadURL(item);
-        return { url: imageURL, title: "NA" }; // Assuming you don't have titles for these images
+        return { url: imageURL, title: "NA" }; 
       });
       const imagesList = await Promise.all(imagesListPromises);
       setSliderImages(imagesList);
@@ -105,7 +105,7 @@ const Home = () => {
       <Slider slides={sliderImages} />
       </div>
       <Slogan />
-      <Hnews title="News and Update" limit={4}>
+      <Hnews title="News and Update" limit={2}>
         {newsData.map((news, index) => (
           <NewsCard
             key={index}

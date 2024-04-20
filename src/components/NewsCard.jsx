@@ -19,8 +19,14 @@ function NewsCard({ title, imgUrl, description, content, id, imageStyle, gridCol
           <Link to={`/news/${id}`}>
             <h4 className="c_white ctitle_program">{title}</h4>
           </Link>
-          <div className="c_white font12rem text__content four_line program__content ac_text">
-            <p>{description}</p>
+          <div className="text__content">
+            <p style={{
+              display: '-webkit-box',
+              overflow: 'hidden',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 2,
+              maxHeight: '2.6em', // Adjust this value based on font-size and line-height
+            }}>{description}</p>
           </div>
           <Link to={`/news/${id}`}>
             <div className="d-flex ohver_read pt-2">

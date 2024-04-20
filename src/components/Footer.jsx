@@ -27,7 +27,7 @@ const Footer = () => {
             <SocialIcon style={{ height: 40, width: 40 }} url="https://t.me/greenbiztechnologyschool" target="_blank" rel="noopener noreferrer" />
           </div>
         </div>
-
+        
         {/* Right Column */}
         <div className="footer-right">
           {/* Google Map */}
