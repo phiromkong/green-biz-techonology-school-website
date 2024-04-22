@@ -34,13 +34,14 @@ const Contact = () => {
   `;
 
   // Send formData to Telegram bot using an HTTP request
-  fetch(`https://api.telegram.org/bot6254588965:AAH4nb5FOeZcLNpeKWi4UpaHQD7lxcTjABY/sendMessage`, {
+  fetch(`https://api.telegram.org/bot6818186724:AAEPVJw5P__LOGu9lpSQPGhh2excv2tNIXo/sendMessage`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          chat_id: '-1002037900041',
+            chat_id: '5053535829',
+          //chat_id: '-1002037900041',
           text: messageText,
       }),
   })
